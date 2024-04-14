@@ -1,0 +1,125 @@
+.header {
+    position: relative;
+    padding-block: 15px;
+    border-bottom: 1px solid hsla(0, 0%, 0%, 0.1);
+
+  }
+
+  .header.active {
+    position: relative;
+    box-shadow: none;
+  }
+
+  .header .container {
+    display: flex;
+    flex-wrap: wrap;
+    //grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  .header-search {
+    display: block;
+    position: relative;
+    width: max-content;
+  }
+
+  .header-search .input-field {
+    border: 1px solid hsla(0, 0%, 0%, 0.1);
+    width: 280px;
+    padding: 12px 30px;
+    border-radius: 6px;
+    transition: var(--transition-1);
+  }
+
+  .header-search .input-field:focus { outline: 1px solid var(--eerie-black); }
+
+  .header-search .search-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: var(--eerie-black);
+  }
+
+  .header-search .search-btn ion-icon { --ionicon-stroke-width: 30px; }
+
+  .header .logo { margin-inline: auto; }
+
+  .nav-open-btn,
+  .header-action-btn:nth-child(2),
+  .navbar-top,
+  .overlay { display: none; }
+
+  .header-actions {
+    all: unset;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+  }
+
+  ._navbar {
+    display: block;
+    all: unset;
+    position: static;
+    margin-top: 30px;
+    top: calc(100% + 1px);
+    left: 0;
+    width: 100%;
+    background: white;
+    
+  }
+
+  .header.active .navbar {
+    position: fixed;
+    top: 0;
+    box-shadow: 0 2px 20px hsla(0, 0%, 0%, 0.1);
+  }
+
+  .navbar-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .navbar-list > li:not(:last-child) { border-bottom: none; }
+
+  .navbar-link {
+    font-size: var(--fs-7);
+    font-weight: var(--fw-500);
+    padding-block: 20px;
+  }
+
+  .navbar-link:is(:hover, :focus) { color: var(--middle-blue-green); }
+
+  i {
+    z-index: 1;
+  }
+  ::ng-deep .p-autocomplete .p-inputtext {
+    padding-left: 28px;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+    background-color: #bfdbfe;
+  }
+  
+  li {
+    float: left;
+  }
+  li a {
+    display: block;
+    color: white ;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #726868;
+  }

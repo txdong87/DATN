@@ -9,6 +9,7 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
+import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { ButtonModule } from 'primeng/button';
     PasswordModule,
     RippleModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    MessagesModule,
+   
   ],
   providers: [
     MessageService,

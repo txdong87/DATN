@@ -8,7 +8,7 @@ import { NgModule } from '@angular/core';
         RouterModule.forRoot(
             [
                 {
-                    path: 'login',
+                    path: '',
                     loadChildren: () =>
                         import('./components/login/login.module').then(
                             (m) => m.LoginModule
