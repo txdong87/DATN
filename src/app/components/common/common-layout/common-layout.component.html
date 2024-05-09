@@ -1,0 +1,39 @@
+<div class="layout-wrapper">
+    <div class=" layout-topbar">
+        <a class="layout-topbar-logo"  routerLink="">
+
+            <span>SAKAI</span>
+        </a>
+
+        <p-button [style.width.px]="asideElement.offsetWidth" (click)="toggleSideBar()" [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'" ></p-button>
+        <div #topbarmenu class="layout-topbar-menu">
+            <button class="p-link layout-topbar-button">
+                <i class="pi pi-calendar"></i>
+                <span>Calendar</span>
+            </button>
+            <button class="p-link layout-topbar-button">
+                <i class="pi pi-user"></i>
+                <span>Profile</span>
+            </button>
+            <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
+                <i class="pi pi-cog"></i>
+                <span>Settings</span>
+            </button>
+        </div>
+    </div>
+    <div style="padding-top: 35px;">
+        <section class="container " style="margin-top: 35px; display: flow;">
+            <aside  [ngClass]="{'expanding': isExpanding}" #asideElement >
+                <ng-container *ngFor="let item of model; let i = index;">
+                    <ul class="layout-menu">
+                        <li class="layout-menuitem-root-text"><a href="item.routerLink">{{item.label}}</a></li>
+                    
+                    </ul>
+                </ng-container>
+            </aside>
+            
+
+        </section>
+    </div>
+    <router-outlet></router-outlet>
+</div>

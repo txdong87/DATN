@@ -1,0 +1,42 @@
+<div class="grid">
+    <div class="col-12 p-0">
+        <div class="card admin-content m-0">
+
+       
+            <div class="my-2 flex flex-wrap">
+                <input pInputText type="text" placeholder="Tên ..."
+                    class="block  lg:w-14rem  sm:w-auto p-inputtext-sm" 
+                    />
+
+                <div class="flex align-items-center">
+                    <button pButton pRipple icon="pi pi-search" class="p-button-primary mr-2 ml-4 p-button-sm"
+                        ></button>
+                    <button pButton pRipple icon="pi pi-times" class="p-button-secondary p-button-sm"
+                        ></button>
+
+                </div>
+                <div class="flex justify-content-end align-items-center flex-1">
+                  <!-- <input (change)="this.selectFile($event)"  class="p-2 " type="file" name="uploadfile"> -->
+                  <button pButton pRipple  label="Thêm mới" icon="pi pi-plus" class="p-button-success p-button-sm" 
+                  ></button>
+                </div>
+            </div>
+           
+        <ng-template #customHeaderTemplate>
+            <th [style.Width]="'6rem'">Tên file </th>
+            <th [style.Width]="'6rem'">Ngày cập nhật</th>
+            <th [style.Width]="'3rem'" class="flex c-center">Action</th>
+        </ng-template>
+        <ng-template #customBodyTemplate let-rowData>
+            <td [style.Width]="'6rem'">{{ rowData.name  }}</td>
+            <td [style.Width]="'6rem'">{{ rowData.updateDate  }}</td>
+            <td [style.Width]="'3rem'" class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
+                <button pButton pRipple icon="pi pi-cloud-download" class="p-button-rounded p-button-success  p-button-xs mr-2"
+               ></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-success  p-button-xs mr-2"
+                ></button>
+            </td>
+        </ng-template>
+        </div>
+    </div>
+</div>
