@@ -1,11 +1,11 @@
 <div class="layout-wrapper">
-    <div class=" layout-topbar">
-        <a class="layout-topbar-logo"  routerLink="">
-
+    <div class="layout-topbar">
+        <a class="layout-topbar-logo" routerLink="">
             <span>SAKAI</span>
         </a>
 
-        <p-button [style.width.px]="asideElement.offsetWidth" (click)="toggleSideBar()" [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'" ></p-button>
+        <p-button [style.width.px]="asideElement.offsetWidth" (click)="toggleSideBar()"
+            [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"></p-button>
         <div #topbarmenu class="layout-topbar-menu">
             <button class="p-link layout-topbar-button">
                 <i class="pi pi-calendar"></i>
@@ -21,19 +21,24 @@
             </button>
         </div>
     </div>
-    <div style="padding-top: 35px;">
-        <section class="container " style="margin-top: 35px; display: flow;">
-            <aside  [ngClass]="{'expanding': isExpanding}" #asideElement >
-                <ng-container *ngFor="let item of model; let i = index;">
-                    <ul class="layout-menu">
-                        <li class="layout-menuitem-root-text"><a href="item.routerLink">{{item.label}}</a></li>
-                    
-                    </ul>
-                </ng-container>
-            </aside>
-            
-
-        </section>
+    <div >
+        <div class="sidebar" style="padding-top: 35px">
+            <section class="container" style="margin-top: 35px">
+                <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
+                    <ng-container *ngFor="let item of model; let i = index">
+                        <ul class="layout-menu">
+                            <li class="layout-menuitem-root-text">
+                                <a href="item.routerLink">{{ item.label }}</a>
+                            </li>
+                        </ul>
+                    </ng-container>
+                </aside>
+                <router-outlet></router-outlet>
+            </section>
+        </div>
+        
+        <!-- <div class="content" [ngClass]="{ pushed: isExpanding }">
+           
+        </div> -->
     </div>
-    <router-outlet></router-outlet>
 </div>

@@ -4,6 +4,13 @@ import { ListVisitComponent } from './list-visit/list-visit.component';
 import { MainWorkComponent } from './main-work/main-work.component';
 import { CommonModule } from '@angular/common';
 import { CommonPageRoutingModule } from './common-page.routing.module';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [
     ListVisitComponent,
@@ -12,7 +19,16 @@ import { CommonPageRoutingModule } from './common-page.routing.module';
   imports: [
     CommonModule,
     AngularSplitModule,
-    CommonPageRoutingModule
+    CommonPageRoutingModule,
+    DropdownModule,
+    InputNumberModule,
+    InputTextModule,
+    CalendarModule,
+    DialogModule,
+    TableModule,
+    ReactiveFormsModule
+    
+    
   ]
 })
 export class CommonPageModule { }

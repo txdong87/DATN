@@ -6,20 +6,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminPagesComponent } from './components/admin/admin-pages/admin-pages.component';
 import { AppLayoutModule } from './components/admin/admin-layout/app.layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    
   ],
   imports: [ 
     BrowserModule,
     AppRoutingModule,
     AppLayoutModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

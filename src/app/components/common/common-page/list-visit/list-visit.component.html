@@ -1,1 +1,132 @@
 <p>list-visit works!</p>
+<div class="list-visit-content">
+    <as-split *ngIf="layout" direction="horizontal">
+        <as-split-area *ngIf="layout.columns[0].visible" [size]="layout.columns[0].size">
+            <ng-container *ngTemplateOutlet="containerLeft"></ng-container>
+        </as-split-area>
+        <as-split-area *ngIf="layout.columns[1].visible" [size]="layout.columns[1].size">
+            <ng-container *ngTemplateOutlet="containerRight"></ng-container>
+        </as-split-area>
+    </as-split>
+</div>
+<div   [formGroup]="patientForm">
+    <ng-template pTemplate="content" #containerLeft>
+        <div class="patient-info-container overflow-auto">
+            <div class="grid mx-0 p-1">
+                <div class="field pb-0 col-6 pl-0 pr-2">
+                    <input formControlName="patientsName" pInputText type="text" placeholder="Tên bệnh nhân*"
+                        class="w-full p-inputtext-sm text-base" />
+                    <div class="m-error"
+                        *ngIf="patientForm.controls['patientsName'].invalid && patientForm.controls['patientsName'].dirty">
+                        *Tên bệnh nhân không được để trống
+                    </div>
+                </div>
+                <div class="field pb-0 col-6 pl-2 pr-0">
+                    <input formControlName="patientCode" pInputText type="text" placeholder="Mã bệnh nhân*"
+                        class="w-full p-inputtext-sm text-base" />
+                    <div class="m-error"
+                        *ngIf="patientForm.controls['patientCode'].invalid && patientForm.controls['patientCode'].dirty">
+                        *Mã bệnh nhân không được để trống
+                    </div>
+                </div>
+                <div class="field py-0 col-6 pl-0 pr-2">
+                    <p-dropdown formControlName="patientsSex" optionLabel="label" optionValue="value"
+                        [options]="GENDERS" placeholder="Giới tính*" [showClear]="true">
+                    </p-dropdown>
+                    <div class="m-error"
+                        *ngIf="patientForm.controls['patientsSex'].invalid && patientForm.controls['patientsSex'].dirty">
+                        *Giới tính không được để trống
+                    </div>
+                </div>
+                <div class="field py-0 col-6 pl-2 pr-0">
+                    <p-inputNumber formControlName="yob" placeholder="Năm sinh*" [useGrouping]="false"
+                        [showButtons]="true" [min]="1900" [max]="2100">
+                    </p-inputNumber>
+                    <div class="m-error"
+                        *ngIf="patientForm.controls['yob'].invalid && patientForm.controls['yob'].dirty">
+                        *Năm sinh không được để trống
+                    </div>
+                </div>
+                <div class="field py-0 col-12 px-0">
+                    <input formControlName="cmnd" pInputText type="text" placeholder="CMND/CCCD"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+                <div class="field py-0 col-12 py-0 px-0">
+                    <input formControlName="address" pInputText type="text" placeholder="Địa chỉ"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+                <div class="field py-0 col-12 py-0 px-0">
+                    <p-dropdown formControlName="patientType" [options]="PATIENT_TYPES" appendTo="body"
+                        placeholder="Loại bệnh nhân*" [showClear]="true" optionLabel="label"
+                        optionValue="value"></p-dropdown>
+                    <div class="m-error"
+                        *ngIf="patientForm.controls['patientType'].invalid && patientForm.controls['patientType'].dirty">
+                        *Vui lòng chọn loại bệnh nhân
+                    </div>
+                </div>
+                <div class="field col-6 py-0 pr-2 pl-0">
+                    <input formControlName="bhyt" pInputText type="text" placeholder="Bảo hiểm y tế"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+                <div class="field col-6 py-0 pl-2 pr-0">
+                    <p-calendar formControlName="expireDateBHYT" placeholder="Ngày hết hạn BHYT" [showIcon]="true"
+                        appendTo="body" [dateFormat]="'dd/mm/yy'" inputStyleClass="w-full p-inputtext-sm text-base">
+                    </p-calendar>
+                </div>
+                <!-- <div class="field col-6 py-0 pl-2 pr-0">
+              <input pInputText type="text" placeholder="Nơi gửi bệnh phẩm" class="w-full p-inputtext-sm text-base" />
+            </div> -->
+                <div class="field col-4 py-0 pr-2 pl-0">
+                    <input formControlName="faculty" pInputText type="text" placeholder="Khoa"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+                <div class="field col-4 py-0 pr-2 pl-2">
+                    <input formControlName="room" pInputText type="text" placeholder="Phòng"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+                <div class="field col-4 py-0 pr-0 pl-2">
+                    <input formControlName="sickBed" pInputText type="text" placeholder="Giường"
+                        class="w-full p-inputtext-sm text-base" />
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Lưu" icon="pi pi-save" class="p-button-text" (click)="onSave()"></button>
+    </ng-template>
+    <!-- <p-dialog [(visible)]="visibleDuplicate" [style]="{width: '600px'}" [header]="'Danh sách bệnh nhân trùng lặp'"
+        [modal]="true" class="p-fluid">
+        <ng-template pTemplate="content">
+            <p-table [value]="listDuplicate" responsiveLayout="scroll" selectionMode="single"
+                [(selection)]="selectedDuplicate" styleClass="p-datatable-xs p-datatable-gridlines" [rowHover]="true"
+                [dataKey]="'id'">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem" class="text-center">STT</th>
+                        <th style="width: 10rem">Tên bệnh nhân</th>
+                        <th style="width: 8rem">Mã bệnh nhân</th>
+                        <th style="width: 8rem">CMND</th>
+                        <th>Lý do trùng</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-rowIndex="rowIndex">
+                    <tr [pSelectableRow]="item">
+                        <td class="text-center">{{rowIndex+1}}</td>
+                        <td>{{item['patientsName']}}</td>
+                        <td>{{item['patientCode']}}</td>
+                        <td>{{item['cmnd']}}</td>
+                        <td>{{item['type']}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Vẫn tiếp tục thêm" class="p-button-sm mr-2 p-button-info"
+                (click)="createPatient(false)"></button>
+            <button [disabled]="!selectedDuplicate?.id" pButton pRipple label="Áp dụng" class="p-button-sm"
+                (click)="onUseDuplicate()"></button>
+        </ng-template>
+    </p-dialog> -->
+</div>
+
+<ng-template #containerRight>34123432</ng-template>

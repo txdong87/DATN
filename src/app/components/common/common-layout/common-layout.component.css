@@ -1,43 +1,87 @@
 * {
-    margin: 0;
-   }
-   nav{
-    height:70px;
-    background-color: green;
-   }
-   .container{
-    display: flex;
-    height: calc(100vh - 70px);
-   }
-   .container .main-body{
-    width: 100%;
-   }
-   .container aside{
-     width: 0;
-     overflow-y: auto;
-     transition: all 0.5s;
-     background-color: rgb(177, 185, 202);
-   }
-   /*Im using hover event to expand sidebar for example, you can use JS to handle click event*/
-   .container aside.expanding{
-     width: 200px;
-   }
-   .layout-menu ul{
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-   }
-   .layout-menuitem-root-text {
-    float: none;
-    color: black;
-   }
-    a {
-    display: block;
-    color: black ;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-  a:hover {
-    background-color: #f0e9e9;
-  }
+  margin: 0;
+}
+
+nav {
+  height: 70px;
+  background-color: green;
+}
+
+.container {
+  display: flex;
+  height: calc(100vh - 70px);
+}
+
+.aside {
+  width: 300px;
+  min-height: calc(100vh - 6rem);
+  z-index: 999;
+  overflow-y: auto;
+  -webkit-user-select: none;
+  user-select: none;
+  top: 5rem;
+  left: 1rem;
+  transition: transform .2s, left .2s;
+  background-color: var(--surface-overlay);
+  border-radius: 12px;
+  padding: .5rem 1.5rem;
+  box-shadow: 0 3px 5px #00000005;
+}
+
+.container .main-body {
+  width: 100%;
+}
+
+.container aside {
+  width: 0;
+  overflow-y: auto;
+  transition: all 0.5s;
+  background-color: rgb(177, 185, 202);
+}
+.main-work{
+  display: flex;
+}
+
+/*Im using hover event to expand sidebar for example, you can use JS to handle click event*/
+.container aside.expanding {
+  width: 300px;
+}
+
+.layout-menu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.layout-menuitem-root-text {
+  float: none;
+  color: black;
+}
+
+a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: #f0e9e9;
+}
+
+.content {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+  margin-left: 0;
+}
+
+.content.pushed {
+  margin-left: 250px;
+  
+}
+
+.content-wrapper {
+  display: flex;
+  flex: 1;
+}

@@ -6,11 +6,7 @@ const routes: Routes = [
     {
       path: '',
       component: ListVisitComponent,
-      children: [
-        {
-        
-        },
-      ],
+      
     },
   ];
 @NgModule({

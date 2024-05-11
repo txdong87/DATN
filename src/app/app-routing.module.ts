@@ -29,7 +29,6 @@ import { AppLayoutComponent } from "./components/admin/admin-layout/app.layout.c
                         import(
                             './components/common/common-layout/common-layout.module'
                         ).then((m) => m.CommonLayoutModule),
-                    canActivate: [],
                 },
                 { path: '**', redirectTo: '404' },
             ],

@@ -9,6 +9,7 @@ import { CommonLayoutComponent } from './common-layout.component';
 		RouterModule.forChild([
 		{
 			path: '',
+			component: CommonLayoutComponent,
 			children: [
 				{
 				  path: 'main-work',
