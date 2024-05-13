@@ -11,6 +11,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { TabDataService } from 'src/app/services/base/tab-data.service';
 @NgModule({
   declarations: [
     ListVisitComponent,
@@ -29,6 +30,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveFormsModule
     
     
-  ]
+  ],
+  providers:[]
 })
 export class CommonPageModule { }

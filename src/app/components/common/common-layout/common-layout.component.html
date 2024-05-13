@@ -4,7 +4,7 @@
             <span>SAKAI</span>
         </a>
 
-        <p-button [style.width.px]="asideElement.offsetWidth" (click)="toggleSideBar()"
+        <p-button  (click)="toggleSideBar()"
             [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"></p-button>
         <div #topbarmenu class="layout-topbar-menu">
             <button class="p-link layout-topbar-button">
@@ -33,12 +33,10 @@
                         </ul>
                     </ng-container>
                 </aside>
-                <router-outlet></router-outlet>
+                <div >
+                    <router-outlet></router-outlet>
+                </div>
             </section>
         </div>
-        
-        <!-- <div class="content" [ngClass]="{ pushed: isExpanding }">
-           
-        </div> -->
     </div>
 </div>

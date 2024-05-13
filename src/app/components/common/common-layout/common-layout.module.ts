@@ -10,13 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainWorkComponent } from '../common-page/main-work/main-work.component';
 import { CommonPageModule } from '../common-page/common-page.module';
+import { TabDataService } from 'src/app/services/base/tab-data.service';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
     
   ],
   providers:[
-
   ],
   imports: [
     CommonModule,

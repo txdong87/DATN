@@ -11,7 +11,13 @@ nav {
   display: flex;
   height: calc(100vh - 70px);
 }
+.sidebar.expanding {
+  transform: translateX(0); /* Di chuyển sidebar ra khỏi vị trí ban đầu */
+}
 
+.content-wrapper {
+  margin-left: 0; /* Không có margin khi sidebar được mở rộng */
+}
 .aside {
   width: 300px;
   min-height: calc(100vh - 6rem);
@@ -70,15 +76,14 @@ a:hover {
   background-color: #f0e9e9;
 }
 
-.content {
-  flex: 1;
-  transition: margin-left 0.3s ease;
-  margin-left: 0;
+.router-outlet {
+  position: relative;
+  left: 250px; /* Độ rộng sidebar */
+  transition: all ease-in-out 0.3s;
 }
 
-.content.pushed {
-  margin-left: 250px;
-  
+.sidebar.expanding .router-outlet {
+  left: 0; /* Khi sidebar mở, `router-outlet` sẽ nằm ở vị trí 0 */
 }
 
 .content-wrapper {

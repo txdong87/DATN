@@ -1,0 +1,53 @@
+<div class="addVisit">
+    <div style="margin-top: 12px">
+      <div class="row row-form">
+        <div class="col-md-6">
+          <!-- <div *ngIf="visitReason == null">KT sức khỏe
+            <input nz-input formControlName="visitReason" placeholder="Lý do khám" #nextTab />
+          </div> -->
+          <input nz-input formControlName="visitReason" placeholder="Lý do khám" #nextTab />
+          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitReason.errors">
+            <div *ngIf="visitFrmCtrls.visitReason.errors.required || visitFrmCtrls.visitReason.hasError('whitespace')">
+           
+              <span>Bạn chưa nhập lý do khám</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          
+          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitDate.errors">
+            <div *ngIf="visitFrmCtrls.visitDate.errors.required">
+            
+              <span>Bạn chưa chọn ngày khám</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col-md-6">
+          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitServices.errors" nzSize="large">
+            2
+            <div *ngIf="visitFrmCtrls.visitServices.errors.required">
+       
+              <span>Bạn chưa chọn dịch vụ khám/gói khám</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col-md-6">
+          <input nz-input formControlName="diagnoseInit" placeholder="Chẩn đoán ban đầu" #nextTab />
+        </div>
+        <div class="col-md-6">
+          <input nz-input formControlName="note" placeholder="Ghi chú" #nextTab />
+        </div>
+        <!-- <div class="col-md-6"></div> -->
+      </div>

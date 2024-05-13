@@ -9,9 +9,8 @@
         </as-split-area>
     </as-split>
 </div>
-<div   [formGroup]="patientForm">
     <ng-template pTemplate="content" #containerLeft>
-        <div class="patient-info-container overflow-auto">
+        <div class="patient-info-container overflow-auto" [formGroup]="patientForm">
             <div class="grid mx-0 p-1">
                 <div class="field pb-0 col-6 pl-0 pr-2">
                     <input formControlName="patientsName" pInputText type="text" placeholder="Tên bệnh nhân*"
@@ -94,6 +93,32 @@
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Lưu" icon="pi pi-save" class="p-button-text" (click)="onSave()"></button>
     </ng-template>
+    <ng-template pTemplate="content" #containerRight>
+        <p-table 
+    [value]="caseStudy" 
+    [columns]="cols"
+    [resizableColumns]="true" 
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    styleClass="p-datatable-gridlines" 
+    [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{ col.header }}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                {{ rowData[col.field] }}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+    </ng-template>
     <!-- <p-dialog [(visible)]="visibleDuplicate" [style]="{width: '600px'}" [header]="'Danh sách bệnh nhân trùng lặp'"
         [modal]="true" class="p-fluid">
         <ng-template pTemplate="content">
@@ -127,6 +152,5 @@
                 (click)="onUseDuplicate()"></button>
         </ng-template>
     </p-dialog> -->
-</div>
 
 <ng-template #containerRight>34123432</ng-template>
