@@ -1,23 +1,36 @@
 import { CommonPageModule } from './../common-page/common-page.module';
 import { AddPatientAndVisitModule } from '../common-page/add-patient-and-visit/add-patient-and-visit.module';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule,Routes } from '@angular/router';
 import { CommonLayoutComponent } from './common-layout.component';
 
-@NgModule({
-	imports: [
-		RouterModule.forChild([
+const routes: Routes = [
+	{
+	  path: '',
+	  redirectTo: 'common/page',
+	  pathMatch: 'full',
+	  
+	},
+	{
+	  path: 'common',
+	  component: CommonLayoutComponent,
+	  children: [
 		{
-			path: '',
-			component: CommonLayoutComponent,
-			children: [
-				{
-				  path: 'main-work',
-				  loadChildren:()=> import('../common-page/common-page.module').then((m)=>m.CommonPageModule),
-				},
-			]
-		}
-	])],
+		  path: 'page',
+		  loadChildren: () =>
+			import('../common-page/common-page.module').then((m) => m.CommonPageModule),
+		  data: {
+			pagename: 'list_visit',
+			// Code:'',
+			// TimeType:'-1'
+		  },
+		
+		},
+	  ],
+	},
+  ];
+@NgModule({
+	imports: [RouterModule.forChild(routes)],
 	exports: [RouterModule]
 })
 export class CommonLayoutRoutingModule { }

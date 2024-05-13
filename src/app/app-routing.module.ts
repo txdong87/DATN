@@ -24,7 +24,7 @@ import { AppLayoutComponent } from "./components/admin/admin-layout/app.layout.c
                     // data: { role: Roles.ADMIN },
                 },
                 {
-                    path: 'common',
+                    path: '',
                     loadChildren: () =>
                         import(
                             './components/common/common-layout/common-layout.module'
