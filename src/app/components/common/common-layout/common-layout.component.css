@@ -153,3 +153,20 @@ a:hover {
     }
   }
 }
+.layout-sidebar {
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.layout-sidebar.hidden {
+  transform: translateX(-300px);
+}
+
+.layout-main-container {
+  transition: margin-left 0.3s ease;
+  margin-left: 300px;
+}
+
+.layout-main-container.sidebar-hidden {
+  margin-left: 0;
+}

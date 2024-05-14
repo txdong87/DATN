@@ -11,6 +11,7 @@ export class CommonLayoutComponent implements OnInit{
   indexTab = 0;
   model: any[] = [];
   isExpanding = true;
+  isSidebarHidden = true;
   currentTabId: string|any;
   tabs:any[]=[];
   constructor(
@@ -23,7 +24,8 @@ export class CommonLayoutComponent implements OnInit{
       });
   }
   toggleSideBar() {
-    this.isExpanding = !this.isExpanding;
+    // this.isExpanding = !this.isExpanding;
+    this.isSidebarHidden = !this.isSidebarHidden;
   }
  
   sidebarVisible: boolean = true;
@@ -42,7 +44,6 @@ getTabs() {
       this.tabs = this.tabDataService.tabs();
     })
     this.indexTab = this.tabDataService.indextab;
-    console.log(this.tabs,this.indexTab)
     this.cdr.detectChanges()
 }
 closeTab(tab: any): void {
@@ -50,6 +51,8 @@ closeTab(tab: any): void {
   }
   openNewTab(id: string, tab: string, type: string) {
     this.tabDataService.updateTab(id, tab, type);
+    this.indexTab = this.tabDataService.indextab;
+    console.log(this.indexTab)
     console.log(tab,id,type)
   }
 itemClick(event: Event) {

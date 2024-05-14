@@ -28,11 +28,9 @@ export class TabDataService {
     this.changeTab(id);
     let tabs = this.content.getValue();
     let len = tabs.length;
-    console.log(tabs)
     for (let i = 0; i < len; i++) {
-      console.log(tabs)
       if (tabs[i].id === id) {
-        console.log(1111)
+        console.log(1111111,id)
         this.indextab = i;
         tabs.splice(i, 1, { id: id, name: patientName, tabType: tabType });
        
@@ -44,8 +42,9 @@ export class TabDataService {
     if (checkid) {
       this.indextab = tabs.length;
       this.content.next(tabs.concat([{ id: id, name: patientName, tabType: tabType }]));
+      
     }
-
+    console.log(tabs,this.indextab,this.content)
     // console.log("", tabs);
   }
 

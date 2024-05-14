@@ -21,7 +21,7 @@
             </button>
         </div>
     </div>
-    <div class="layout-sidebar" [ngClass]="{ expanding: isExpanding }">
+    <div class="layout-sidebar" [ngClass]="{ 'expanding': isExpanding, 'hidden': !isSidebarHidden }">
             <section class="container" style="margin-top: 35px">
                 <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
                   
@@ -40,9 +40,9 @@
                 </div> -->
             </section>
     </div>
-    <div class="layout-main-container">
+    <div class="layout-main-container" [ngClass]="{ 'sidebar-hidden': !isSidebarHidden }">
         <div class="layout-main">
-        <p-tabView class="tab-mainwork"  [scrollable]="true">
+        <p-tabView [activeIndex]="indexTab" class="tab-mainwork"  [scrollable]="true">
             <p-tabPanel *ngFor="let tab of tabs" >
                 <ng-template pTemplate="header">
                     <div class="fs-16"  *ngIf="tab.tabType == 'main'">
