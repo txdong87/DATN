@@ -14,7 +14,9 @@ nav {
 .sidebar.expanding {
   transform: translateX(0); /* Di chuyển sidebar ra khỏi vị trí ban đầu */
 }
-
+.layout-sidebar.expanding{
+  width: 300px;
+}
 .content-wrapper {
   margin-left: 0; /* Không có margin khi sidebar được mở rộng */
 }
@@ -75,12 +77,12 @@ a {
 a:hover {
   background-color: #f0e9e9;
 }
-
+/* 
 .router-outlet {
   position: relative;
-  left: 250px; /* Độ rộng sidebar */
+  left: 250px; 
   transition: all ease-in-out 0.3s;
-}
+} */
 
 .sidebar.expanding .router-outlet {
   left: 0; /* Khi sidebar mở, `router-outlet` sẽ nằm ở vị trí 0 */
@@ -89,4 +91,65 @@ a:hover {
 .content-wrapper {
   display: flex;
   flex: 1;
+}
+.tab-mainwork {
+  padding: 8px; 
+
+  .p-tabview {
+    overflow: initial;
+  }
+
+  .p-tabview-nav {
+    margin-bottom: 0px;
+    border-bottom: none;
+
+    .p-tabview-nav-content {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    .p-tabview-nav-link {
+      color: var(--his-font-cl);
+      background-color: #d9dde7;
+      padding: 5.5px 35px 5.5px 8px;
+      position: relative;
+
+      &.p-highlight {
+        color: var(--his-primary) !important;
+        background-color: white;
+        border-bottom-color: white;
+
+        .p-tabview-nav-title {
+          color: var(--his-primary) !important;
+          font-weight: 400;
+        }
+      }
+
+      &:hover {
+        background-color: white;
+        color: var(--his-primary) !important;
+      }
+
+      .tab-action {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+      }
+
+      .pi-times {
+        margin-right: 12px;
+        position: absolute;
+        top: 4px;
+        right: 0px;
+        width: 13px;
+        height: 13px;
+      }
+    }
+  }
+
+  .p-tabview-title {
+    &:focus {
+      color: var(--his-font-cl);
+    }
+  }
 }

@@ -1,4 +1,4 @@
-<div class="layout-wrapper">
+<div class="layout-wrapper" [ngClass]="containerClass">
     <div class="layout-topbar">
         <a class="layout-topbar-logo" routerLink="">
             <span>SAKAI</span>
@@ -21,22 +21,49 @@
             </button>
         </div>
     </div>
-    <div >
-        <div class="sidebar" style="padding-top: 35px">
+    <div class="layout-sidebar" [ngClass]="{ expanding: isExpanding }">
             <section class="container" style="margin-top: 35px">
                 <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
-                    <ng-container *ngFor="let item of model; let i = index">
+                  
                         <ul class="layout-menu">
-                            <li class="layout-menuitem-root-text">
-                                <a href="item.routerLink">{{ item.label }}</a>
+                            <li class="layout-menuitem-root-text"  (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
+                                <span>Danh sách ca khám</span>
+                            </li>
+                            <li class="layout-menuitem-root-text"  (click)="openNewTab('AddCase', 'Thêm ca khám', 'extra')">
+                                <span>Thêm ca khám</span>
                             </li>
                         </ul>
-                    </ng-container>
                 </aside>
-                <div >
+                
+                <!-- <div >
                     <router-outlet></router-outlet>
-                </div>
+                </div> -->
             </section>
-        </div>
+    </div>
+    <div class="layout-main-container">
+        <div class="layout-main">
+        <p-tabView class="tab-mainwork"  [scrollable]="true">
+            <p-tabPanel *ngFor="let tab of tabs" >
+                <ng-template pTemplate="header">
+                    <div class="fs-16"  *ngIf="tab.tabType == 'main'">
+                      {{ tab.name }}
+                    </div>
+                    <div class="fs-16" *ngIf="tab.tabType == 'extra'">
+                      {{ tab.name }}
+                      <span class="tab-action">
+                        <i class="pi pi-times" (click)="closeTab(tab)" ></i>
+                      </span>
+                    </div>
+                </ng-template>
+                <div
+                    *ngIf="tab.id == 'ListVisit' ">
+                    <app-list-visit></app-list-visit>
+                </div>
+                <div *ngIf="tab.id == 'AddCase' ">
+                    <app-add-case-study></app-add-case-study>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
     </div>
 </div>

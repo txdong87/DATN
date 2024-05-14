@@ -12,10 +12,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
+import { AddCaseStudyComponent } from './add-case-study/add-case-study.component';
 @NgModule({
   declarations: [
     ListVisitComponent,
-    MainWorkComponent
+    MainWorkComponent,
+    AddCaseStudyComponent
+  ],
+  exports:[
+    ListVisitComponent,
+    MainWorkComponent,
+    AddCaseStudyComponent
   ],
   imports: [
     CommonModule,

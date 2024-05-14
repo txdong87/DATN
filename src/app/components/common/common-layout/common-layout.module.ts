@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainWorkComponent } from '../common-page/main-work/main-work.component';
 import { CommonPageModule } from '../common-page/common-page.module';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
+import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
@@ -25,7 +26,10 @@ import { TabDataService } from 'src/app/services/base/tab-data.service';
     SplitterModule,
     SidebarModule,
     ButtonModule,
-    CommonPageModule
+    CommonPageModule,
+    TabViewModule,
+    ButtonModule,
+    
   ],
   exports: []
 })
