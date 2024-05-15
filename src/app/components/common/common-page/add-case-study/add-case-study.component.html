@@ -1,45 +1,119 @@
 <div class="addVisit" [formGroup]="formAddVisit">
-    <div style="margin-top: 12px">
-      <div class="row row-form">
-        <div class="col-md-6">
-          <input pInputText formControlName="visitReason" placeholder="Lý do khám" required autofocus #nextTab />
-          <div class="m-error" *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
-            <span>Bạn chưa nhập lý do khám</span>
-          </div>
-          <!-- <div class="message-required" *ngIf=" visitFormCtrl.visitReason.errors">
-            <div *ngIf="visitFormCtrl.visitReason.errors.required || visitFormCtrl.visitReason.hasError('whitespace')">
-           
-              <span>Bạn chưa nhập lý do khám</span>
+  <div style="margin-top: 12px">
+    <div class="grid mx-0 p-1">
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <p-calendar class="w-full p-inputtext-sm text-base" formControlName="visitDate" [showTime]="true"
+          [showIcon]="true" appendTo="body" placeholder="Thời gian tạo*" [dateFormat]="'dd/mm/yy'"></p-calendar>
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitDate'].invalid && formAddVisit.controls['visitDate'].dirty">
+          <span>Bạn chưa nhập ngày khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+      <div class="field pb-0 col-6 pl-0 pr-2">
+        <input class="w-full p-inputtext-sm text-base" pInputText formControlName="visitReason" placeholder="Lý do khám"
+          required autofocus #nextTab />
+        <div class="m-error"
+          *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+          <span>Bạn chưa nhập lý do khám</span>
+        </div>
+      </div>
+    </div>
+    <div class="row-form">
+      <div class="cursor-pointer mg-bt-10" (click)="vitalInfoCollapse()">
+        Thông tin sinh tồn
+        <i class="mgl10"
+          [ngClass]="{'pi pi-caret-down': vitalSignCollapse, 'pi pi-caret-right': !vitalSignCollapse}"></i>
+      </div>
+      <div *ngIf="vitalSignCollapse">
+        <div class="vital-sign-info">
+          <div class="vital-sign-row">
+            <div class="col-12 vital-sign-col">
+            <div class="label">Mạch</div>
+            <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="heartBeat" type="number"
+              placeholder="lần/phút" />
             </div>
-            
-          </div> -->
-        </div>
-        <div class="col-md-6">
-          <p-calendar formControlName="visitDate" [showTime]="true" [showIcon]="true" appendTo="body" placeholder="Thời gian tạo*"
-          inputStyleClass="w-full p-inputtext-sm text-base" [dateFormat]="'dd/mm/yy'"></p-calendar>
-          <div class="m-error" *ngIf="formAddVisit.controls['visitDate'].invalid && formAddVisit.controls['visitDate'].dirty">
-            <span>Bạn chưa nhập ngày khám</span>
+          </div>
+          <div class="vital-sign-row row">
+            <div class="col-6 vital-sign-col">
+              <div class="label">Nhiệt độ</div>
+              <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="temperature"
+                type="number" placeholder="Nhiệt độ" />
+            </div>
+            <div class="col-6 vital-sign-col">
+              <div class="label">SpO2</div>
+              <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="spo2" type="number"
+                placeholder="SpO2" />
+            </div>
+          </div>
+          <div class="vital-sign-row">
+            <div class="col-12 vital-sign-col">
+            <div class="label">Huyết áp</div>
+            <input class="w-full p-inputtext-sm text-base" #nextTab class="w-100px mgr10" pInputText
+              formControlName="bloodPressureMax" type="number" placeholder="max" />
+            <input class="w-full p-inputtext-sm text-base" #nextTab class="w-100px mgl10" pInputText
+              formControlName="bloodPressureMin" type="number" placeholder="min" />
+            </div>
+          </div>
+          <div class="vital-sign-row row">
+            <div class="col-6 vital-sign-col">
+              <div class="label">Chiều cao</div>
+              <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="height" type="number"
+                placeholder="cm" />
+            </div>
+            <div class="col-6 vital-sign-col">
+              <div class="label">Cân nặng</div>
+              <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="weight" type="number"
+                placeholder="kg" />
+            </div>
           </div>
         </div>
       </div>
-      <div class="row row-form">
-        <div class="col-md-6">
-          
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      <div class="row row-form">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
-        </div>
-      </div>
-      <div class="row row-form">
-        <div class="col-md-6">
-          <input  placeholder="Chẩn đoán ban đầu" #nextTab />
-        </div>
-        <div class="col-md-6">
-          <input  placeholder="Ghi chú" #nextTab />
-        </div>
-      </div>
+    </div>

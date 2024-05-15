@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class AddCaseStudyComponent {
   formAddVisit: FormGroup;
+  vitalSignCollapse = false;
   constructor(private formBuilder: FormBuilder,) { 
     this.formAddVisit = this.formBuilder.group({
       id: [0],
@@ -36,4 +37,8 @@ export class AddCaseStudyComponent {
   get visitFormCtrl() {
     return this.formAddVisit.controls;
   }
+  vitalInfoCollapse() {
+    this.vitalSignCollapse = !this.vitalSignCollapse;
+  }
+
 }
