@@ -34,7 +34,8 @@ import { AddCaseStudyComponent } from './add-case-study/add-case-study.component
     CalendarModule,
     DialogModule,
     TableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CalendarModule
     
     
   ],

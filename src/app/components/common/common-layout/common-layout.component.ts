@@ -1,4 +1,4 @@
-import { Component, ViewChild,ChangeDetectorRef, OnDestroy, OnInit  } from '@angular/core';
+import { Component, ViewChild,ChangeDetectorRef, OnDestroy, OnInit,SimpleChanges   } from '@angular/core';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
 import { LayoutService } from '../../admin/admin-layout/service/app.layout.service';
 @Component({
@@ -39,10 +39,16 @@ export class CommonLayoutComponent implements OnInit{
        
     ];
 }
+ngOnChanges(changes: SimpleChanges) {
+  if (changes['indexTab']) {
+    this.cdr.detectChanges();
+  }
+}
 getTabs() {
     this.tabDataService.share.subscribe(() => {
       this.tabs = this.tabDataService.tabs();
     })
+    console.log(this.tabs)
     this.indexTab = this.tabDataService.indextab;
     this.cdr.detectChanges()
 }
@@ -52,8 +58,6 @@ closeTab(tab: any): void {
   openNewTab(id: string, tab: string, type: string) {
     this.tabDataService.updateTab(id, tab, type);
     this.indexTab = this.tabDataService.indextab;
-    console.log(this.indexTab)
-    console.log(tab,id,type)
   }
 itemClick(event: Event) {
     // avoid processing disabled items

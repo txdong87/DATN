@@ -1,34 +1,30 @@
-<!-- <div class="addVisit">
+<div class="addVisit" [formGroup]="formAddVisit">
     <div style="margin-top: 12px">
       <div class="row row-form">
         <div class="col-md-6">
-          <input nz-input formControlName="visitReason" placeholder="Lý do khám" #nextTab />
-          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitReason.errors">
-            <div *ngIf="visitFrmCtrls.visitReason.errors.required || visitFrmCtrls.visitReason.hasError('whitespace')">
+          <input pInputText formControlName="visitReason" placeholder="Lý do khám" required autofocus #nextTab />
+          <div class="m-error" *ngIf="formAddVisit.controls['visitReason'].invalid && formAddVisit.controls['visitReason'].dirty">
+            <span>Bạn chưa nhập lý do khám</span>
+          </div>
+          <!-- <div class="message-required" *ngIf=" visitFormCtrl.visitReason.errors">
+            <div *ngIf="visitFormCtrl.visitReason.errors.required || visitFormCtrl.visitReason.hasError('whitespace')">
            
               <span>Bạn chưa nhập lý do khám</span>
             </div>
+            
+          </div> -->
+        </div>
+        <div class="col-md-6">
+          <p-calendar formControlName="visitDate" [showTime]="true" [showIcon]="true" appendTo="body" placeholder="Thời gian tạo*"
+          inputStyleClass="w-full p-inputtext-sm text-base" [dateFormat]="'dd/mm/yy'"></p-calendar>
+          <div class="m-error" *ngIf="formAddVisit.controls['visitDate'].invalid && formAddVisit.controls['visitDate'].dirty">
+            <span>Bạn chưa nhập ngày khám</span>
           </div>
         </div>
+      </div>
+      <div class="row row-form">
         <div class="col-md-6">
           
-          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitDate.errors">
-            <div *ngIf="visitFrmCtrls.visitDate.errors.required">
-            
-              <span>Bạn chưa chọn ngày khám</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row row-form">
-        <div class="col-md-6">
-          <div class="message-required" *ngIf="submitted && visitFrmCtrls.visitServices.errors" nzSize="large">
-            2
-            <div *ngIf="visitFrmCtrls.visitServices.errors.required">
-       
-              <span>Bạn chưa chọn dịch vụ khám/gói khám</span>
-            </div>
-          </div>
         </div>
         <div class="col-md-6">
         </div>
@@ -41,9 +37,9 @@
       </div>
       <div class="row row-form">
         <div class="col-md-6">
-          <input nz-input formControlName="diagnoseInit" placeholder="Chẩn đoán ban đầu" #nextTab />
+          <input  placeholder="Chẩn đoán ban đầu" #nextTab />
         </div>
         <div class="col-md-6">
-          <input nz-input formControlName="note" placeholder="Ghi chú" #nextTab />
+          <input  placeholder="Ghi chú" #nextTab />
         </div>
-      </div> -->
+      </div>
