@@ -29,8 +29,14 @@
                             <li class="sideicon menu-item menu-item-flex"  style="border-style: dashed; border-width: 0 0 1px 0; border-color: white"  (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
                                 <span>Danh sách ca khám</span>
                             </li>
-                            <li    class="sideicon menu-item menu-item-flex"  (click)="openNewTab('AddCase', 'Thêm ca khám', 'extra')">
+                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('AddCase', 'Thêm ca khám', 'extra')">
                                 <span>Thêm ca khám</span>
+                            </li>
+                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('ListPatient', 'Danh sách bệnh nhân', 'extra')">
+                                <span>Danh sách bệnh nhân</span>
+                            </li>
+                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('ListCaseStudy','Danh sách ca khám', 'extra')">
+                                <span>Danh sách ca khám bác sĩ</span>
                             </li>
                         </ul>
                     </div>
@@ -62,6 +68,12 @@
                 </div>
                 <div *ngIf="tab.id == 'AddCase' ">
                     <app-add-case-study></app-add-case-study>
+                </div>
+                <div *ngIf="tab.id == 'ListPatient' ">
+                    <app-list-patient></app-list-patient>
+                </div>
+                <div *ngIf="tab.id == 'ListCaseStudy' ">
+                    <app-list-case-study></app-list-case-study>
                 </div>
             </p-tabPanel>
         </p-tabView>

@@ -1,0 +1,39 @@
+<div class="h-full w-full worklist-container" direction="vertical">
+  <div class="grid w-full m-0">
+    <div>
+      <span class="block sm:text-lg xl:text-xl font-bold text-primary-color pt-2">
+        <ng-container>Danh sách ca khám:</ng-container> {{totalCaseStudies}} kết quả
+      </span>
+    </div>
+    <div>
+      <div class="flex justify-content-end">
+        <input pInputText type="text" placeholder="Tên bệnh nhân" title="Tên bệnh nhân"
+          class="text-base p-inputtext-sm mr-2 border-round-3xl pl-3" [(ngModel)]="searchData.patientName"
+          (keydown.enter)="onModelChangeSearchData()" />
+        <p-calendar [showClear]="true" [showButtonBar]="true" [dateFormat]="'dd/mm/yy'" placeholder="Lọc từ ngày"
+          [(ngModel)]="searchData.from" (ngModelChange)="onModelChangeSearchData()" [showIcon]="false" appendTo="body"
+          [dateFormat]="'dd/mm/yy'" inputStyleClass="mr-2 border-round-3xl pl-3"></p-calendar>
+        <p-calendar [showClear]="true" [showButtonBar]="true" placeholder="Lọc đến ngày" [(ngModel)]="searchData.to"
+          (ngModelChange)="onModelChangeSearchData()" [showIcon]="false" appendTo="body" [dateFormat]="'dd/mm/yy'"
+          inputStyleClass="mr-2 border-round-3xl  pl-3"></p-calendar>
+        <!-- <p-dropdown [options]="REPORT_STATES" [(ngModel)]="searchData.status"
+                placeholder="Trạng thái" optionLabel="label" (ngModelChange)="onModelChangeSearchData()"
+                optionValue="value" [showClear]="true" styleClass="mr-2 border-round-3xl {{filterStyleClass}} pl-2"></p-dropdown>
+              <button pButton pRipple type="button" icon="pi pi-search-plus" class="flex-none text-xl p-button-info font-bold p-button-rounded"
+                (click)="isVisibleSearchCaseStudy=true" title="Tìm kiếm nâng cao"></button> -->
+        <button pButton pRipple type="button" icon="pi pi-delete-left"
+          class="flex-none ml-2 text-2xl p-button-danger font-bold p-button-rounded" (click)="onResetSearchData()"
+          title="Xóa lọc"></button>
+        <!-- <button [loading]="loadingExport" (click)="showCustomExeclCols()"
+                pButton pRipple type="button" icon="pi pi-download" title="Xuất báo cáo"
+                class="flex-none text-xl ml-2 font-bold p-button-rounded p-buton-primary"></button> -->
+        <button pButton pRipple label="Thêm ca bệnh" icon="pi pi-plus"
+          class="flex-none xl:ml-4 sm:ml-2 p-button p-button-rounded" (click)="onCreateCaseStudy()"></button>
+      </div>
+    </div>
+    <div class="col-12 py-0 px-3 w-full ">
+      <app-patient-table>  </app-patient-table>
+    </div>
+  </div>
+</div>
+<p-contextMenu #menu styleClass="w-16rem" [model]="actions"></p-contextMenu>

@@ -1,0 +1,156 @@
+<div class="p-fluid card" style="border-top: 0px; overflow: auto; padding: 10px">
+    <div class="p-grid p-mb-2">
+      <div class="p-col-12 p-md-4 info-label">Triệu chứng lâm sàng</div>
+      <div class="p-col-12 p-md-8 position-relative">
+        <textarea pInputTextarea [disabled]="disabledEditInfo" autoResize [(ngModel)]="visit.clinicalInfomation"
+          (ngModelChange)="onTypingClinicalInfo($event)">
+        </textarea>
+        <i class="pi pi-save position-absolute icon-save" pTooltip="Lưu" (click)="clickTosaveVisitInfo('clinicalInfomation')"></i>
+      </div>
+    </div>
+    <div class="p-grid p-mb-2">
+      <div class="p-col-12 p-md-4 info-label">Chẩn đoán ban đầu</div>
+      <div class="p-col-12 p-md-8 position-relative">
+        <textarea [disabled]="disabledEditInfo" autoResize [(ngModel)]="visit.diagnoseInit"
+          (ngModelChange)="onTypingDiagnoseInit($event)">
+        </textareapInpu>
+        <i class="pi pi-copy position-absolute icon-copy" pTooltip="Copy chẩn đoán ban đầu" (click)="copyDiagnoseInit()"></i>
+        <i class="pi pi-save position-absolute icon-save" pTooltip="Lưu" (click)="clickTosaveVisitInfo('diagnoseInit')"></i>
+      </div>
+    </div>
+    <div class="p-grid p-mb-2">
+      <div class="p-col-12 p-md-4 info-label">Kết luận của BS</div>
+      <div class="p-col-12 p-md-8 position-relative">
+        <textarea pInputTextarea [disabled]="disabledEditInfo" autoResize [(ngModel)]="visit.conclusion"
+          (ngModelChange)="onTypingConclusion($event)"></textarea>
+        <i class="pi pi-save position-absolute icon-save" pTooltip="Lưu" (click)="clickTosaveVisitInfo('conclusion')"></i>
+      </div>
+    </div>
+    <div class="p-grid p-mb-2">
+      <div class="p-col-12 p-md-4 info-label">Chỉ định CLS</div>
+      <div class="p-col-12 p-md-8">
+        <p-dropdown [disabled]="disabledEditInfo" [options]="subOrderSource" [(ngModel)]="filterSubItem"
+          placeholder="Tìm kiếm để thêm..." [filter]="true" [showClear]="true" appendTo="body" (onChange)="addSubOrder($event)">
+          <ng-template let-sub pTemplate="selectedItem">
+            <!-- <span>{{ hienGiaDichVuChiDinh }}</span> -->
+          </ng-template>
+          <ng-template let-sub pTemplate="item">
+            <span>{{ sub.name }}</span>
+          </ng-template>
+        </p-dropdown>
+        <button pButton label="CĐHA" [disabled]="disabledEditInfo" class="p-ml-2" (click)="showModalAddSubOrder(rosConstant.Imaging)"></button>
+        <button pButton label="Xét nghiệm" [disabled]="disabledEditInfo" class="p-ml-2" (click)="showModalAddSubOrder(rosConstant.Laboratory)"></button>
+        <button pButton label="Nhóm" [disabled]="disabledEditInfo" class="p-ml-2" (click)="showModalSubOrderGroup()"></button>
+        <button pButton label="DV khám thêm" [disabled]="disabledEditInfo" class="p-ml-2" (click)="showAddService()"></button>
+        <button pButton label="Thông tin khác" [disabled]="disabledEditInfo" class="p-ml-2" (click)="showVisitOtherInfo()"></button>
+      </div>
+    </div>
+    <div class="p-grid p-mb-2">
+      <div class="p-col-12" [ngClass]="{'p-col-8': isShowRelatedVisit, 'p-col-12': !isShowRelatedVisit}">
+        <p-table [value]="subClinicalVisit" [paginator]="false" [rows]="10" class="p-datatable-sm p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 40px">STT</th>
+              <th>Dịch vụ</th>
+              <th>Trạng thái</th>
+              <th>Người tạo</th>
+              <th>T/gian tạo</th>
+              <th class="text-align-center">SL</th>
+              <th class="text-nowrap" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">Đơn giá</th>
+              <th class="text-nowrap" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">Thành tiền</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-i="rowIndex">
+            <tr [ngClass]="{'coral': data.discount > 0, 'td-italic': data.isOtherVisit}" [title]="data.discount" >
+              <ng-container >
+                <td>{{ i + 1 }}</td>
+                <td>{{ data.name }}</td>
+                <td>{{ data.statusString }}</td>
+                <td>{{ data.creatorName }}</td>
+                <td>{{ data.createdDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td class="text-align-center">
+                  <div *ngIf="!data.isEditing" class="btn-amount" (click)="switchStatus(data)">
+                    {{ data.amount }}
+                  </div>
+                  <div *ngIf="data.isEditing" class="btn-amount">
+                    <input pInputText type="number" min="1" [(ngModel)]="data.amount" (blur)="updateAmount($event, data.id)" />
+                  </div>
+                </td>
+                <td class="text-nowrap text-right" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">
+                  {{ data.price  }}
+                </td>
+                <td class="td-into-money" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">
+                  {{ data.finalFee }}
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <!-- <div *ngIf="isShowRelatedVisit" class="p-col-4">
+        <p-table [value]="lstRelatedVisitDisplay" [paginator]="false" [rows]="10" class="p-datatable-sm p-datatable-gridlines">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>{{ visit.refVisitId ? 'Các ca khám liên quan' : 'Dịch vụ khám thêm' }}</th>
+              <th class="text-nowrap" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">Giá tiền</th>
+              
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-data let-i="rowIndex">
+            <tr (click)="openRelatedVisit(data)">
+              <td>
+                <div>{{ data.serviceName }}</div>
+                <div class="italic fs-12">{{ data.doctorName }}</div>
+              </td>
+              <td class="text-nowrap text-right" [ngClass]="{'d-none':!hienGiaDichVuChiDinh}">{{ data.servicePrice }}</td>
+              <td class="text-center">
+                <p-checkbox *ngIf="!data.isDisabled" [(ngModel)]="data.notPrint" (onChange)="notPrintChildChange2($event)"></p-checkbox>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div> -->
+    </div>
+  </div>
+  
+  <!-- context menu -->
+
+  <!-- Khám thêm -->
+  <!-- <p-dialog [(visible)]="visibleAddService" header="Chỉ định dịch vụ khám thêm" [modal]="true" [closable]="false" [style]="{width: '500px'}">
+    <div class="p-grid p-fluid">
+      <div class="p-col-12 p-md-4">Dịch vụ khám <span class="red-dot">*</span></div>
+      <div class="p-col-12 p-md-8">
+        <p-dropdown [(ngModel)]="objService.serviceId" [options]="services"  filterBy="name" appendTo="body">
+          <ng-template let-service pTemplate="selectedItem">
+            <span>{{ hienGiaDichVuChiDinh ? service.name + ' - '+ (service.price | currencyFormat) : service.name }}</span>
+          </ng-template>
+          <ng-template let-service pTemplate="item">
+            <span>{{ service.name }}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+      <div class="p-col-12 p-md-4">Phòng khám <span class="red-dot">*</span></div>
+      <div class="p-col-12 p-md-8">
+        <p-dropdown [(ngModel)]="objService.roomId" [options]="rooms"  appendTo="body">
+          <ng-template let-room pTemplate="selectedItem">
+            <span>{{ room.name }}</span>
+          </ng-template>
+          <ng-template let-room pTemplate="item">
+            <span>{{ room.name }}</span>
+          </ng-template>
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="p-dialog-footer">
+      <button pButton type="button" label="Hủy" class="btn-cancel-small" (click)="closeAddService()"></button>
+      <button pButton type="button" label="Thêm" class="btn-primary-small" (click)="addService()"></button>
+    </div>
+  </p-dialog> -->
+  
+  <!-- <app-subclinical-group-add [(isVisible)]="visibleSubOrderGroupAdd" [groupId]="visit.groupId" [visitId]="visit.id" [getHISServicePrice]="getHISServicePrice" (refresh)="loadData(); titleTabChange()"></app-subclinical-group-add>
+  
+  <app-subclinical-tree-add [(isVisible)]="showAddSubOrder" [visitId]="visit.id" [rosIdSelected]="rosIdSelected" [subClinicalVisit]="subClinicalVisitModal" [getHISServicePrice]="getHISServicePrice" (refreshData)="loadData(); titleTabChange()" (cancelModal)="cancelModalAddSubOrder()" (cancelSubclinicalVisit)="serviceCanceledEvent($event)"></app-subclinical-tree-add>
+  
+  <app-discount [isVisible]="visibleDiscount" (closeModal)="closeModalDiscount()" [visitId]="visit.id" [currentOrdersDiscount]="currentOrdersDiscount" (discountChange)="discountEvent($event)"></app-discount>
+  <app-visit-other-info [popupData]="visitOtherInfoPopupData"></app-visit-other-info>
+   -->

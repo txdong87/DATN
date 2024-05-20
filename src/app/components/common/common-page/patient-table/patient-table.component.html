@@ -1,0 +1,90 @@
+<p>patient-table works!</p>
+<div class="col-12 py-0 px-3 w-full ">
+    <p-table #caseStudyTable [columns]="cols" [value]="caseStudies" [scrollable]="true" [scrollHeight]="'500px'"
+      [loading]="loading" [virtualScrollItemSize]="40" [rows]="50" [lazy]="true" [virtualScroll]="true"
+      responsiveLayout="scroll" [rowHover]="true" selectionMode="single" [contextMenu]="menu"
+      [(contextMenuSelection)]="selectedCaseStudy" dataKey="caseStudyId" [resizableColumns]="true"
+      columnResizeMode="expand"  (onColResize)="onColResize($event)">ư
+      
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{ rowData[col.field] }}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+    <!-- <p-table #caseStudyTable [columns]="cols" [value]="caseStudies" [scrollable]="true" [scrollHeight]="'500px'"
+      [loading]="loading" [virtualScrollItemSize]="40" [rows]="50" [lazy]="true" [virtualScroll]="true"
+      responsiveLayout="scroll" [rowHover]="true" selectionMode="single" [contextMenu]="menu"
+      [(contextMenuSelection)]="selectedCaseStudy" dataKey="caseStudyId" [resizableColumns]="true"
+      columnResizeMode="expand"  (onColResize)="onColResize($event)">
+    
+      <ng-template pTemplate="header">
+        <tr class="text-blue-900">
+          <ng-container *ngFor="let col of cols">
+            <ng-container [ngSwitch]="col.field">
+              <th *ngSwitchCase="'idx'" class="flex flex-none bg-white relative" [style]="{ width: '50px' }"
+                pResizableColumn [attr.data-colName]="'idx'">
+                <ng-container> <i class="pi pi-filter-fill cursor-pointer absolute left-0 ml-1"></i>&nbsp;
+                </ng-container>STT
+              </th>
+              <th *ngSwitchDefault [style]="{ width: col.width }" pResizableColumn [pSortableColumn]="col.field"
+                class="bg-white flex align-items-center overflow-hidden text-overflow-ellipsis flex-none"
+                [attr.data-colName]="col.field">
+                {{ col.header }}
+                <div class="ml-1">
+                  <span class="flex align-items-center">
+                    <i *ngIf="col.sort == 'asc'" class="pi pi-sort-amount-up-alt" style="font-size: 1.01rem"></i>
+                    <i *ngIf="col.sort == 'desc'" class="pi pi-sort-amount-down" style="font-size: 1.01rem"></i>
+                  </span>
+                </div>
+              </th>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr style="height: 40px" [pContextMenuRow]="rowData" [pSelectableRow]="rowData"
+          (click)="onRowSelect($event, rowData)"
+          [ngClass]="{ 'bg-grid': rowData['slideCount'] > 0 && rowData['idx'] != selectedCaseStudy['idx'], 'surface-200': rowData['idx'] == selectedCaseStudy['idx'], 'hover:surface-200 cursor-pointer': true}">
+          <ng-container *ngFor="let col of cols">
+            <ng-container [ngSwitch]="col.field">
+              <td *ngSwitchCase="'idx'" class="flex align-items-center justify-content-center flex-none"
+                [style]="{ width: '50px' }">{{ rowData['idx'] }}</td>
+              <td *ngSwitchCase="'state'" class="flex align-items-center flex-none" [style]="{ width: '10rem' }">
+                <span class="flex align-items-center state-color-{{ rowData['state'] }}">
+                  <img class="mr-1" src="assets/images/state-{{ rowData['state'] }}.png" alt="" />
+                  {{ rowData['stateLabel'] }}
+                </span>
+              </td>
+              <td *ngSwitchDefault [style]="{ width: col.width }"
+                class="flex align-items-center overflow-hidden white-space-nowrap text-overflow-ellipsis flex-none"
+                [title]="rowData[col.field]" [innerHTML]="rowData[col.field]"></td>
+            </ng-container>
+          </ng-container>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="loadingbody" let-columns="columns">
+        <tr style="height: 40px">
+          <td *ngIf="cols" [attr.colspan]="cols.length + 2" class="text-center">
+            <p-skeleton [ngStyle]="{ width: '100%' }"></p-skeleton>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td *ngIf="cols" [attr.colspan]="cols.length + 2" class="justify-content-center">Không có dữ liệu.</td>
+        </tr>
+      </ng-template>
+    </p-table> -->
+</div>
+<p-contextMenu #menu styleClass="w-16rem" [model]="actions"></p-contextMenu>

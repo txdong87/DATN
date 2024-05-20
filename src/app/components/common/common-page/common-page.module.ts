@@ -8,21 +8,37 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControlDirective,FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
 import { AddCaseStudyComponent } from './add-case-study/add-case-study.component';
+import { ListPatientComponent } from './list-patient/list-patient.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { PatientTableComponent } from './patient-table/patient-table.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { ListCaseStudyComponent } from './list-case-study/list-case-study.component';
+import { PanelModule } from 'primeng/panel';
+import { CaseStudyDetailComponent } from './list-case-study/case-study-detail/case-study-detail.component';
+import { MenuModule } from 'primeng/menu';
 @NgModule({
   declarations: [
     ListVisitComponent,
     MainWorkComponent,
-    AddCaseStudyComponent
+    AddCaseStudyComponent,
+    ListPatientComponent,
+    PatientTableComponent,
+    ListCaseStudyComponent,
+    CaseStudyDetailComponent
   ],
   exports:[
     ListVisitComponent,
     MainWorkComponent,
-    AddCaseStudyComponent
+    AddCaseStudyComponent,
+    ListPatientComponent,
+    PatientTableComponent,
+    ListCaseStudyComponent,
+    CaseStudyDetailComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +51,14 @@ import { AddCaseStudyComponent } from './add-case-study/add-case-study.component
     DialogModule,
     TableModule,
     ReactiveFormsModule,
-    CalendarModule
+    CalendarModule,
+    AngularSplitModule,
+    FormsModule,
+    ContextMenuModule,
+    TableModule,
+    RadioButtonModule,
+    PanelModule,
+    MenuModule
     
     
   ],

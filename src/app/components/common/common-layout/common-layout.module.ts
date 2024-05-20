@@ -15,7 +15,6 @@ import { TabViewModule } from 'primeng/tabview';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
-    
   ],
   providers:[
   ],
@@ -28,7 +27,6 @@ import { TabViewModule } from 'primeng/tabview';
     ButtonModule,
     CommonPageModule,
     TabViewModule,
-    ButtonModule,
     
   ],
   exports: []
