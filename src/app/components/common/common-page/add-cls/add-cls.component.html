@@ -1,0 +1,58 @@
+<p-dialog [(visible)]="isVisible" header="Chỉ định CLS" [style]="{width: '70vw'}" [closable]="false" [modal]="true" (onHide)="handleCancel()">
+    <div class="cd-table">
+      <div class="content-left">
+        <app-tree-select [tree]="treeSource" [selectedNodeId]="rosIdSelected" (selectdNodeChange)="selectdNodeEvent($event)">
+        </app-tree-select>
+      </div>
+      <div class="content-right">
+        <div class="content-item content-v1 mg-bt-10">
+          <label class="label">Danh sách dịch vụ đã chọn ({{ totalSubclinical }})</label>
+          <div class="content-v2">
+            <div class="w-50 mgr-10">
+              <div *ngFor="let item of lstServiceChecked.slice(0, lstServiceChecked.length / 2 + 1)">
+                <ng-container *ngTemplateOutlet="subclinicalItem; context: { item: item }"></ng-container>
+              </div>
+            </div>
+            <div class="w-50 mgl-10">
+              <div *ngFor="let item of lstServiceChecked.slice(lstServiceChecked.length / 2 + 1, lstServiceChecked.length)">
+                <ng-container *ngTemplateOutlet="subclinicalItem; context: { item: item }"></ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-item">
+          <div class="d-flex justify-content-between mg-bt-4">
+            <label class="label">Danh sách dịch vụ</label>
+            <input pInputText type="text" [(ngModel)]="textSearch" placeholder="Enter để tìm kiếm..." (keydown.enter)="onSearch()" style="width: 200px" />
+          </div>
+          <div class="content-v3 row">
+            <div class="col-6">
+              <div *ngFor="let item of serviceSearch.slice(0,lstServiceChecked.length / 2 + 1)" class="cursor-pointer selected-{{item}}" (click)="addNewItem(item)">
+                <i class="pi pi-plus"></i>
+                <span  class="pdl8">{{ item }} - {{item | currency:'VND'}}</span>
+              </div>
+            </div>
+            <div class="col-6">
+              <div *ngFor="let item of serviceSearch.slice(lstServiceChecked.length / 2 + 1, serviceSearch.length)" class="cursor-pointer selected-{{item}}" (click)="addNewItem(item)">
+                <i class="pi pi-plus"></i>
+              
+                <span class="pdl8">{{ item }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <button pButton label="Huỷ" class="btn-cancel-medium" icon="pi pi-times" (click)="handleCancel()"></button>
+      <button pButton label="Cập nhật" class="btn-primary-medium" icon="pi pi-check" [loading]="isSaving" (click)="updateOrder()"></button>
+    </p-footer>
+  </p-dialog>
+  
+  <ng-template #subclinicalItem let-item="item">
+    
+    <span >{{ item.name }} - {{ item.statusString }}</span>
+    <span *ngIf="item.amount > 1"> - SL: {{ item.amount }}</span>
+    <i *ngIf="item.canEdit" class="pi pi-minus" style="font-size: 20px; color: #eb2f96" (click)="removeData(item)"></i>
+  </ng-template>
+  

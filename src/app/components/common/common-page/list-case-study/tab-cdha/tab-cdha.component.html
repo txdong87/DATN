@@ -1,0 +1,26 @@
+<div class="clinical-container">
+    <div class="clinical-visit">
+        <div class="m-tab-title">Danh sách chỉ định CĐHA</div>
+        <ng-container *ngTemplateOutlet="result; context: { data: subclinicalResultOfVisit }"></ng-container>
+    </div>
+  </div>
+  
+  <ng-template #result let-data="data">
+    <div style="min-height: 150px;" *ngFor="let clinical of data" class="clinical-item">
+      <ng-container >
+        <div class="clinical-header">
+          <div class="clinical-title mg-r-15">{{ clinical.name }} - {{ clinical.visitDate | date: 'dd/MM/yyy' }} </div>
+          <div >
+            <a class="mg-r-15" href="" target="_blank"> Link xem
+              ca chụp</a>
+          </div>
+          <!-- <div *ngIf="clinical.description == 'MR'" click-stop-propagation>
+            <a class="mg-r-15" href="{{ resultLink + clinical.referenceId + '&modality=MR' }}" target="_blank"> Link xem
+              ca chụp</a>
+          </div> -->
+          <!-- <i class="icon-expand" nz-icon [nzType]="clinical.isExpand ? 'down' : 'right'" nzTheme="outline"></i> -->
+        </div>
+        <div *ngIf="clinical.isExpand">Chưa có kết quả từ PACS</div>
+      </ng-container>
+    
+  

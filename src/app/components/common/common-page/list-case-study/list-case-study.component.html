@@ -1,56 +1,38 @@
-<p>list-case-study works!</p>
-<div class="list-visit-small">
-    <div class="search-visit-small">
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <p-radioButton name="isReceived" [(ngModel)]="search.isReceived" (ngModelChange)="searchListVisit()" label="Chờ gọi" [value]="false"></p-radioButton>
-              <p-radioButton name="isReceived" [(ngModel)]="search.isReceived" (ngModelChange)="searchListVisit()" label="Tất cả" [value]="null"></p-radioButton>
-            </div>
+<div  class="tab-list-detail-visit">
+  <as-split direction="horizontal">
+    <as-split-area  [size]="30">
+      <app-case-study-table></app-case-study-table>
+    </as-split-area>
+    <as-split-area [size]="70">
+      <div style="height: 100%">
+        <!-- <ng-container *ngIf="isLoading">
+          <nz-spin
+            [nzSpinning]="isLoading"
+            nzSize="large"
+            style="height: 100%"
+            nzTip="Đang tải thông tin ca khám...">
+          </nz-spin>
+        </ng-container> -->
+        <ng-container *ngIf="!isLoading">
+          <div class="pd-10" >
+            <app-case-study-info [(visit)]="currentVisit"></app-case-study-info>
+            <p-tabView #tabView [activeIndex]="indexTab" class="tab-mainwork" [scrollable]="true" (onChange)="onTabChange($event)">
+              <!-- <p-tabPanel header="Thông tin ca khám">
+                <app-case-study-info></app-case-study-info>
+              </p-tabPanel>  -->
+              <p-tabPanel header="Thông tin ca khám">
+                <app-case-study-detail></app-case-study-detail>  
+              </p-tabPanel>
+              <p-tabPanel header="Chỉ định HA">
+                <app-tab-cdha></app-tab-cdha>
+              </p-tabPanel>
+              <p-tabPanel header="Đơn thuốc">
+                <app-prescription-tab></app-prescription-tab>
+              </p-tabPanel>
+            </p-tabView>
           </div>
-          <div class="col-12">
-            <div>
-              <p-radioButton name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Chờ khám" [value]="0"></p-radioButton>
-              <p-radioButton name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Chờ kết luận" [value]="1"></p-radioButton>
-              <p-radioButton name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Tất cả" [value]="null"></p-radioButton>
-            </div>
-            <span class="search-visit-small-icon" title="Refresh" (click)="searchListVisit()"></span>
-          </div>
-        </div>
-        <p-panel [toggleable]="true">
-            <ng-template pTemplate="header">
-                <div class="search-visit-small-title">Tìm kiếm nâng cao</div>
-            </ng-template>
-            <div class="advanced-search" *ngIf="isExpandSearch">
-                <div class="row">
-                    <label class="col-4">Mã bệnh nhân:</label>
-                    <div class="col-8">
-                        <input pInputText [(ngModel)]="search.patientCode" name="patientCode" placeholder="Mã bệnh nhân" (keydown.enter)="searchListVisit()">
-                    </div>
-                </div>
-                <div class="row">
-                    <label class="col-4">Tên bệnh nhân:</label>
-                    <div class="col-8">
-                        <input pInputText [(ngModel)]="search.patientName" name="patientName" placeholder="Tên bệnh nhân" (keyup)="onSearchPatientName($event)">
-                    </div>
-                </div>
-                <div class="row">
-                    <label class="col-4">Ngày khám:</label>
-                    <div class="col-8">
-                        <p-calendar [(ngModel)]="search.visitDate" name="visitDate" placeholder="Ngày khám"></p-calendar>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-8">
-                        <div class="btn-search-container">
-                            <span class="pi pi-plus" (click)="resetSearch()" title="Bỏ lọc"></span>
-                            <span class="pi pi-search" (click)="searchListVisit()" title="Lọc"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </p-panel>
-        <app-case-study-detail></app-case-study-detail>
-    </div>
+          </ng-container>
+      </div>
+    </as-split-area>
+  </as-split>
 </div>

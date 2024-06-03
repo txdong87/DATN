@@ -1,19 +1,35 @@
 import { Component } from '@angular/core';
-import { IlayoutConfig } from 'src/app/models/ilayout-config';
 import { SearchVisitSmall } from 'src/app/models/listVisit.class';
-
 @Component({
-  selector: 'app-list-case-study',
-  templateUrl: './list-case-study.component.html',
-  styleUrl: './list-case-study.component.css'
+  selector: 'app-case-study-table',
+  templateUrl: './case-study-table.component.html',
+  styleUrl: './case-study-table.component.css'
 })
-export class ListCaseStudyComponent {
+export class CaseStudyTableComponent {
   isLoading = false;
-  indexTab = 0;
   // config: IlayoutConfig = null;
   search: SearchVisitSmall 
   searchDataIsReceived = false;
-  currentVisit: any = {};
+  caseStudy:any[]=[]
+  cols = [ 
+    {
+      "header": 'STT',
+      "field": "STT",
+    },
+    {
+      "header": 'Tên bệnh nhân',
+      "field": "patientName",
+    },
+    // {
+    //   "header": 'STT',
+    //   "width": '30',
+    //   "field": "csStatus",
+    // },
+    // {
+    //   title: '',
+    //   width: 50,
+    // },
+  ];
   isExpandSearch = false;
   constructor(){
     this.search = {
@@ -41,10 +57,6 @@ export class ListCaseStudyComponent {
     // this.listVisits = [];
     // this.pageIndex = 1;
     // this.getListVisit();
-  }
-  onTabChange(event: any): void {
-    console.log(event)
-    this.indexTab = event.index;
   }
   resetSearch() {
     // this.totalVisit = 0;

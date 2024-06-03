@@ -1,0 +1,39 @@
+.input-container {
+    position: relative;
+  }
+  
+  input[pInputText] {
+    width: 100%;
+    padding-right: 30px; /* Điều chỉnh khoảng cách để icon không chồng lên chữ */
+  }
+  
+  .save-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Điều chỉnh khoảng cách từ phải để đặt icon đúng chỗ */
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #007bff; /* Màu sắc của icon */
+  }
+  
+  .save-icon:hover {
+    color: #0056b3; /* Màu sắc của icon khi hover */
+  }
+  .button-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .button-container p-dropdown {
+    flex: 1; /* Để dropdown chiếm tối đa không gian có thể */
+    
+  }
+  
+  .button-container button {
+    margin-left: 8px;
+    
+    height: 40px; /* Điều chỉnh giá trị này theo yêu cầu */
+     /* Điều chỉnh khoảng cách giữa các nút */
+  }
+  
+  

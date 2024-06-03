@@ -14,6 +14,9 @@ import { TabViewModule } from 'primeng/tabview';
     AddPatientAndVisitRoutingModule,
     SplitterModule,
     TabViewModule
+  ],
+  exports:[
+    AddPatientAndVisitComponent
   ]
 })
 export class AddPatientAndVisitModule { }

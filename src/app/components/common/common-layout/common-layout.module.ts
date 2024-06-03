@@ -11,12 +11,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainWorkComponent } from '../common-page/main-work/main-work.component';
 import { CommonPageModule } from '../common-page/common-page.module';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
-import { TabViewModule } from 'primeng/tabview';
+import { TabView, TabViewModule } from 'primeng/tabview';
+import { ListPatientModule } from '../common-page/list-patient/list-patient.module';
+import { ListCaseStudyModule } from '../common-page/list-case-study/list-case-study.module';
+import { AddCaseStudyModule } from '../common-page/add-case-study/add-case-study.module';
+import { ListVisitModule } from '../common-page/list-visit/list-visit.module';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
   ],
   providers:[
+    
   ],
   imports: [
     CommonModule,
@@ -25,8 +30,12 @@ import { TabViewModule } from 'primeng/tabview';
     SplitterModule,
     SidebarModule,
     ButtonModule,
-    CommonPageModule,
     TabViewModule,
+    ListCaseStudyModule,
+    ListVisitModule,
+    ListPatientModule,
+    AddCaseStudyModule
+    
     
   ],
   exports: []

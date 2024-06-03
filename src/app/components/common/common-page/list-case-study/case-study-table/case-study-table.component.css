@@ -1,0 +1,9 @@
+
+/* styles.css hoặc component.css */
+.uniform-button {
+    padding: 10px 20px; /* Điều chỉnh kích thước padding tùy theo nhu cầu */
+    font-size: 14px; /* Điều chỉnh kích thước chữ tùy theo nhu cầu */
+    line-height: 1.5; /* Đảm bảo chiều cao dòng nhất quán */
+    display: inline-block;
+    text-align: center;
+}

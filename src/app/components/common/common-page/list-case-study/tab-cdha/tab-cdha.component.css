@@ -1,0 +1,249 @@
+.clinical-container {
+    background: #fff;
+    padding: 15px;
+    padding-bottom: 0px;
+  
+    .m-tab-title {
+      margin-bottom: 20px;
+    }
+  
+    .clinical-visit {
+      margin-bottom: 30px;
+    }
+  }
+  
+  .clinical-item {
+    border-radius: 10px;
+    box-shadow: 0 10px 25px 0 rgba(51, 51, 51, 0.15);
+    border: solid 1px #c3c3c3;
+    padding: 15px;
+  
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  
+    .clinical-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--dp-primary-2);
+    }
+  
+    .clinical-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      position: relative;
+    }
+  
+    .icon-expand {
+      position: absolute;
+      right: 10px;
+    }
+  
+    .img-pdf {
+      width: 16px;
+      margin-bottom: 3px;
+      margin-right: 3px;
+    }
+  
+    .thumbnail-report img {
+      height: 20px;
+      margin-bottom: 6px;
+    }
+  }
+  
+  .tab-list-cdha {
+    .html-box {
+      border: 1px solid #dedede;
+      padding: 10px;
+      white-space: pre-line;
+    }
+  
+    .report-des {
+      margin-top: 5px;
+      margin-bottom: 20px;
+    }
+  
+    .report-des .html-box {
+      min-height: 200px;
+    }
+  
+    .report-conclus .html-box {
+      min-height: 50px;
+    }
+  
+    label {
+      margin-bottom: 10px;
+      color: black;
+    }
+  
+    .app-slider {
+      max-height: 500px;
+    }
+  }
+  
+  ::ng-deep .tab-list-cdha {
+    .ant-tabs-nav-list {
+      width: 50%;
+    }
+  
+    .ant-tabs-nav::before {
+      border-bottom: 1px solid #e8e8e8 !important;
+      width: 50%;
+    }
+  }
+  
+  ::ng-deep .tab-normal-inside-visit {
+    .ant-tabs-tab-btn {
+      font-family: var(--dp-font-family);
+      font-size: 14px !important;
+      margin: 0px;
+    }
+  
+    .ant-tabs-tabpane {
+      background: #fff;
+      box-shadow: none !important
+    }
+  
+    .ant-tabs-tab {
+      height: 30px;
+    }
+  
+    .ant-tabs-content,
+    .ant-tabs-content-holder {
+      max-height: fit-content !important;
+      min-height: fit-content !important;
+    }
+  
+    .ant-tabs-nav {
+      background: #fff !important;
+    }
+  
+    .ant-tabs-nav::before {
+      border-bottom: 1px solid #e8e8e8 !important;
+    }
+  }.clinical-container {
+  background: #fff;
+  padding: 15px;
+  padding-bottom: 0px;
+
+  .m-tab-title {
+    margin-bottom: 20px;
+  }
+
+  .clinical-visit {
+    margin-bottom: 30px;
+  }
+}
+
+.clinical-item {
+  border-radius: 10px;
+  box-shadow: 0 10px 25px 0 rgba(51, 51, 51, 0.15);
+  border: solid 1px #c3c3c3;
+  padding: 15px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .clinical-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--dp-primary-2);
+  }
+
+  .clinical-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .icon-expand {
+    position: absolute;
+    right: 10px;
+  }
+
+  .img-pdf {
+    width: 16px;
+    margin-bottom: 3px;
+    margin-right: 3px;
+  }
+
+  .thumbnail-report img {
+    height: 20px;
+    margin-bottom: 6px;
+  }
+}
+
+.tab-list-cdha {
+  .html-box {
+    border: 1px solid #dedede;
+    padding: 10px;
+    white-space: pre-line;
+  }
+
+  .report-des {
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  .report-des .html-box {
+    min-height: 200px;
+  }
+
+  .report-conclus .html-box {
+    min-height: 50px;
+  }
+
+  label {
+    margin-bottom: 10px;
+    color: black;
+  }
+
+  .app-slider {
+    max-height: 500px;
+  }
+}
+
+::ng-deep .tab-list-cdha {
+  .ant-tabs-nav-list {
+    width: 50%;
+  }
+
+  .ant-tabs-nav::before {
+    border-bottom: 1px solid #e8e8e8 !important;
+    width: 50%;
+  }
+}
+
+::ng-deep .tab-normal-inside-visit {
+  .ant-tabs-tab-btn {
+    font-family: var(--dp-font-family);
+    font-size: 14px !important;
+    margin: 0px;
+  }
+
+  .ant-tabs-tabpane {
+    background: #fff;
+    box-shadow: none !important
+  }
+
+  .ant-tabs-tab {
+    height: 30px;
+  }
+
+  .ant-tabs-content,
+  .ant-tabs-content-holder {
+    max-height: fit-content !important;
+    min-height: fit-content !important;
+  }
+
+  .ant-tabs-nav {
+    background: #fff !important;
+  }
+
+  .ant-tabs-nav::before {
+    border-bottom: 1px solid #e8e8e8 !important;
+  }
+}

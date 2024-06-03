@@ -4,8 +4,7 @@
             <span>SAKAI</span>
         </a>
 
-        <p-button  (click)="toggleSideBar()"
-            [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"></p-button>
+        <p-button (click)="toggleSideBar()" [icon]="isExpanding ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"></p-button>
         <div #topbarmenu class="layout-topbar-menu">
             <button class="p-link layout-topbar-button">
                 <i class="pi pi-calendar"></i>
@@ -22,61 +21,55 @@
         </div>
     </div>
     <div class="layout-sidebar" [ngClass]="{ 'expanding': isExpanding, 'hidden': !isSidebarHidden }">
-            <section class="container" style="margin-top: 35px">
-                <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
-                  <div   style="border-style: dashed; border-width: 0 0 1px 0; border-color: white">
-                        <ul class="layout-menu" style="margin-top: 15px; padding: 10px 10px">
-                            <li class="sideicon menu-item menu-item-flex"  style="border-style: dashed; border-width: 0 0 1px 0; border-color: white"  (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
-                                <span>Danh sách ca khám</span>
-                            </li>
-                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('AddCase', 'Thêm ca khám', 'extra')">
-                                <span>Thêm ca khám</span>
-                            </li>
-                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('ListPatient', 'Danh sách bệnh nhân', 'extra')">
-                                <span>Danh sách bệnh nhân</span>
-                            </li>
-                            <li class="sideicon menu-item menu-item-flex"  (click)="openNewTab('ListCaseStudy','Danh sách ca khám', 'extra')">
-                                <span>Danh sách ca khám bác sĩ</span>
-                            </li>
-                        </ul>
-                    </div>
-                </aside>
+        <section class="container" style="margin-top: 35px">
+            <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
                 
-                <!-- <div >
-                    <router-outlet></router-outlet>
-                </div> -->
-            </section>
+                    <ul class="layout-menu" style="margin-top: 15px; padding: 10px 10px">
+                        <li class="sideicon menu-item menu-item-flex" style="border-style: dashed; border-width: 0 0 1px 0; border-color: white" (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
+                            <span>Danh sách ca khám</span>
+                        </li>
+                        <li class="sideicon menu-item menu-item-flex" (click)="openNewTab('AddCase', 'Thêm ca khám', 'extra')">
+                            <span>Thêm ca khám</span>
+                        </li>
+                        <li class="sideicon menu-item menu-item-flex" (click)="openNewTab('ListPatient', 'Danh sách bệnh nhân', 'extra')">
+                            <span>Danh sách bệnh nhân</span>
+                        </li>
+                        <li class="sideicon menu-item menu-item-flex" (click)="openNewTab('ListCaseStudy','Ca khám bác sĩ', 'extra')">
+                            <span>Ca khám bác sĩ</span>
+                        </li>
+                    </ul>
+            </aside>
+        </section>
     </div>
     <div class="layout-main-container" [ngClass]="{ 'sidebar-hidden': !isSidebarHidden }">
         <div class="layout-main">
-        <p-tabView [activeIndex]="indexTab" class="tab-mainwork"  [scrollable]="true">
-            <p-tabPanel *ngFor="let tab of tabs" >
-                <ng-template pTemplate="header">
-                    <div class="fs-16"  *ngIf="tab.tabType == 'main'">
-                      {{ tab.name }}
+            <p-tabView #tabView [activeIndex]="indexTab" class="tab-mainwork" [scrollable]="true" (onChange)="onTabChange($event)">
+                <p-tabPanel *ngFor="let tab of tabs; let i = index" [header]="tab.name" [selected]="indexTab === i" [ngClass]="{'tab-active': indexTab === i}">
+                    <ng-template pTemplate="header">
+                        <div class="fs-16" *ngIf="tab.tabType == 'main'">
+                            {{ tab.name }}
+                        </div>
+                        <div class="fs-16" *ngIf="tab.tabType == 'extra'">
+                            {{ tab.name }}
+                            <span class="tab-action">
+                                <i class="pi pi-times" (click)="closeTab(tab)"></i>
+                            </span>
+                        </div>
+                    </ng-template>
+                    <div *ngIf="tab.id == 'ListVisit'">
+                        <app-list-visit></app-list-visit>
                     </div>
-                    <div class="fs-16" *ngIf="tab.tabType == 'extra'">
-                      {{ tab.name }}
-                      <span class="tab-action">
-                        <i class="pi pi-times" (click)="closeTab(tab)" ></i>
-                      </span>
+                    <div *ngIf="tab.id == 'AddCase'">
+                        <app-add-case-study></app-add-case-study>
                     </div>
-                </ng-template>
-                <div
-                    *ngIf="tab.id == 'ListVisit' ">
-                    <app-list-visit></app-list-visit>
-                </div>
-                <div *ngIf="tab.id == 'AddCase' ">
-                    <app-add-case-study></app-add-case-study>
-                </div>
-                <div *ngIf="tab.id == 'ListPatient' ">
-                    <app-list-patient></app-list-patient>
-                </div>
-                <div *ngIf="tab.id == 'ListCaseStudy' ">
-                    <app-list-case-study></app-list-case-study>
-                </div>
-            </p-tabPanel>
-        </p-tabView>
-    </div>
+                    <div *ngIf="tab.id == 'ListPatient'">
+                        <app-list-patient></app-list-patient>
+                    </div>
+                    <div *ngIf="tab.id == 'ListCaseStudy'">
+                        <app-list-case-study></app-list-case-study>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
     </div>
 </div>

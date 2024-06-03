@@ -1,3 +1,4 @@
+import { ListCaseStudyModule } from './list-case-study/list-case-study.module';
 import { NgModule } from '@angular/core';
 import {AngularSplitModule} from 'angular-split';
 import { ListVisitComponent } from './list-visit/list-visit.component';
@@ -12,7 +13,6 @@ import { FormControlDirective,FormsModule, ReactiveFormsModule } from '@angular/
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
-import { AddCaseStudyComponent } from './add-case-study/add-case-study.component';
 import { ListPatientComponent } from './list-patient/list-patient.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { PatientTableComponent } from './patient-table/patient-table.component';
@@ -21,27 +21,21 @@ import { ListCaseStudyComponent } from './list-case-study/list-case-study.compon
 import { PanelModule } from 'primeng/panel';
 import { CaseStudyDetailComponent } from './list-case-study/case-study-detail/case-study-detail.component';
 import { MenuModule } from 'primeng/menu';
+import { ListPatientModule } from './list-patient/list-patient.module';
+import { AddCaseStudyModule } from './add-case-study/add-case-study.module';
+import { ListVisitModule } from './list-visit/list-visit.module';
+
 @NgModule({
   declarations: [
-    ListVisitComponent,
     MainWorkComponent,
-    AddCaseStudyComponent,
-    ListPatientComponent,
-    PatientTableComponent,
-    ListCaseStudyComponent,
-    CaseStudyDetailComponent
   ],
   exports:[
-    ListVisitComponent,
-    MainWorkComponent,
-    AddCaseStudyComponent,
-    ListPatientComponent,
-    PatientTableComponent,
-    ListCaseStudyComponent,
-    CaseStudyDetailComponent
   ],
   imports: [
-    CommonModule,
+    ListVisitModule,
+    ListCaseStudyModule,
+    ListPatientModule,
+    AddCaseStudyModule,
     AngularSplitModule,
     CommonPageRoutingModule,
     DropdownModule,
@@ -49,16 +43,13 @@ import { MenuModule } from 'primeng/menu';
     InputTextModule,
     CalendarModule,
     DialogModule,
-    TableModule,
     ReactiveFormsModule,
-    CalendarModule,
-    AngularSplitModule,
     FormsModule,
     ContextMenuModule,
     TableModule,
     RadioButtonModule,
     PanelModule,
-    MenuModule
+    MenuModule,
     
     
   ],

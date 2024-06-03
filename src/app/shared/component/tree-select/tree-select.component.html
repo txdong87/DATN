@@ -1,0 +1,26 @@
+<div class="tree-select">
+  <div *ngFor="let node of tree">
+    <div
+      class="d-flex node-item"
+      [ngClass]="{ 'node-active': node.id === selectedNodeId }"
+      (click)="expandNode(node); selectNode(node)">
+      <div>
+        <span *ngIf="node.isLeaf" class="mg-l-15"></span>
+        <i
+          *ngIf="!node.isLeaf"
+          class="pi"
+          [ngClass]="node.isExpand ? 'pi-caret-down' : 'pi-caret-right'"></i>
+      </div>
+      <div>{{ node.name }}</div>
+    </div>
+    <ng-container *ngIf="!node.isLeaf && node.isExpand">
+      <div class="node-child">
+        <app-tree-select
+          [tree]="node.children"
+          [selectedNodeId]="selectedNodeId"
+          (selectdNodeChange)="nodeIdChangeEvent($event)">
+        </app-tree-select>
+      </div>
+    </ng-container>
+  </div>
+</div>

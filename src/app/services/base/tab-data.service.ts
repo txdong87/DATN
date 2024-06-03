@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-// import { AppState } from 'src/app/components/app-state/app-state';
-// import { AuthModel } from 'src/app/models/auth.model';
-// import { Constant } from '../constants/constant.class';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,60 +11,53 @@ export class TabDataService {
   ]);
   public contentVal = this.content;
   public share = this.content.asObservable();
-  //private _groupId = '';
-  //public sharegroup = new BehaviorSubject("sharegroup");
   private currIdSource = new BehaviorSubject('ListVisit');
   public currentTabId = this.currIdSource.asObservable();
 
-  constructor() {
-    let tabs = this.content.getValue();
-    this.content.next(tabs);
-  }
+  constructor() {}
 
-  updateTab(id:any, patientName:any, tabType:any): void {
-    var checkid = true;
+  updateTab(id: any, patientName: any, tabType: any): void {
     this.changeTab(id);
     let tabs = this.content.getValue();
-    let len = tabs.length;
-    console.log(tabs)
-    for (let i = 0; i < len; i++) {
-     
+    let tabExists = false;
+    
+    for (let i = 0; i < tabs.length; i++) {
       if (tabs[i].id === id) {
-        console.log(1111)
         this.indextab = i;
-        tabs.splice(i, 1, { id: id, name: patientName, tabType: tabType });
-       
-        checkid = true;
-        console.log(tabs)
-        return;
+        tabs[i] = { id: id, name: patientName, tabType: tabType };
+        tabExists = true;
+        break;
       }
-      this.content.next(tabs);
     }
-    if (checkid) {
+    
+    if (!tabExists) {
       this.indextab = tabs.length;
-      this.content.next(tabs.concat([{ id: id, name: patientName, tabType: tabType }]));
+      tabs.push({ id: id, name: patientName, tabType: tabType });
     }
 
-    // console.log("", tabs);
+    this.content.next(tabs); // Ensure the updated tabs are emitted
   }
 
-  closeTab(data:any) {
-    this.content.getValue().splice(this.content.getValue().indexOf(data), 1);
-    if (data.id == this.currIdSource.getValue()) {
-      let arr = this.content.getValue();
-      let currId = arr[arr.length - 1].id;
-      this.changeTab(currId);
-    }
-  }
-
-  changeGroup() {
-    this.currIdSource.next('ListVisit'); //reload sidebar menu khi thay đổi nhóm
-    this.content.getValue().splice(1, this.content.getValue().length); //xoa het tab tru tab danh sach
-  }
-  tabs() {
+  closeTab(data: any): void {
     let tabs = this.content.getValue();
+    let index = tabs.findIndex(tab => tab.id === data.id);
+    if (index !== -1) {
+      tabs.splice(index, 1);
+      if (data.id == this.currIdSource.getValue() && tabs.length > 0) {
+        let currId = tabs[tabs.length - 1].id;
+        this.changeTab(currId);
+      }
+      this.content.next(tabs); // Ensure the updated tabs are emitted
+    }
+  }
 
-    return tabs;
+  changeGroup(): void {
+    this.currIdSource.next('ListVisit'); // reload sidebar menu khi thay đổi nhóm
+    this.content.next([{ id: 'ListVisit', name: 'Danh sách ca khám', tabType: 'main' }]); // xóa hết tab trừ tab danh sách
+  }
+
+  tabs(): any[] {
+    return this.content.getValue();
   }
 
   getUserProfile() {
@@ -78,36 +69,20 @@ export class TabDataService {
     );
   }
 
-  // set groupID(info:any){
-  //   localStorage.setItem(Constant.CURRENT_GROUP_INFO, info);
-  //   console.log('setinfo',info);
-  //   this.sharegroup.next(info.id);
-  //   this.doctorService.saveCurrentGroupId(info.id)
-  //   // this._groupId = id;
-  // }
-
-  // get groupID(){
-  //   console.log('info',localStorage.getItem(Constant.CURRENT_GROUP_INFO));
-  //   let info= JSON.parse(localStorage.getItem(Constant.CURRENT_GROUP_INFO));
-
-  //   if(info!=null)
-  //     return info.id;
-  //   else return '';
-  // }
-
-  changeTab(id: string) {
+  changeTab(id: string): void {
     this.currIdSource.next(id);
   }
 
-  replaceTab(curId: string, nextId: string) {
-    let curTab = this.content.getValue().filter((t) => t.id == curId);
-    let index = this.content.getValue().indexOf(curTab);
-    let nextTab = { ...curTab[0], ...{ id: nextId } };
-    this.content.getValue().splice(index, 1, nextTab);
-    this.content.next(this.content.getValue());
+  replaceTab(curId: string, nextId: string): void {
+    let tabs = this.content.getValue();
+    let index = tabs.findIndex(tab => tab.id === curId);
+    if (index !== -1) {
+      tabs[index].id = nextId;
+      this.content.next(tabs); // Ensure the updated tabs are emitted
+    }
   }
 
-  reInitTab(type:any, name:any) {
+  reInitTab(type: any, name: any): void {
     this.content.next([{ id: type, name: name, patientId: '' }]);
     this.changeTab('ListPatient');
   }

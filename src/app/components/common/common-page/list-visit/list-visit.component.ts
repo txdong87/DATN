@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotificationService } from 'src/app/shared/notification.service';
+import { NotificationService } from 'src/app/shared/service/notification.service';
 import { Constants } from 'src/app/constant/constants';
 @Component({
   selector: 'app-list-visit',

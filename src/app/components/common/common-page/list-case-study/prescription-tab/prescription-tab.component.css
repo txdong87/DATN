@@ -1,0 +1,207 @@
+.thuoc-container {
+  padding-bottom: 10px !important;
+}
+
+.thuoc-container .thuoc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.thuoc-container .thuoc-modal {
+  margin-bottom: 30px;
+}
+
+.thuoc-container .thuoc-modal #red {
+  background-color: var(--dp-cancel-color);
+}
+
+.thuoc-container .thuoc-modal #blue {
+  background-color: var(--dp-primary-2);
+}
+
+.thuoc-container .thuoc-modal #green {
+  background-color: var(--dp-primary-1);
+}
+
+.thuoc-general-info {
+  margin-top: 20px;
+}
+
+.thuoc-general-info .item-info {
+  display: flex;
+  margin-bottom: 16px;
+}
+
+.thuoc-general-info .txt-info {
+  width: 180px;
+}
+
+.thuoc-general-info .true .txt-info {
+  line-height: 32px;
+}
+
+.thuoc-general-info .input-info,
+.thuoc-general-info .input-doctor-advice {
+ width: 450px;
+ height: 150px; /* Đảm bảo container này chiếm toàn bộ chiều cao của vùng chứa */
+ display: flex;
+}
+.input-doctor-advice textarea {
+  font-size: 14px; /* Đặt kích thước font chữ */
+  width: 100%; /* Đặt chiều rộng 100% để lấp đầy container */
+  height: 100%;
+  box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng */
+}
+.thuoc-list-all {
+  margin-top: 10px;
+}
+
+.div-error {
+  color: red;
+  margin-top: 5px;
+  font-size: 12px !important;
+}
+
+.form-edit {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px 0 rgba(43, 78, 155, 0.15);
+  border: solid 1px #f5f5f5;
+}
+
+.valid-error {
+  color: var(--dp-cancel-color);
+}
+
+.valid-error span {
+  font-size: 12px;
+}
+
+.thuoc-table {
+  margin-right: -6px;
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(30px);
+  box-shadow: 0 2px 12px 0 rgba(43, 78, 155, 0.25);
+}
+
+.text-note-small {
+  color: #707070;
+  font-size: 12px;
+}
+
+.text-title {
+  color: #212121;
+}
+
+.medic-icon {
+  line-height: 40px;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #f3f6f9;
+  text-align: center;
+  margin-right: 12px;
+  float: left;
+}
+
+.highlight td .medic-icon {
+  background-color: var(--dp-primary-1) !important;
+}
+
+.highlight td .medic-icon svg path {
+  stroke: white !important;
+}
+
+.btn-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-more:hover,
+.is-open-true {
+  background: #f3f6f9;
+}
+
+.top-btn {
+  margin-left: 8px;
+}
+
+.pres-item {
+  padding: 8px;
+  border-left: 2px solid #23A25E;
+  box-shadow: 0 3px 6px 3px rgba(43, 78, 155, 0.15);
+}
+
+@media screen and (max-width: 320px) {
+  .col-2,
+  .col-4,
+  .col-6,
+  .col-8,
+  .col-3,
+  .col-12 {
+      padding-right: 4px !important;
+      padding-left: 4px !important;
+  }
+
+  .thuoc-modal input {
+      line-height: 30px !important;
+  }
+
+  .thuoc-modal button {
+      width: 30px !important;
+      height: 30px !important;
+  }
+
+  .input-info {
+      width: auto !important;
+  }
+
+  .input-doctor-advice {
+      width: 100% !important;
+  }
+
+  .thuoc-header {
+      display: block !important;
+  }
+
+  .list-btn-mobile {
+      margin-left: -8px;
+      margin-top: 8px;
+  }
+}
+
+.icon-general-info {
+  color: var(--dp-primary-1);
+  font-size: 16px;
+  margin-right: 8px;
+  border: none;
+}
+
+.icon-primary-2 {
+  color: var(--dp-primary-2);
+  font-size: 16px;
+  margin-right: 8px;
+  border: none;
+}
+
+@media only screen and (max-width: 1600px) {
+  .thuoc-general-info .item-info {
+      margin-bottom: 8px;
+  }
+}
+
+.alternating-tables tbody tr:nth-of-type(odd) {
+  background-color: #eee !important;
+}
+.row {
+  margin-right: 0;
+  margin-left: 0;
+  display: flex;
+}

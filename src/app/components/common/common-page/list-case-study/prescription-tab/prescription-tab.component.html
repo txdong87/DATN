@@ -1,0 +1,135 @@
+
+<div class="thuoc-container m-tab-container">
+    <div class="thuoc-header mg-bt-10">
+        <div>
+            <span class="m-tab-title">Đơn thuốc</span>
+        </div>
+        <div class="d-flex" >
+            <div class="d-flex mg-r-15">
+                <!-- <ng-container *ngIf="!isEmptyPrescription">
+                    <button *ngIf="canApprovePrescription" class="top-btn" pButton type="button" label="Duyệt" (click)="approvePrescription()" [disabled]="disabledActiton"></button>
+                    <div class="d-flex" *ngIf="isOtherCreated">
+                        <button *ngIf="canApprovePrescription" class="top-btn" pButton type="button" label="Yêu cầu kiểm tra" (click)="queryPrescription()" [disabled]="disabledActiton"></button>
+                        <button *ngIf="canDenyPrescription" class="top-btn" pButton type="button" label="Từ chối" (click)="denyPrescription()" [disabled]="disabledActiton"></button>
+                    </div>
+                    <button *ngIf="canUnapprovePrescription" class="top-btn" pButton type="button" label="Bỏ duyệt" (click)="unapprovePrescription()" [disabled]="disabledActiton"></button>
+                </ng-container> -->
+            </div>
+            <div >
+                <button pButton class="mr-2" type="button" icon="pi pi-plus" (click)="showFormMedication(true)" ></button>
+                <button pButton class="mr-2" type="button" icon="pi pi-times" (click)="showFormMedication(false)" ></button>
+                <button class="pl-2" *ngIf="canEditPrescription && prescription != null" class="top-btn" pButton type="button" label="Xóa đơn" (click)="removePrescription()" ></button>
+                <button pButton class="mr-2" type="button" icon="pi pi-print" label="In" (click)="printPrescription2()" title="In"></button>
+                <button pButton class="mr-2" type="button" icon="pi pi-external-link" label="Xuất thuốc" (click)="export()"  title="Xuất thuốc"></button>
+            
+            </div>
+           
+            
+        </div>
+    </div>
+
+    <!-- <div  style="margin-bottom: 16px">
+        <span *ngIf="prescription.CreatorName">Bác sỹ kê toa: <strong>{{ prescription.CreatorName }}</strong></span>
+    </div> -->
+
+    <div class="thuoc-modal">
+        <form [formGroup]="formMedication" class="form-edit">
+            <div class="row mb-2">
+                <div class="col-md-8 col-6 mb-2">
+                    <input pInputText placeholder="Nhập tên thuốc để lựa chọn" formControlName="medicationName" (input)="callbackSearchFn()" style="width: 100%">
+                </div>
+                <div class="col-md-2 col-2 mb-2">
+                    <p-inputNumber formControlName="amount" [step]="1" [min]="1" [showButtons]="true" placeholder="Số lượng" inputStyleClass="w-full"></p-inputNumber>
+                </div>
+                <div class="col-md-2 col-1 mb-2">
+                    <input pInputText formControlName="unit" placeholder="Đơn vị tính" readonly>
+                    <input type="hidden" formControlName="content">
+                </div>
+            
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-8 col-6 mb-2">
+                    <input pInputText formControlName="text" placeholder="Cách sử dụng" style="width: 100%" autocomplete="off">
+                </div> ''
+                <div class="col-md-2 col-2 mb-2">
+                    <input pInputText formControlName="price" placeholder="Đơn giá" readonly>
+                </div>
+                <div class="col-md-2 col-1 mb-2 d-flex align-items-center">
+                    <!-- <button pButton type="button" icon="pi pi-plus" class="w-100 mr-2" (click)="addMedication()"></button>
+                    <button pButton type="button" icon="pi pi-times" class="w-100" (click)="removeMedication()"></button> -->
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-2 ">
+                    <span style="color: #333; margin-right: 5px;">BN đã có</span>
+                    <p-inputNumber formControlName="existingAmount" [step]="1" [min]="0" [showButtons]="true" ></p-inputNumber>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+
+    <div  class="thuoc-table main-table-grid alternating-tables" style="margin-right: -6px">
+        <p-table [value]="listMedicationTable" [scrollable]="true" scrollHeight="30vh" [rows]="100" [paginator]="false">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th >STT</th>
+                    <th *ngIf="prescription != null">Tên thuốc</th>
+                    <th *ngIf="prescription != null">Hàm lượng</th>
+                    <th>SL</th>
+                    <th *ngIf="prescription != null">Đơn vị</th>
+                    <th *ngIf="prescription != null">Giá</th>
+                    <th *ngIf="prescription != null">Cách dùng</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
+                <tr>
+                    <td>{{ rowIndex + 1 }}</td>
+                    <td *ngIf="prescription != null">{{ row.medicationName }}</td>
+                    <td *ngIf="prescription != null">{{ row.content }}</td>
+                    <td>{{ row.amount }}</td>
+                    <td *ngIf="prescription != null">{{ row.unit }}</td>
+                    <td *ngIf="prescription != null">{{ row.price }}</td>
+                    <td *ngIf="prescription != null">{{ row.text }}</td>
+                    <td>
+                        <button *ngIf="canEditPrescription && prescription != null" pButton type="button" icon="pi pi-pencil" (click)="editMedication(rowIndex)"></button>
+                        <button *ngIf="canEditPrescription && prescription != null" pButton type="button" icon="pi pi-trash" (click)="removeMedication(row.id)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="row">
+        <div class="thuoc-general-info col-6">
+          <div class="m-tab-title mb-10">Lời dặn của BS:</div>
+          <div class="item-info">
+            <div class="input-doctor-advice">
+              <textarea pInputTextarea [(ngModel)]="doctorComment" (ngModelChange)="doctorCommentChange()"
+                placeholder="Nhập lời khuyên BS" autocomplete="off"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="thuoc-general-info col-6">
+          <div class="m-tab-title mb-10">Lưu ý:</div>
+          <div>Khám lại khi hết thuốc. Khi có dấu hiệu bất thường thì khám lại ngay.</div>
+        
+          <div class="item-info ">
+            <div [formGroup]="prescriptionNoteFG">           
+                 <span>
+                {{
+                prescriptionNoteFormData['reExaminationDate'].value
+                }}
+              </span>
+              <label class="mr-10">Hẹn tái khám: </label>
+              <p-calendar class="mr-10" formControlName="reExaminationDate" [showIcon]="true" 
+                (onSelect)="reExaminationDateChange($event)"></p-calendar>
+              <span class="pl-6"> Tái khám sau: </span>
+              <p-dropdown class="w-20" formControlName="visitAgainAfter" [options]="options" optionLabel="label" placeholder="Chọn thời gian"
+                (onChange)="visitAgainAfterChange($event)"></p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</div>

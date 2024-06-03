@@ -1,0 +1,77 @@
+::ng-deep .modal-service {
+    .ant-modal-body {
+      height: 70vh !important;
+    }
+  
+    .node-root {
+      .node-title {
+        font-weight: 500;
+        cursor: pointer;
+      }
+  
+      .node-child {
+        margin-left: 25px;
+        cursor: pointer;
+      }
+    }
+  
+    .content-left {
+      padding-right: 10px;
+      border-right: 1px solid #dedede;
+      width: 20%;
+    }
+  
+    .content-right {
+      padding-left: 10px;
+      width: 80%;
+    }
+  
+    .content-item {
+      .label {
+        font-weight: 600;
+      }
+    }
+  
+    .content-v2 {
+      max-height: 100px;
+      overflow-y: auto;
+      display: flex;
+  
+      i {
+        font-size: 11px;
+        cursor: pointer;
+        padding: 5px;
+      }
+  
+      .child:nth-child(2n + 1) {
+        clear: left;
+      }
+    }
+  
+    .cd-table {
+      height: 100%;
+      padding: 10px 0;
+      display: flex;
+      overflow-x: hidden;
+    }
+  
+    .node-active {
+      color: var(--dp-primary-1);
+    }
+  
+    .mgl-10 {
+      margin-left: 10px;
+    }
+  
+    .mgr-10 {
+      margin-right: 10px;
+    }
+  }
+  
+  .selected-true {
+    color: var(--dp-primary-1);
+  }
+  .justify-content-between {
+    display: flex;
+    justify-content: space-between !important;
+}

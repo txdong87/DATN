@@ -17,6 +17,8 @@ export class CaseStudyDetailComponent {
     groupId: 1,
     id: 1
   };
+  isVisibleView = false;
+  rosIdSelected = '';
   suggestDiseases: any;
   diseasesData: any[] = [];
   subOrderSource: any[] = [];
@@ -57,14 +59,14 @@ export class CaseStudyDetailComponent {
     }
   }
   showModalAddSubOrder(title:any) {
-    // this.rosIdSelected = this.rosIdConfig.Laboratory;
+    // this.rosIdSelected = this.rosIdConfig;
     // if (title == this.rosConstant.Imaging) {
     //   this.rosIdSelected = this.rosIdConfig.Imaging;
     // } else if (title == this.rosConstant.Laboratory) {
     //   this.rosIdSelected = this.rosIdConfig.Laboratory;
     // }
-    // this.showAddSubOrder = true;
-    // this.subClinicalVisitModal = this.subClinicalVisit.filter((en) => en.isDisabled == false);
+    this.showAddSubOrder = true;
+    this.subClinicalVisitModal = this.subClinicalVisit.filter((en) => en.isDisabled == false);
   }
   showModalSubOrderGroup() {
     this.visibleSubOrderGroupAdd = true;
@@ -82,7 +84,15 @@ export class CaseStudyDetailComponent {
     ];
     this.apiAddOrder(subClinicalOrders);
   }
-
+  cancelModalAddSubOrder() {
+    this.showAddSubOrder = false;
+    this.rosIdSelected = '';
+    this.subClinicalVisitModal = [];
+  }
+  loadData() {
+    // this.getSubClinicalVisitByRelated();
+    // this.getMedicalOrderByVisitId();
+  }
   apiAddOrder(subClinicalOrders:any) {
     // const payload = {
     //   visitId: this.visit.id,
