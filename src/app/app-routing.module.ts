@@ -30,6 +30,13 @@ import { AppLayoutComponent } from "./components/admin/admin-layout/app.layout.c
                             './components/common/common-layout/common-layout.module'
                         ).then((m) => m.CommonLayoutModule),
                 },
+                {
+                    path: 'ktv',
+                    loadChildren: () =>
+                        import(
+                            './components/ktv/ktv-layout/ktv-layout.module'
+                        ).then((m) => m.KTVLayoutModule),
+                },
                 { path: '**', redirectTo: '404' },
             ],
             {

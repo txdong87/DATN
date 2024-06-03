@@ -1,0 +1,28 @@
+<p>perform-cdha works!</p>
+<div>
+  <h1>Webcam Capture</h1>
+  <div *ngIf="showWebcam">
+    <webcam 
+      [height]="videoHeight"
+      [width]="videoWidth"
+      [trigger]="triggerObservable"
+      [switchCamera]="nextWebcamObservable"
+      (imageCapture)="handleImage($event)"
+      (initError)="handleInitError($event)">
+    </webcam>
+  </div>
+
+  <div>
+    <button (click)="triggerSnapshot()">Capture Image</button>
+    <button (click)="toggleWebcam()">Toggle Webcam</button>
+    <button *ngIf="multipleWebcamsAvailable" (click)="showNextWebcam(true)">Switch Camera</button>
+  </div>
+
+  <div *ngFor="let image of capturedImages; let i = index">
+    <div>
+      <h2>Captured Image {{ i + 1 }}:</h2>
+      <img [src]="image.imageAsDataUrl"/>
+      <button (click)="deleteImage(i)">Delete</button>
+    </div>
+  </div>
+</div>

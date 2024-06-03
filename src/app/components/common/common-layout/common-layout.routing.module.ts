@@ -9,7 +9,6 @@ const routes: Routes = [
 	  path: '',
 	  redirectTo: 'common/page',
 	  pathMatch: 'full',
-	  
 	},
 	{
 	  path: 'common',
