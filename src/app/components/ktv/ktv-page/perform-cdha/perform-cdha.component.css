@@ -13,6 +13,11 @@
   .webcam-container {
     flex: 1;
     max-width: 100%;
+    background-color: #eee;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
   }
   
   .webcam {
@@ -32,10 +37,38 @@
   }
   
   .captured-images {
-    margin-top: 10px;
+    display: flex; /* Arrange images horizontally */
+    flex-wrap: wrap; /* Allow images to wrap to next line if needed */
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
   }
   
   .captured-images img {
-    max-width: 10%;
-    height: auto;
+    width: 10%; /* Maintain image width as a percentage */
+    margin-bottom: 5px;
+    /* Add margin between images */
+  }
+  .delete-button {
+    position: absolute;
+    top: 5px; /* Position at top right corner */
+    right: 5px;
+    background-color: #f00; /* Red color */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px; /* Smaller font size */
+  }
+  .captured-images img:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+  .buttons p-button {
+    margin-right: 10px;
+  }
+  
+  .buttons p-button:hover {
+    background-color: #eee;
   }

@@ -15,8 +15,9 @@ import { ButtonModule } from 'primeng/button';
   imports: [
     CommonModule,
     WebcamModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
+ 
     DropdownModule,
     InputTextModule,
     InputNumberModule,

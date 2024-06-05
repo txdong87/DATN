@@ -2,76 +2,72 @@
   <div class="webcam-capture">
     <h2>Chụp ảnh webcam</h2>
     <div class="webcam-container">
-      <webcam #webcam
-        [height]="videoHeight"
-        [width]="videoWidth"
-        [trigger]="triggerObservable"
-        [switchCamera]="nextWebcamObservable"
-        (imageCapture)="handleImage($event)"
-        (initError)="handleInitError($event)">
+      <webcam #webcam [height]="videoHeight" [width]="videoWidth" [trigger]="triggerObservable"
+              [switchCamera]="nextWebcamObservable" (imageCapture)="handleImage($event)"
+              (initError)="handleInitError($event)">
       </webcam>
     </div>
-
     <div class="buttons">
-        <p-button  icon="pi pi-camera" (click)="triggerSnapshot()"></p-button>
-        <p-button  icon="pi pi-video" (click)="toggleWebcam()"></p-button>
-      
-    
+      <p-button icon="pi pi-camera" (click)="triggerSnapshot()"></p-button>
+      <p-button icon="pi pi-video" (click)="toggleWebcam()"></p-button>
     </div>
-
     <div class="captured-images">
       <h2>Ảnh đã chụp</h2>
       <div *ngFor="let image of capturedImages; let i = index">
-        <div>
+        <div class="captured-image-container">
           <h2>Ảnh {{ i + 1 }}:</h2>
-          <img [src]="image.imageAsDataUrl" alt="Ảnh {{ i + 1 }}">
-          <button pButton (click)="deleteImage(i)">Xóa</button>
+          <img [src]="image.imageAsDataUrl" alt="Ảnh {{ i + 1 }}" />
+          <button pButton class="delete-button" (click)="deleteImage(i)">Xóa</button>
         </div>
       </div>
     </div>
   </div>
+
+
+
   <div class="report">
     <div class="report-header">
       <h2>Báo cáo kết quả bệnh án</h2>
     </div>
-  
-    <div [formGroup]="reportForm">
-      <div class="section">
+
+    <div >
+      <div class="section" [formGroup]="patientInformation">
         <h3>Thông tin bệnh nhân</h3>
-        <div class="p-field">
+        <div class="p-field" >
           <label for="name">Họ và tên:</label>
-          <input type="text" id="name" pInputText formControlName="patientInformation.name" required>
+          <input type="text" id="name" pInputText formControlName="name" required />
         </div>
         <div class="p-field">
           <label for="age">Tuổi:</label>
-          <input type="number" id="age" pInputText formControlName="patientInformation.age" required>
+          <input type="number" id="age" pInputText formControlName="age" required />
         </div>
         <div class="p-field">
           <label for="gender">Giới tính:</label>
-          <p-dropdown id="gender" formControlName="patientInformation.gender" [options]="options"></p-dropdown>
+          <p-dropdown id="gender" formControlName="gender" [options]="options"></p-dropdown>
         </div>
         <div class="p-field">
           <label for="diagnosis">Chẩn đoán:</label>
-          <input type="text" id="diagnosis" pInputText formControlName="patientInformation.diagnosis" required>
+          <input type="text" id="diagnosis" pInputText formControlName="diagnosis" required />
         </div>
         <div class="p-field">
           <label for="address">Địa chỉ:</label>
-          <input type="text" id="address" pInputText formControlName="patientInformation.address" required>
+          <input type="text" id="address" pInputText formControlName="address" required />
         </div>
       </div>
-  
-      <div class="section">
+
+      <div class="section" [formGroup]="procedure">
         <h3>Chỉ định</h3>
-        <div class="p-field">
+        <div class="p-field" >
           <label for="description">Mô tả:</label>
-          <p-textarea id="description" rows="5" pInputText formControlName="procedure.description" required></p-textarea>
+          <p-textarea id="description" rows="5" pInputText formControlName="description"
+            required></p-textarea>
         </div>
         <div class="p-field">
           <label for="notes">Ghi chú:</label>
-          <p-textarea id="notes" rows="3" pInputText formControlName="procedure.notes" required></p-textarea>
+          <p-textarea id="notes" rows="3" pInputText formControlName="notes" required></p-textarea>
         </div>
       </div>
-  
+
       <div class="section">
         <h3>Kết luận</h3>
       </div>
