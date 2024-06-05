@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+  }
+  
+  .webcam-capture {
+    flex: 1;
+    max-width: 33.33%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .webcam-container {
+    flex: 1;
+    max-width: 100%;
+  }
+  
+  .webcam {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .report {
+    flex: 2;
+    max-width: 66.67%;
+    overflow: hidden;
+  }
+  
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .captured-images {
+    margin-top: 10px;
+  }
+  
+  .captured-images img {
+    max-width: 10%;
+    height: auto;
+  }

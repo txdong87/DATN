@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
-
+import { FormGroup,FormControl,FormBuilder ,Validators} from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-perform-cdha',
   templateUrl: './perform-cdha.component.html',
   styleUrls: ['./perform-cdha.component.css']
 })
 export class PerformCDHAComponent implements OnInit {
+  reportForm: FormGroup;
   public showWebcam = true;
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
@@ -15,7 +17,9 @@ export class PerformCDHAComponent implements OnInit {
   public videoWidth = 640;
   public videoHeight = 480;
   public errors: WebcamInitError[] = [];
+  options:any =[]
 
+  
   // latest snapshot
   public webcamImage: WebcamImage | undefined;
   // array to store captured images
@@ -25,15 +29,44 @@ export class PerformCDHAComponent implements OnInit {
   private trigger: Subject<void> = new Subject<void>();
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+  constructor(private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) { 
+    this.reportForm = this.fb.group({
+      patientInformation: this.fb.group({
+        name: ['', Validators.required],
+        age: ['', Validators.required],
+        gender: ['', Validators.required],
+        diagnosis: ['', Validators.required],
+        address: ['', Validators.required]
+      }),
+      procedure: this.fb.group({
+        description: ['', Validators.required],
+        notes: ['', Validators.required]
+      }),
+      conclusion: this.fb.group({
+        summary: ['', Validators.required],
+        recommendations: ['', Validators.required]
+      }),
+      doctorInformation: this.fb.group({
+        name: ['', Validators.required],
+        signature: ['', Validators.required],
+        date: ['', Validators.required]
+      })
+    })
 
-  constructor() {
-    // Initialize webcamImage to avoid undefined error
+    this.options=[
+      {label: "Nam", value: 'male'},
+      {label: 'Nữ', value: 'female'}
+    ] 
+    
     this.webcamImage = {} as WebcamImage;
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     WebcamUtil.getAvailableVideoInputs().then((mediaDevices: MediaDeviceInfo[]) => {
       this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+      this.cdr.detectChanges(); // Manually trigger change detection
     });
   }
 
