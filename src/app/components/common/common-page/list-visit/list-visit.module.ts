@@ -8,6 +8,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSplitModule } from 'angular-split';
 import { InputTextModule } from 'primeng/inputtext';
+import { TabViewModule } from 'primeng/tabview';
 
 
 
@@ -22,7 +23,8 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     ReactiveFormsModule,
     AngularSplitModule,
-    InputTextModule
+    InputTextModule,
+    TabViewModule
   ],
   exports:[
     ListVisitComponent

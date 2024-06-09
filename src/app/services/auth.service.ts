@@ -1,0 +1,40 @@
+
+import { Injectable } from "@angular/core";
+import { Observable, tap } from "rxjs";
+import { BaseService } from './base/base.service';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService extends BaseService {
+  login(payload: any): Observable<any> {
+    return this.post('/api/Auth/Login', payload).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          this.setToken(response.token);
+        }
+      })
+    );
+  }
+  logout(): void {
+    this.clearToken();
+    // this.router.navigate(['/login']);
+  }
+
+  private setToken(token: string): void {
+    localStorage.setItem('authToken', token);
+  }
+
+  private clearToken(): void {
+    localStorage.removeItem('authToken');
+  }
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+  // logout(): Observable<any> {
+  //   let token = localStorage.getItem(Constants.FIREBASE_TOKEN);
+  //   let headers = { 'FB_Token': token };
+
+  //   return this.post('/logout', null, {}, '', headers);
+  // }
+}

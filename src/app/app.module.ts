@@ -7,6 +7,8 @@ import { AdminPagesComponent } from './components/admin/admin-pages/admin-pages.
 import { AppLayoutModule } from './components/admin/admin-layout/app.layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
+import { AppConfig } from './models/app.config';
+import { AppConfigService } from './shared/app-config.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,7 @@ import { MessageService } from 'primeng/api';
     BrowserAnimationsModule,
     
   ],
-  providers: [MessageService],
+  providers: [MessageService,AppConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

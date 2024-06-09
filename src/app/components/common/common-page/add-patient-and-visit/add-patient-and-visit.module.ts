@@ -4,6 +4,10 @@ import { AddPatientAndVisitRoutingModule } from './add-patient-and-visit-routing
 import { AddPatientAndVisitComponent } from './add-patient-and-visit.component';
 import { SplitterModule } from 'primeng/splitter';
 import { TabViewModule } from 'primeng/tabview';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -13,7 +17,12 @@ import { TabViewModule } from 'primeng/tabview';
     CommonModule,
     AddPatientAndVisitRoutingModule,
     SplitterModule,
-    TabViewModule
+    TabViewModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownModule,
+    InputNumberModule,
+    InputTextModule
   ],
   exports:[
     AddPatientAndVisitComponent

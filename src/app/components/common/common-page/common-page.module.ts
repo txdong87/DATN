@@ -22,8 +22,9 @@ import { PanelModule } from 'primeng/panel';
 import { CaseStudyDetailComponent } from './list-case-study/case-study-detail/case-study-detail.component';
 import { MenuModule } from 'primeng/menu';
 import { ListPatientModule } from './list-patient/list-patient.module';
-import { AddCaseStudyModule } from './add-case-study/add-case-study.module';
+import { AddPatientModule } from './add-patient/add-patient.module';
 import { ListVisitModule } from './list-visit/list-visit.module';
+import { AddPatientComponent } from './add-patient/add-patient.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { ListVisitModule } from './list-visit/list-visit.module';
     ListVisitModule,
     ListCaseStudyModule,
     ListPatientModule,
-    AddCaseStudyModule,
+    AddPatientModule,
     AngularSplitModule,
     CommonPageRoutingModule,
     DropdownModule,

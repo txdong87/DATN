@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PatientService } from 'src/app/services/patient.service';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 import { Constants } from 'src/app/constant/constants';
+import { TabView } from 'primeng/tabview';
 @Component({
   selector: 'app-list-visit',
   templateUrl: './list-visit.component.html',
@@ -9,11 +11,14 @@ import { Constants } from 'src/app/constant/constants';
 })
 
 export class ListVisitComponent {
+  @Input() newPatient: any;
   GENDERS = Constants.GENDERS;
   cols!: any[];
   caseStudy:any[]=[]
   PATIENT_TYPES = Constants.PATIENT_TYPES;
-  patientForm: FormGroup;
+  patientForm:FormGroup
+  formAddVisit:FormGroup
+  vitalSignCollapse = false;
   layout = {
     columns: [
       {
@@ -31,30 +36,33 @@ export class ListVisitComponent {
     ],
     disabled: false,
   };
+  activeTabIndex: number = 0;
   constructor(
     private fb: FormBuilder,
     private notification: NotificationService,
+    private patientService: PatientService,
+    private tabView: TabView
   ) {
+    console.log(this.newPatient,this.activeTabIndex)
     this.patientForm = this.fb.group({
       id: [null],
       patientCode: [null, [Validators.required]],
-      patientsName: [null, [Validators.required]],
-      patientsSex: [null, [Validators.required]],
-      yob: [null, [Validators.required]],
-      cmnd: [null],
-      phoneNo: [null],
-      email: [null],
+      patientName: [null, [Validators.required]],
+      sex: [null, [Validators.required]],
+      dob: [null, [Validators.required]],
+      phone: [null],
       address: [null],
-      faculty: [null],
-      room: [null],
-      sickBed: [null],
-      patientType: [null, [Validators.required]],
-      bhyt: [null],
-      validDateBHYT: [null],
-      expireDateBHYT: [null],
+    });
+    this.formAddVisit = this.fb.group({
+      id: [0],
+      appointmentId: [0],
+      roomId: [null],
+      visitDate: [new Date(), [Validators.required]],
+      visitReason: [null, [Validators.required]],
     });
   }
   ngOnInit(){
+    console.log(this.newPatient)
     this.cols=[
       {
           "field": "idx",
@@ -64,73 +72,18 @@ export class ListVisitComponent {
           "sort": "none"
       },
       {
-          "width": "9.5rem",
-          "sortField": "State",
-          "field": "state",
-          "header": "Trạng thái",
-          "sort": "none"
-      },
-      {
-          "width": "11.54rem",
-          "sortField": "CsStatus",
-          "field": "csStatus",
-          "header": "Trạng thái CK",
-          "sort": "none"
-      },
-      {
           "width": "15.93rem",
           "sortField": "PatientsName",
           "field": "patientsName",
           "header": "Tên bệnh nhân",
           "sort": "none"
       },
-      {
-          "width": "19.79rem",
-          "sortField": "CreatedTime",
-          "field": "createdTime",
-          "header": "Ngày lấy mẫu",
-          "sort": "desc"
-      },
-      {
-          "width": "23.57rem",
-          "sortField": "SourceHospital",
-          "field": "sourceHospital",
-          "header": "Nơi gửi mẫu",
-          "sort": "none"
-      },
-      {
-          "width": "10rem",
-          "sortField": "BodyPart",
-          "field": "bodyPart",
-          "header": "Vị trí lấy mẫu",
-          "sort": "none"
-      },
+      
       {
           "width": "10rem",
           "sortField": "PatientCode",
           "field": "patientCode",
           "header": "Mã bệnh nhân",
-          "sort": "none"
-      },
-      {
-          "width": "10rem",
-          "sortField": "SpecimensCode",
-          "field": "specimensCode",
-          "header": "Mã bệnh phẩm",
-          "sort": "none"
-      },
-      {
-          "width": "18rem",
-          "sortField": "Conclusion",
-          "field": "conclusion",
-          "header": "Kết luận",
-          "sort": "none"
-      },
-      {
-          "width": "8.5rem",
-          "sortField": "SlideCount",
-          "field": "slideCount",
-          "header": "Số lam kính",
           "sort": "none"
       },
       {
@@ -140,20 +93,6 @@ export class ListVisitComponent {
           "header": "Ngày tạo",
           "sort": "desc"
       },
-      {
-          "width": "15rem",
-          "sortField": "ClinicalDiagnosis",
-          "field": "clinicalDiagnosis",
-          "header": "Chẩn đoán",
-          "sort": "none"
-      },
-      {
-          "width": "14.21rem",
-          "sortField": "RequestTypeLabel",
-          "field": "requestTypeLabel",
-          "header": "Loại yêu cầu",
-          "sort": "none"
-      }
   ]
   }
   onSave() {
@@ -172,5 +111,32 @@ export class ListVisitComponent {
     //   });
     // }
   }
-
+  get visitFormCtrl() {
+    return this.formAddVisit.controls;
+  }
+  vitalInfoCollapse() {
+    this.vitalSignCollapse = !this.vitalSignCollapse;
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['newPatient'] && changes['newPatient'].currentValue) {
+      const newPatient = changes['newPatient'].currentValue;
+      console.log('New patient received:', newPatient);
+      this.caseStudy.push(newPatient); // Giả sử bạn thêm bệnh nhân mới vào danh sách thăm khám
+    }
+  }
+  addPatient(){
+    if (this.patientForm.invalid) {
+      // Hiển thị cảnh báo rằng các trường bắt buộc cần được điền đầy đủ
+      this.notification.error('Vui lòng điền đầy đủ thông tin bắt buộc.');
+      return;
+    }
+    this.patientService.create({ ...this.patientForm.value}).subscribe({
+      next: (res) => {
+        
+        this.activeTabIndex = 1;
+        console.log(this.activeTabIndex)
+        // this.patientAdded.emit(res);
+    }
+    })
+  }
 }

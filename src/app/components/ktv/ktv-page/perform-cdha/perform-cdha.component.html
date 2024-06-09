@@ -12,10 +12,8 @@
       <p-button icon="pi pi-video" (click)="toggleWebcam()"></p-button>
     </div>
     <div class="captured-images">
-      <h2>Ảnh đã chụp</h2>
       <div *ngFor="let image of capturedImages; let i = index">
-        <div class="captured-image-container">
-          <h2>Ảnh {{ i + 1 }}:</h2>
+        <div class="captured-image-container" style="display: flex;">
           <img [src]="image.imageAsDataUrl" alt="Ảnh {{ i + 1 }}" />
           <button pButton class="delete-button" (click)="deleteImage(i)">Xóa</button>
         </div>
@@ -29,7 +27,6 @@
     <div class="report-header">
       <h2>Báo cáo kết quả bệnh án</h2>
     </div>
-
     <div >
       <div class="section" [formGroup]="patientInformation">
         <h3>Thông tin bệnh nhân</h3>

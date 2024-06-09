@@ -1,3 +1,4 @@
+import { PatientService } from './../../../../services/patient.service';
 import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { SearchCaseStudy,INIT_SEARCH_CASE_STUDY, } from 'src/app/models/search-case-study';
 import { MenuItem } from 'primeng/api';
@@ -15,195 +16,15 @@ export class ListPatientComponent {
   clickTimer: any;
   actions!: MenuItem[];
   loading = false;
+  patients:any[]=[]
   @Output() onSelectCaseStudy = new EventEmitter<any>();
-  constructor(){
-  this.caseStudies=[{
-  "idx": 1,
-  "caseStudyId": "6646bcd6346d242867419007",
-  "patientCode": "0517",
-  "patientsName": "BN 0517",
-  "patientId": "6646bce6346d242867419008",
-  "branchId": "642fda25c315466f34d0a089",
-  "branchName": "dps VT",
-  "sourceHospital": "Bệnh viện đa khoa quốc tế Thu Cúc",
-  "bodyPart": "Báo cáo 4",
-  "bodyPartUserTyping": null,
-  "clinicalDiagnosis": "",
-  "diagnostic": null,
-  "conclusion": "chan doan; ",
-  "conclusionUnsigned": null,
-  "requestType": "1",
-  "description": "",
-  "slideCount": 1,
-  "using": null,
-  "state": 4,
-  "createdTime": "17/05/2024",
-  "slides": null,
-  "isDeleted": false,
-  "modalityCode": null,
-  "modalityName": null,
-  "patientType": null,
-  "bhyt": null,
-  "expireBHYT": null,
-  "room": null,
-  "sickBed": null,
-  "faculty": null,
-  "address": null,
-  "specimensDate": null,
-  "createdDate": "2024-05-17T09:12:44+07:00",
-  "patientFrom": "DPS",
-  "casestudyFrom": "DPS",
-  "specimensCode": "",
-  "isPrint": false,
-  "isApprove": true,
-  "hasSilde": true,
-  "hasConclusion": null,
-  "mixSpecimensUserId": null,
-  "mixSpecimensTime": "",
-  "makeTemplatesUserId": null,
-  "makeTemplatesTime": "",
-  "predictType": null,
-  "specimenReceiverId": null,
-  "specimenReceiverName": null,
-  "numberOfSpecimensReceived": null,
-  "numberOfBlocks": null,
-  "notes": null,
-  "csStatus": 0
-},
-{
-  "idx": 1,
-  "caseStudyId": "6646bcd6346d242867419007",
-  "patientCode": "0517",
-  "patientsName": "BN 0517",
-  "patientId": "6646bce6346d242867419008",
-  "branchId": "642fda25c315466f34d0a089",
-  "branchName": "dps VT",
-  "sourceHospital": "Bệnh viện đa khoa quốc tế Thu Cúc",
-  "bodyPart": "Báo cáo 4",
-  "bodyPartUserTyping": null,
-  "clinicalDiagnosis": "",
-  "diagnostic": null,
-  "conclusion": "chan doan; ",
-  "conclusionUnsigned": null,
-  "requestType": "1",
-  "description": "",
-  "slideCount": 1,
-  "using": null,
-  "state": 4,
-  "createdTime": "17/05/2024",
-  "slides": null,
-  "isDeleted": false,
-  "modalityCode": null,
-  "modalityName": null,
-  "patientType": null,
-  "bhyt": null,
-  "expireBHYT": null,
-  "room": null,
-  "sickBed": null,
-  "faculty": null,
-  "address": null,
-  "specimensDate": null,
-  "createdDate": "2024-05-17T09:12:44+07:00",
-  "patientFrom": "DPS",
-  "casestudyFrom": "DPS",
-  "specimensCode": "",
-  "isPrint": false,
-  "isApprove": true,
-  "hasSilde": true,
-  "hasConclusion": null,
-  "mixSpecimensUserId": null,
-  "mixSpecimensTime": "",
-  "makeTemplatesUserId": null,
-  "makeTemplatesTime": "",
-  "predictType": null,
-  "specimenReceiverId": null,
-  "specimenReceiverName": null,
-  "numberOfSpecimensReceived": null,
-  "numberOfBlocks": null,
-  "notes": null,
-  "csStatus": 0
-}]
+  constructor(private patientService: PatientService ){
+
   }
   ngOnInit(){
+    this.getListPatient()
     this.cols=[
-      {
-          "width": "9.5rem",
-          "sortField": "State",
-          "field": "state",
-          "header": "Trạng thái"
-      },
-      {
-          "width": "11.54rem",
-          "sortField": "CsStatus",
-          "field": "csStatus",
-          "header": "Trạng thái CK"
-      },
-      {
-          "width": "15.93rem",
-          "sortField": "PatientsName",
-          "field": "patientsName",
-          "header": "Tên bệnh nhân"
-      },
-      {
-          "width": "19.79rem",
-          "sortField": "CreatedTime",
-          "field": "createdTime",
-          "header": "Ngày lấy mẫu"
-      },
-      {
-          "width": "23.57rem",
-          "sortField": "SourceHospital",
-          "field": "sourceHospital",
-          "header": "Nơi gửi mẫu"
-      },
-      {
-          "width": "10rem",
-          "sortField": "BodyPart",
-          "field": "bodyPart",
-          "header": "Vị trí lấy mẫu"
-      },
-      {
-          "width": "10rem",
-          "sortField": "PatientCode",
-          "field": "patientCode",
-          "header": "Mã bệnh nhân"
-      },
-      {
-          "width": "10rem",
-          "sortField": "SpecimensCode",
-          "field": "specimensCode",
-          "header": "Mã bệnh phẩm"
-      },
-      {
-          "width": "18rem",
-          "sortField": "Conclusion",
-          "field": "conclusion",
-          "header": "Kết luận"
-      },
-      {
-          "width": "8.5rem",
-          "sortField": "SlideCount",
-          "field": "slideCount",
-          "header": "Số lam kính"
-      },
-      {
-          "width": "13.79rem",
-          "sortField": "CreatedTime",
-          "field": "createdDate",
-          "header": "Ngày tạo"
-      },
-      {
-          "width": "15rem",
-          "sortField": "ClinicalDiagnosis",
-          "field": "clinicalDiagnosis",
-          "header": "Chẩn đoán"
-      },
-      {
-          "width": "14.21rem",
-          "sortField": "RequestTypeLabel",
-          "field": "requestTypeLabel",
-          "header": "Loại yêu cầu"
-      }
+      
   ]
   this.cols.unshift({
     field: 'idx',
@@ -213,6 +34,23 @@ export class ListPatientComponent {
     sort: 'none',
   });
   }
+  getListPatient(){
+    this.patientService.getPatients().subscribe({
+      next:(res)=>{
+        this.patients = res;
+        console.log(this.patients)
+      }
+    })
+  }
+  // getTechnicians() {
+  //   this.technicianService.getAll().subscribe({
+  //     next: (res) => {
+  //       if (res.isValid) {
+  //         this.technicians = res.jsonData;
+  //       }
+  //     },
+  //   });
+  // }
   onResetSearchData() {
 //     this.searchCaseStudyStateService.dispatch({ ...INIT_SEARCH_CASE_STUDY, branchId: this.selectedBranch })
  }

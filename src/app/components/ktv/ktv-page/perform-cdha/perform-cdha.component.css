@@ -37,17 +37,19 @@
   }
   
   .captured-images {
-    display: flex; /* Arrange images horizontally */
-    flex-wrap: wrap; /* Allow images to wrap to next line if needed */
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
+    display: flex; /* Sử dụng flexbox để xếp ảnh theo chiều ngang */
+  flex-wrap: nowrap; /* Không cho phép ảnh xuống dòng khi không đủ không gian */
+  overflow-x: auto; /* Cho phép cuộn ngang khi không đủ không gian */
+  -webkit-overflow-scrolling: touch; /* Cho phép cuộn trên thiết bị cảm ứng */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
   }
   
   .captured-images img {
-    width: 10%; /* Maintain image width as a percentage */
-    margin-bottom: 5px;
-    /* Add margin between images */
+    width: auto; /* Để ảnh tự điều chỉnh kích thước theo chiều ngang */
+    height: 100px; /* Để cố định chiều cao */
+    margin-right: 5px; /* Thêm margin giữa các ảnh */
   }
   .delete-button {
     position: absolute;

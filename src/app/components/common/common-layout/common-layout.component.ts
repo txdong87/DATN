@@ -1,7 +1,8 @@
-import { Component, ChangeDetectorRef, OnInit,ViewChild} from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, ViewChild } from '@angular/core';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
 import { LayoutService } from '../../admin/admin-layout/service/app.layout.service';
 import { TabView } from 'primeng/tabview';
+
 @Component({
   selector: 'app-common-layout',
   templateUrl: './common-layout.component.html',
@@ -14,7 +15,11 @@ export class CommonLayoutComponent implements OnInit {
   isSidebarHidden = true;
   currentTabId: string | any;
   tabs: any[] = [];
+  role = "nurse";  // Change this to 'nurse' to test the other scenario
   @ViewChild('tabView') tabView!: TabView;
+
+  newPatient: any; // Biến để lưu bệnh nhân mới
+
   constructor(
     private tabDataService: TabDataService,
     private cdr: ChangeDetectorRef,
@@ -25,21 +30,37 @@ export class CommonLayoutComponent implements OnInit {
     });
   }
 
-  toggleSideBar() {
-    this.isSidebarHidden = !this.isSidebarHidden;
-  }
-
-  sidebarVisible: boolean = true;
-
   ngOnInit() {
     this.getTabs();
   }
+
   getTabs() {
     this.tabDataService.share.subscribe(() => {
       this.tabs = this.tabDataService.tabs();
       this.indexTab = this.tabDataService.indextab;
+      this.setMainTab();
       this.cdr.detectChanges();
     });
+  }
+
+  setMainTab() {
+    if (this.role === 'doctor') {
+      this.tabs = [
+        { id: 'ListCaseStudy', name: 'Ca khám bác sĩ', tabType: 'main' },
+      ];
+    } else if (this.role === 'nurse') {
+      this.tabs = [
+        { id: 'ListVisit', name: 'Danh sách ca khám', tabType: 'main' },
+        { id: 'AddPatient', name: 'Thêm bệnh nhân', tabType: 'extra' },
+        { id: 'ListPatient', name: 'Danh sách bệnh nhân', tabType: 'extra' },
+      ];
+    }
+    this.indexTab = 0;
+    this.cdr.detectChanges();
+  }
+
+  toggleSideBar() {
+    this.isSidebarHidden = !this.isSidebarHidden;
   }
 
   closeTab(tab: any): void {
@@ -51,16 +72,15 @@ export class CommonLayoutComponent implements OnInit {
     this.tabDataService.updateTab(id, tab, type);
     this.indexTab = this.tabDataService.indextab;
     this.cdr.detectChanges();
-    // Sử dụng ViewChild để cập nhật chỉ số tab active
     this.tabView.activeIndex = this.indexTab;
   }
+
   updateIndexTab(): void {
     this.indexTab = this.tabDataService.indextab;
     this.cdr.detectChanges();
   }
 
   onTabChange(event: any): void {
-    console.log(event)
     this.indexTab = event.index;
   }
 
@@ -80,5 +100,14 @@ export class CommonLayoutComponent implements OnInit {
       'p-input-filled': this.layoutService.config().inputStyle === 'filled',
       'p-ripple-disabled': !this.layoutService.config().ripple
     };
+  }
+
+  hasRole(role: string) {
+    return this.role === role;
+  }
+
+  onPatientAdded(newPatient: any) {
+    this.newPatient = newPatient; // Cập nhật biến với bệnh nhân mới
+    this.openNewTab('ListVisit', 'Danh sách ca khám', 'main'); // Chuyển đến tab "Danh sách ca khám"
   }
 }

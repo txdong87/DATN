@@ -1,23 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddCaseStudyComponent } from './add-case-study.component';
+import {  AddPatientComponent } from './add-patient.component';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 
 @NgModule({
-  declarations: [AddCaseStudyComponent],
+  declarations: [AddPatientComponent],
   imports: [
     CommonModule,
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,
-    InputTextModule 
+    DropdownModule,
+    InputNumberModule,
+    InputTextModule,
+    CalendarModule
   ],
   exports:[
-    AddCaseStudyComponent
+    AddPatientComponent
   ]
 })
-export class AddCaseStudyModule { }
+export class AddPatientModule { }
