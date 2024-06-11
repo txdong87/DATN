@@ -1,0 +1,9 @@
+.ui-calendar {
+    position: relative;
+}
+
+.ui-calendar .ui-datepicker {
+    top: auto;
+    bottom: 100%;
+    transform: translateY(-10px); /* Đẩy lịch lên phía trên */
+}

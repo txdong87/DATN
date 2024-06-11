@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularSplitModule } from 'angular-split';
 import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
-
+import { MessagesModule } from 'primeng/messages';
 
 
 @NgModule({
@@ -24,7 +24,9 @@ import { TabViewModule } from 'primeng/tabview';
     ReactiveFormsModule,
     AngularSplitModule,
     InputTextModule,
-    TabViewModule
+    TabViewModule,
+    MessagesModule 
+    
   ],
   exports:[
     ListVisitComponent

@@ -15,6 +15,7 @@ export class ListCaseStudyComponent {
   searchDataIsReceived = false;
   currentVisit: any = {};
   isExpandSearch = false;
+  selectedCaseStudy: any;
   constructor(){
     this.search = {
       patientName: '',
@@ -57,5 +58,7 @@ export class ListCaseStudyComponent {
     // this.pageIndex = 1;
     // this.getListVisit();
   }
-
+  onSelectCaseStudy(caseStudy: any) {
+    this.selectedCaseStudy = caseStudy;
+  }
 }

@@ -20,7 +20,5 @@ export class CaseStudyInfoComponent {
     
   }
   getVisitStatus() {
-    // const currentStatus = Object.values(this.VISIT_STATUS).find((e) => e.value == this.visit.status);
-    // return currentStatus ? currentStatus.text : 'Không xác định';
   }
 }

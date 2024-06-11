@@ -1,4 +1,4 @@
-<p>list-case-study works!</p>
+
 <div class="list-visit-small">
     <div class="search-visit-small">
         <div class="row">
@@ -53,31 +53,5 @@
         </p-panel>
        
     </div>
-    <!-- <p-table 
-    [value]="caseStudy" 
-    [columns]="cols"
-    [resizableColumns]="true" 
-    [paginator]="true"
-    [rows]="5"
-    [rowsPerPageOptions]="[5, 10, 20]"
-    styleClass="p-datatable-gridlines" 
-    [style]="{'width': '100%'}"
-    >
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns">
-                {{ col.header }}
-            </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
-            <td *ngFor="let col of columns">
-                {{ rowData[col.field] }}
-            </td>
-        </tr>
-    </ng-template>
-</p-table> -->
-
 <app-patient-table>  </app-patient-table>
 </div>

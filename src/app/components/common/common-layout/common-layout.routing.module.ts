@@ -7,11 +7,6 @@ import { CommonLayoutComponent } from './common-layout.component';
 const routes: Routes = [
 	{
 	  path: '',
-	  redirectTo: 'common/page',
-	  pathMatch: 'full',
-	},
-	{
-	  path: 'common',
 	  component: CommonLayoutComponent,
 	  children: [
 		{

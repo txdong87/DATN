@@ -88,6 +88,11 @@ nav {
 .container aside.expanding {
   width: 300px;
 }
+.layout-menu {
+  display: flex;
+  justify-content: space-between; /* Căn các thẻ con ra hai bên */
+  align-items: center; /* Căn các thẻ con theo trục dọc */
+}
 
 .layout-menu ul {
   margin: 0;

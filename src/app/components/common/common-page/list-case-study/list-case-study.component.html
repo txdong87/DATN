@@ -1,21 +1,13 @@
 <div  class="tab-list-detail-visit">
   <as-split direction="horizontal">
     <as-split-area  [size]="30">
-      <app-case-study-table></app-case-study-table>
+      <app-patient-table (onSelectCaseStudy)="onSelectCaseStudy($event)"></app-patient-table>
     </as-split-area>
     <as-split-area [size]="70">
       <div style="height: 100%">
-        <!-- <ng-container *ngIf="isLoading">
-          <nz-spin
-            [nzSpinning]="isLoading"
-            nzSize="large"
-            style="height: 100%"
-            nzTip="Đang tải thông tin ca khám...">
-          </nz-spin>
-        </ng-container> -->
         <ng-container *ngIf="!isLoading">
           <div class="pd-10" >
-            <app-case-study-info [(visit)]="currentVisit"></app-case-study-info>
+            <app-case-study-info [visit]="selectedCaseStudy"></app-case-study-info>
             <p-tabView #tabView [activeIndex]="indexTab" class="tab-mainwork" [scrollable]="true" (onChange)="onTabChange($event)">
               <!-- <p-tabPanel header="Thông tin ca khám">
                 <app-case-study-info></app-case-study-info>

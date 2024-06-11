@@ -1,9 +1,12 @@
+import { DoctorService } from './../../../../services/doctor.service';
 import { PatientService } from 'src/app/services/patient.service';
+import { CaseStudyService } from 'src/app/services/case-study.service';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/service/notification.service';
 import { Constants } from 'src/app/constant/constants';
 import { TabView } from 'primeng/tabview';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-list-visit',
   templateUrl: './list-visit.component.html',
@@ -15,6 +18,8 @@ export class ListVisitComponent {
   GENDERS = Constants.GENDERS;
   cols!: any[];
   caseStudy:any[]=[]
+  listPatients:any[]=[]
+  listDoctor:any[]=[]
   PATIENT_TYPES = Constants.PATIENT_TYPES;
   patientForm:FormGroup
   formAddVisit:FormGroup
@@ -41,7 +46,10 @@ export class ListVisitComponent {
     private fb: FormBuilder,
     private notification: NotificationService,
     private patientService: PatientService,
-    private tabView: TabView
+    private doctorService:DoctorService,
+    private caseStudyService:CaseStudyService,
+    private tabView: TabView,
+    private messageService: MessageService 
   ) {
     console.log(this.newPatient,this.activeTabIndex)
     this.patientForm = this.fb.group({
@@ -54,14 +62,17 @@ export class ListVisitComponent {
       address: [null],
     });
     this.formAddVisit = this.fb.group({
-      id: [0],
-      appointmentId: [0],
-      roomId: [null],
-      visitDate: [new Date(), [Validators.required]],
-      visitReason: [null, [Validators.required]],
+      patientId: [null, Validators.required],
+      reason: [null, Validators.required],
+      createDate: [new Date(), Validators.required],
+      doctor: [null, Validators.required],
+      diagnostic: [null],
+      status: [null]
     });
   }
   ngOnInit(){
+    this.getListDoctor()
+    this.getCaseStudy()
     console.log(this.newPatient)
     this.cols=[
       {
@@ -74,7 +85,7 @@ export class ListVisitComponent {
       {
           "width": "15.93rem",
           "sortField": "PatientsName",
-          "field": "patientsName",
+          "field": "patientName",
           "header": "Tên bệnh nhân",
           "sort": "none"
       },
@@ -89,27 +100,13 @@ export class ListVisitComponent {
       {
           "width": "13.79rem",
           "sortField": "CreatedTime",
-          "field": "createdDate",
+          "field": "createdAt",
           "header": "Ngày tạo",
           "sort": "desc"
       },
   ]
   }
   onSave() {
-    // if (this.patientForm.valid) {
-    //   if (this.patientId == '') {
-    //     this.createPatient();
-    //   } else {
-    //     this.updatePatient();
-    //   }
-    // } else {
-    //   Object.values(this.patientForm.controls).forEach((control) => {
-    //     if (control.invalid) {
-    //       control.markAsDirty();
-    //       control.updateValueAndValidity({ onlySelf: true });
-    //     }
-    //   });
-    // }
   }
   get visitFormCtrl() {
     return this.formAddVisit.controls;
@@ -124,19 +121,49 @@ export class ListVisitComponent {
       this.caseStudy.push(newPatient); // Giả sử bạn thêm bệnh nhân mới vào danh sách thăm khám
     }
   }
+  getListPatient(){
+    this.patientService.getPatients().subscribe((res: any) => {
+      this.listPatients=res.data
+  })
+  }
+  getListDoctor(){
+    this.doctorService.getDoctors().subscribe((res: any) => {
+      this.listDoctor=res.data;
+      console.log(res)
+  })
+  }
   addPatient(){
     if (this.patientForm.invalid) {
-      // Hiển thị cảnh báo rằng các trường bắt buộc cần được điền đầy đủ
-      this.notification.error('Vui lòng điền đầy đủ thông tin bắt buộc.');
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Closable Message Content' },);
       return;
     }
     this.patientService.create({ ...this.patientForm.value}).subscribe({
       next: (res) => {
-        
+        this.newPatient=res.data
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
         this.activeTabIndex = 1;
         console.log(this.activeTabIndex)
         // this.patientAdded.emit(res);
     }
     })
+  }
+  addCaseStudy(){
+    console.log(1,this.formAddVisit)
+    this.caseStudyService.create({ ...this.formAddVisit.value}).subscribe({
+      next: (res) => {
+        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+        console.log(res)
+    }
+    })
+  }
+  getCaseStudy(){
+    this.caseStudyService.getCaseStudy().subscribe((res: any) => {
+      this.caseStudy=res;
+      console.log(this.caseStudy)
+  })
+  }
+  convertISODateToNormalDate(isoDate: string): string {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString(); 
   }
 }
