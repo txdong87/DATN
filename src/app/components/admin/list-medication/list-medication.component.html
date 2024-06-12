@@ -1,0 +1,122 @@
+<p>list-medication works!</p>
+<div class="grid">
+    <div class="col-12 p-0">
+        <div class="card admin-content m-0">
+            <!-- <p-breadcrumb [model]="breadcrumbItem" [home]="home" styleClass="breadcrumb-admin"></p-breadcrumb> -->
+            <!--End: Title Danh sách group -->
+            <div class="flex flex-wrap column-gap-2 row-gap-6 pb-2 relative">
+                <input type="text" class="w-full sm:w-auto p-inputtext-sm" pInputText placeholder="Tên"
+                    [(ngModel)]="searchData.name" />
+                    <button pButton pRipple icon="pi pi-search" class="p-button-primary p-button-sm"
+                    (click)="onSearch() "></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary p-button-sm"
+                    (click)="onClearSearch()"></button>
+
+                <button pButton pRipple icon="pi pi-plus"
+                    class="p-button-success p-button-sm absolute right-0 bottom-auto" (click)="onCreate()"
+                    label="Thêm mới"></button>
+            </div>
+
+            <m-table [isLazyLoad]="true" [cols]="cols" [items]="rows" (selectRow)="selectItem($event)"
+                [dataKey]="'id'" [customHeaderTemplate]="customHeaderTemplate" [customBodyTemplate]="customBodyTemplate"
+                class="table-admin" [calcHeight]="303" (onPageChange)="onPageChange($event)"
+                [totalRecords]="total" [loading]="loading" (selectRow)="selectItem($event)"></m-table>
+            <ng-template #customHeaderTemplate>
+                <th [style.Width]="'6rem'">Tên</th>
+                <th [style.Width]="'6rem'">Tên En</th>
+                <th [style.Width]="'4rem'">Ảnh</th>
+                <th [style.Width]="'2rem'">Enable</th>
+                <th [style.Width]="'6rem'">Mô tả</th>
+                <th [style.Width]="'6rem'">Order</th>
+                <th [style.Width]="'3rem'" class="flex c-center">Action</th>
+            </ng-template>
+            <ng-template #customBodyTemplate let-rowData>
+                <td [style.Width]="'6rem'">{{ rowData.name  }}</td>
+                <td [style.Width]="'6rem'">{{ rowData.nameEn  }}</td>
+                <!-- <td [style.Width]="'4rem'" >
+                    <img *ngIf="rowData.image" [src]="basefileUrl+ '/'+rowData.image" alt="Image"
+                        style="max-height: 4rem; max-width: 4rem; margin: 0 auto" />
+                </td> -->
+                <td [style.Width]="'2rem'">{{ !rowData.disable }}</td>
+                <td [style.Width]="'6rem'">{{ rowData.description }}</td>
+                <td [style.Width]="'6rem'">{{ rowData.order }}</td>
+                <td [style.Width]="'3rem'" class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success  p-button-xs mr-2"
+                        (click)="onEditItem(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-success  p-button-xs mr-2"
+                        (click)="onDelete(rowData)"></button>
+                </td>
+            </ng-template>
+            <p-dialog [(visible)]="visibleImage">
+                <img *ngIf="selectedImg" [src]="selectedImg" alt="Selected Image" />
+            </p-dialog>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="visibleDialog" [style]="{ width: '40rem' }" [modal]="true" [header]="bannersDialogHeader"
+    class="p-fluid">
+    <ng-template pTemplate="content">
+        <form [formGroup]="formGroup">
+            <div class="field">
+                <label>Tên <span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="name" formControlName="name"  placeholder="Tên" />
+            </div>
+            <div class="field">
+                <label>Tên En<span class="text-red-500">*</span></label>
+                <input type="text" pInputText id="name" formControlName="nameEn"  placeholder="Tên" />
+            </div>
+            <div class="field">
+                <label>Mô tả</label>
+                <input type="text" pInputText id="description" formControlName="description"  placeholder="Nhập mô tả" />
+            </div>
+            <div class="field">
+                <label>Mô tả En</label>
+                <input type="text" pInputText id="descriptionEn" formControlName="descriptionEn"  placeholder="Mô tả (En)" />
+            </div>
+            <div class="field">
+                <label>Order</label>
+                <input type="text" pInputText id="order" formControlName="order"  placeholder="Order" />
+            </div>
+            <div class="field">
+                <label>Enable</label>
+                <p-inputSwitch formControlName="enable"></p-inputSwitch>
+            </div>
+            <div class="grid">
+                <div class="col-6">
+                    <div class="field">
+                        <label>
+                            <div>
+                                Ảnh <span class="text-red-500">*</span>
+                            </div>
+                            <div><span class="text-sm">(tỷ lệ nên là 1:1 )</span></div>
+
+                        </label>
+                        <div> <button pButton pRipple class=" p-button-success w-6" (click)="fileInput.click()"
+                            label="Chọn file"></button>
+                    </div>
+                        <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
+                        <input #fileInput class="p-2 hidden" type="file" name="uploadfile" (change)="selectFile($event)"
+                            accept="image/*" />
+                    </div>
+                </div>
+                <div class="col-6 text-center flex justify-content-left">
+                        <!-- <p-image [src]="previewImageUrl" alt="Image" width="250" [preview]="true">
+                            <ng-template pTemplate="indicator">
+                                Phóng to
+                            </ng-template>
+                        </p-image> -->
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Đóng" icon="pi pi-times" class="p-button-text text-red-600"
+            (click)="visibleDialog = false"></button>
+        <button pButton pRipple label="Lưu" icon="pi pi-check" class="p-button-text" (click)="onSaveItem()"></button>
+    </ng-template>
+</p-dialog>
+<!-- 
+<confirm-dialog [(visible)]="isVisible" [confirmText]="textDelete"
+[confirmLabel]="confirmLabelDelete" (onClose)="cancelDelete()" (onConfirm)="deleteUser()"
+(onCancel)="cancelDelete()"></confirm-dialog> -->

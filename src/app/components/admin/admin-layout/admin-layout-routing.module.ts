@@ -16,6 +16,10 @@ import { AdminPagesComponent } from '../admin-pages/admin-pages.component';
             path: 'pages',
             loadChildren: () => import('../admin-pages/admin-pages.module').then((m) => m.AdminPagesModule),
           },
+          {
+            path: 'admin-dashboard',
+            loadChildren: () => import('../list-medication/list-medication.module').then((m) => m.ListMedicationModule),
+          },
          
         ],
       },
