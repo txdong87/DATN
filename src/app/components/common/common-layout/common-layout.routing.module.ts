@@ -1,5 +1,4 @@
 import { CommonPageModule } from './../common-page/common-page.module';
-import { AddPatientAndVisitModule } from '../common-page/add-patient-and-visit/add-patient-and-visit.module';
 import { NgModule } from '@angular/core';
 import { RouterModule,Routes } from '@angular/router';
 import { CommonLayoutComponent } from './common-layout.component';

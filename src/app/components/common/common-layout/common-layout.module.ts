@@ -1,9 +1,7 @@
-import { AddPatientAndVisitModule } from './../common-page/add-patient-and-visit/add-patient-and-visit.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommonLayoutRoutingModule } from './common-layout.routing.module';
 import { SplitterModule } from 'primeng/splitter';
-import { AddPatientAndVisitComponent } from '../common-page/add-patient-and-visit/add-patient-and-visit.component';
 import { CommonLayoutComponent } from './common-layout.component';
 import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
@@ -36,7 +34,6 @@ import { ListVisitModule } from '../common-page/list-visit/list-visit.module';
     ListVisitModule,
     ListPatientModule,
     AddPatientModule,
-    AddPatientAndVisitModule
     
     
   ],

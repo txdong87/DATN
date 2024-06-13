@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PatientService } from 'src/app/services/patient.service';
-import { Constants } from 'src/app/constant/constants';
+import { Constants } from 'src/app/shared/constants/constants';
 @Component({
   selector: 'app-add-patient',
   templateUrl: './add-patient.component.html',

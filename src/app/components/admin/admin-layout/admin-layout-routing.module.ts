@@ -17,6 +17,14 @@ import { AdminPagesComponent } from '../admin-pages/admin-pages.component';
             loadChildren: () => import('../admin-pages/admin-pages.module').then((m) => m.AdminPagesModule),
           },
           {
+            path: 'list-user',
+            loadChildren: () => import('../list-user/list-user.module').then((m) => m.ListUserModule),
+          },
+          {
+            path: 'list-cdha',
+            loadChildren: () => import('../list-cdha/list-cdha.module').then((m) => m.ListCDHAModule),
+          }
+          {
             path: 'admin-dashboard',
             loadChildren: () => import('../list-medication/list-medication.module').then((m) => m.ListMedicationModule),
           },

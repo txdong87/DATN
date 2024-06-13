@@ -1,10 +1,11 @@
+
 import { DoctorService } from './../../../../services/doctor.service';
 import { PatientService } from 'src/app/services/patient.service';
 import { CaseStudyService } from 'src/app/services/case-study.service';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/shared/service/notification.service';
-import { Constants } from 'src/app/constant/constants';
+import { Constants } from 'src/app/shared/constants/constants';
 import { TabView } from 'primeng/tabview';
 import { MessageService } from 'primeng/api';
 @Component({
