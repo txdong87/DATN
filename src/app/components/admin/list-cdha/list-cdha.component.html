@@ -1,0 +1,60 @@
+<div class="grid">
+    <div class="col-12 p-0">
+        <div class="card admin-content m-0">
+          
+            <div class="my-2 flex flex-wrap">
+                <div class="flex justify-content-end align-items-center flex-1">
+                    <button pButton pRipple label="Thêm mới" icon="pi pi-plus" class="p-button-success p-button-sm"
+                        (click)="onCreateItem()"></button>
+                </div>
+            </div>
+            <m-table [isLazyLoad]="true" [totalRecords]="total" [cols]="cols" [items]="listCDHA"
+                (onDeleteItem)="onDelete($event)" (selectRow)="selectRow($event)" [dataKey]="'id'"
+                [customHeaderTemplate]="customHeaderTemplate" [customBodyTemplate]="customBodyTemplate"
+                [loading]="loading" class="table-admin" [calcHeight]="330"
+                ></m-table>
+
+            <ng-template #customHeaderTemplate>
+                <th *ngFor="let col of cols; let i = index" [style.minWidth]="col['width'] || '12rem'">
+                    {{col['header']}}
+                </th>
+                <!-- <th [style.minWidth]="'6rem'">Trạng thái</th> -->
+                <th [style.Width]="'6rem'" pFrozenColumn alignFrozen="right" class="flex c-center"> Action</th>
+            </ng-template>
+            <ng-template #customBodyTemplate let-rowData>
+                <td [style.minWidth]="col.width || '12rem'" *ngFor="let col of cols">
+                    <!-- {{ rowData[col["field"]] }} -->
+                    <ng-container [ngSwitch]="col.field">
+                        <ng-container *ngSwitchCase="'dob'">
+                            {{ rowData[col["field"]] | date:'dd/MM/yyyy'}}
+                        </ng-container>
+                        <ng-container *ngSwitchDefault>
+                            {{ rowData[col["field"]] }}
+                        </ng-container>
+                    </ng-container>
+                </td>
+                <!-- <td class="text-center flex justify-content-center" [style.minWidth]="'6rem'">
+                    <p-inputSwitch [(ngModel)]="rowData.isDisable" (onChange)="toggleEnable(rowData)"></p-inputSwitch>
+                </td> -->
+                <td [style.minWidth]="'6rem'" class="text-center flex justify-content-center " pFrozenColumn
+                    alignFrozen="right">
+                    <!-- <button pButton pRipple icon="pi pi-check"
+                        class="p-button-rounded p-button-warning p-button-outlined p-button-xs mr-2"
+                        (click)="onActive(rowData)"></button> -->
+                    <button pButton pRipple icon="pi pi-pencil"
+                        class="p-button-rounded   p-button-xs mr-2"
+                        (click)="onEdit(rowData)"></button>
+                        <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-success  p-button-xs mr-2"
+                        (click)="onDelete(rowData)"></button>
+                    <!-- <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text p-button-xs"
+                        (click)="onDeleteItem(rowData)"></button> -->
+                </td>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<!--
+<confirm-dialog [(visible)]="isVisibleDeleteItemDialog" [confirmText]="textConfirmDelete"
+    (onConfirm)="deleteTeacher()"></confirm-dialog> -->
+
+

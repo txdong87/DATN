@@ -10,14 +10,21 @@ export abstract class BaseService extends Service {
   search(data: any): Observable<any> {
     return this.post(`${this.url}/Search`, data);
   }
-  getAll(): Observable<any> {
-    return this.get(this.url);
+  getAll(params?: any): Observable<any> {
+    return this.get(this.url, params);
+  }
+  getAllEnable(params?: any): Observable<any> {
+    params = {...params,Disable:false}
+    return this.get(this.url, params);
   }
   getById(id: any): Observable<any> {
     return this.get(`${this.url}/${id}`);
   }
   create(data: any): Observable<any> {
     return this.post(this.url, data);
+  }
+  createEnableDefault(data: any): Observable<any> {
+    return this.post(this.url, {...data,Disable:false});
   }
   update(id: any, data: any): Observable<any> {
     return this.put(`${this.url}/${id}`, data);

@@ -23,7 +23,11 @@ import { AdminPagesComponent } from '../admin-pages/admin-pages.component';
           {
             path: 'list-cdha',
             loadChildren: () => import('../list-cdha/list-cdha.module').then((m) => m.ListCDHAModule),
-          }
+          },
+          {
+            path: 'list-medication',
+            loadChildren: () => import('../list-medication/list-medication.module').then((m) => m.ListMedicationModule),
+          },
           {
             path: 'admin-dashboard',
             loadChildren: () => import('../list-medication/list-medication.module').then((m) => m.ListMedicationModule),
