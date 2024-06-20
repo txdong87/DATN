@@ -6,7 +6,7 @@ import { BaseService } from 'src/app/services/base/base.service';
   providedIn: 'root'
 })
 export class UserService extends BaseService {
-  override url = '/api/User';
+  override url = '/api/Users';
   getUsers(): Observable<any[]> {
     return this.get(`${this.url}`);
   }

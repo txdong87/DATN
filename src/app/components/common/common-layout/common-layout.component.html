@@ -25,7 +25,7 @@
             <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
                 
                     <ul class="layout-menu" style="margin-top: 15px; padding: 10px 10px">
-                        <li *ngIf="hasRole('Nurse')" class="sideicon menu-item menu-item-flex" style="border-style: dashed; border-width: 0 0 1px 0; border-color: white" (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
+                        <li *ngIf="hasRole('nurse')" class="sideicon menu-item menu-item-flex" style="border-style: dashed; border-width: 0 0 1px 0; border-color: white" (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
                             <span>Danh sách ca khám</span>
                         </li>
                         <li *ngIf="hasRole('Doctor')" class="sideicon menu-item menu-item-flex" (click)="openNewTab('ListCaseStudy','Ca khám bác sĩ', 'extra')">

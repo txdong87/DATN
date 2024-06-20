@@ -49,7 +49,7 @@ export class CommonLayoutComponent implements OnInit {
       this.tabs = [
         { id: 'ListCaseStudy', name: 'Ca khám bác sĩ', tabType: 'main' },
       ];
-    } else if (this.role === 'Nurse') {
+    } else if (this.role === 'nurse') {
       this.tabs = [
         { id: 'ListVisit', name: 'Danh sách ca khám', tabType: 'main' },
         // { id: 'AddPatient', name: 'Thêm bệnh nhân', tabType: 'extra' },

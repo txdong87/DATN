@@ -74,31 +74,21 @@ export class ListUserComponent {
       // { field: 'action', header: 'Action',width: '15rem' },
     //   { field: 'email', header: 'Email', isOpSort: true, iconSort : 0, width: '50rem' },
     ];
-    // this.search();
+    this.search();
   }
 
-  // search() {
-  //   this.loading = true;
-  //   this.userService.getUsers(this.searchData).subscribe({
-  //     next: (res) => {
-  //       if (res.isValid) {
-  //         this.users = res.jsonData.data
-  //         this.total = res.jsonData.total;
-  //       }else{
-  //           if(res.errors && res.errors.length > 0){
-  //               res.errors.forEach((el: any) => {
-  //                   // this.notification.error(el.errorMessage)
-  //               })
-  //           }else{
-  //               // this.notification.error('Tìm kiếm không thành công')
-  //           }
-  //       }
-  //     },
-  //   })
-  //     .add(() => {
-  //       this.loading = false;
-  //     });
-  // }
+  search() {
+    this.loading = true;
+    this.userService.getUsers().subscribe({
+      next: (res) => {
+        console.log(res)
+        this.users=res
+      },
+    })
+      .add(() => {
+        this.loading = false;
+      });
+  }
 
   resetSearch() {
     this.searchData = {
@@ -123,8 +113,7 @@ export class ListUserComponent {
       fullName: '',
       username: '',
       password: '',
-      repass: '',
-      role:'Admin'
+      role:''
     });
     this.isVisibleUserDialog = true;
     this.userDialogHeader = 'Thêm tài khoản mới';

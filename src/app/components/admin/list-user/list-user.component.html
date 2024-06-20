@@ -27,14 +27,14 @@
           [totalRecords]="total" [dataKey]="'id'" [loading]="loading" class="table-admin"> </m-table>
         <ng-template #customHeaderTemplate>
           <th *ngFor="let col of cols; let i = index">{{ col['header'] }}</th>
-          <th [style.maxWidth]="'10%'" class="flex c-center">Action</th>
+          <th  class="flex c-center">Action</th>
           <!-- <th   pFrozenColumn alignFrozen="right" class="flex c-center">Action</th> -->
         </ng-template>
         <ng-template #customBodyTemplate let-rowData>
           <td [style.minWidth]="col.width" *ngFor="let col of cols">
             {{ rowData[col['field']] }}
           </td>
-          <td [style.maxWidth]="'10%'" class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
+          <td  class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
             <!-- <button pButton pRipple icon="pi pi-check"
               class="p-button-rounded p-button-warning p-button-outlined p-button-xs mr-2"
               (click)="onActive(rowData)"></button> -->
