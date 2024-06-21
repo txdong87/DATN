@@ -9,6 +9,7 @@ import { MTableModule } from 'src/app/shared/component/m-table/m-table.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListUserRoutingModule } from './list-user.routing.module';
 import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
@@ -24,6 +25,7 @@ import { ButtonModule } from 'primeng/button';
     MTableModule,
     FormsModule,
     ButtonModule,
+    DropdownModule,
     ReactiveFormsModule,
     ListUserRoutingModule
   ]

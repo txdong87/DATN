@@ -5,7 +5,7 @@ import { PatientService } from 'src/app/services/patient.service';
 import { CaseStudyService } from 'src/app/services/case-study.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotificationService } from 'src/app/shared/service/notification.service';
+import { NotificationService } from 'src/app/shared/notification.service';
 import { TabView } from 'primeng/tabview';
 import { MessageService } from 'primeng/api';
 
