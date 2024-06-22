@@ -128,20 +128,20 @@ export class ListVisitComponent {
   })
   }
   getListDoctor(){
-    this.doctorService.getDoctors().subscribe((res: any) => {
+    this.doctorService.getAll().subscribe((res: any) => {
       this.listDoctor=res.data;
       console.log(res)
   })
   }
   addPatient(){
     if (this.patientForm.invalid) {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Closable Message Content' },);
+      this.notification.error('Nhập đủ các trường bệnh nhân', '');
       return;
     }
     this.patientService.create({ ...this.patientForm.value}).subscribe({
       next: (res) => {
         this.newPatient=res.data
-        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+        this.notification.success('Thêm mới bệnh nhân thành công', '');
         this.activeTabIndex = 1;
         console.log(this.activeTabIndex)
         // this.patientAdded.emit(res);

@@ -1,6 +1,6 @@
 
 <div class="list-visit-content h-full w-full worklist-container">
-  <as-split *ngIf="layout" direction="horizontal">
+  <as-split *ngIf="layout" direction="horizontal" style="height: 700px;" >
     <as-split-area *ngIf="layout.columns[0].visible" [size]="layout.columns[0].size"
       class="h-full w-full worklist-container">
       <ng-container *ngTemplateOutlet="containerLeft"></ng-container>
@@ -110,12 +110,12 @@
           <div class="field pb-0 col-6 pl-0 pr-2">
             <p-dropdown [options]="listDoctor" formControlName="doctor" optionLabel="doctorName" optionValue="doctorId"
               placeholder="Chọn bác sĩ" [showClear]="true" [style]="{ width: '100%' }"></p-dropdown>
-            <div class="m-error" *ngIf="
+            <!-- <div class="m-error" *ngIf="
                 formAddVisit.controls['doctor'].invalid &&
                 formAddVisit.controls['doctor'].dirty
               ">
               <span>Vui lòng chọn bác sĩ</span>
-            </div>
+            </div> -->
           </div>
           <div class="field pb-0 col-6 pl-0 pr-2">
             <input class="w-full p-inputtext-sm text-base" pInputText formControlName="diagnostic"

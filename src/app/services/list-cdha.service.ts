@@ -7,13 +7,13 @@ import { BaseService } from 'src/app/services/base/base.service';
 })
 export class ListCdhaService extends BaseService {
   override url = '/api/CDHA';
-  getPatients(): Observable<any[]> {
+  getCDHA(): Observable<any[]> {
     return this.get(`${this.url}`);
   }
-  getPatientById(patientId: string): Observable<any> {
-    return this.get(`${this.url}/${patientId}`);
-  }
-  override deleteById(id: any): Observable<any> {
-      return this.delete(`${this.url}`,id);
-  }
+  // getPatientById(patientId: string): Observable<any> {
+  //   return this.get(`${this.url}/${patientId}`);
+  // }
+  // override deleteById(id: any): Observable<any> {
+  //     return this.delete(`${this.url}`,id);
+  // }
 }

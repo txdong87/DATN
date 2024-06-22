@@ -39,7 +39,13 @@ export class LoginComponent implements OnInit {
         console.log(res)
         localStorage.setItem('authToken', res.token);
         localStorage.setItem('role', res.role);
+        if(res.role==="Admin"){
+          console.log(res)
+          this.router.navigate(['/admin']);
+        }else{
+          console.log(res)
         this.router.navigate(['/common/page']);
+        }
       },
       (error: any) => {
         console.log(error);

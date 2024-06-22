@@ -158,6 +158,7 @@ export class ListUserComponent {
     this.userService.addUser(payload).subscribe({
       next: (res) => {
         if (res.isSuccess) {
+          console.log(1)
           this.notification.success('Thêm mới user thành công', '');
           this.isVisibleUserDialog = false;
           this.search();
@@ -183,16 +184,16 @@ export class ListUserComponent {
     this.userService.deleteById(this.deleteUserId).subscribe({
       next: (res) => {
         if (res.isValid) {
-          // this.notification.success('Delete User thành công', '');
+          this.notification.success('Delete User thành công', '');
           this.isVisibleDeleteUserDialog = false;
           // this.search();
         } else {
           if (res.errors && res.errors.length > 0) {
             res.errors.forEach((el: any) => {
-              // this.notification.error(el.errorMessage)
+              this.notification.error(el.errorMessage)
             })
           } else {
-            // this.notification.error('Delete User không thành công')
+            this.notification.error('Delete User không thành công')
           }
         }
       }

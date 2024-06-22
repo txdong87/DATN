@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 import { AppConfig } from './models/app.config';
 import { AppConfigService } from './shared/app-config.service';
+import { NotificationModule } from './shared/component/notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppConfigService } from './shared/app-config.service';
     AppLayoutModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NotificationModule
     
   ],
   providers: [MessageService,AppConfigService],

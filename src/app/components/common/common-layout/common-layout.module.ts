@@ -15,6 +15,7 @@ import { ListPatientModule } from '../common-page/list-patient/list-patient.modu
 import { ListCaseStudyModule } from '../common-page/list-case-study/list-case-study.module';
 import {  AddPatientModule } from '../common-page/add-patient/add-patient.module';
 import { ListVisitModule } from '../common-page/list-visit/list-visit.module';
+import { NotificationModule } from 'src/app/shared/component/notification/notification.module';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
@@ -34,7 +35,7 @@ import { ListVisitModule } from '../common-page/list-visit/list-visit.module';
     ListVisitModule,
     ListPatientModule,
     AddPatientModule,
-    
+    NotificationModule
     
   ],
   exports: []
