@@ -21,7 +21,6 @@ import { ListCaseStudyComponent } from './list-case-study/list-case-study.compon
 import { PanelModule } from 'primeng/panel';
 import { CaseStudyDetailComponent } from './list-case-study/case-study-detail/case-study-detail.component';
 import { MenuModule } from 'primeng/menu';
-import { ListPatientModule } from './list-patient/list-patient.module';
 import { AddPatientModule } from './add-patient/add-patient.module';
 import { ListVisitModule } from './list-visit/list-visit.module';
 import { AddPatientComponent } from './add-patient/add-patient.component';
@@ -35,7 +34,6 @@ import { AddPatientComponent } from './add-patient/add-patient.component';
   imports: [
     ListVisitModule,
     ListCaseStudyModule,
-    ListPatientModule,
     AddPatientModule,
     AngularSplitModule,
     CommonPageRoutingModule,

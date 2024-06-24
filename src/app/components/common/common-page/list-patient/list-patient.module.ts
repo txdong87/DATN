@@ -6,8 +6,6 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { PatientTableModule } from '../patient-table/patient-table.module';
 
-
-
 @NgModule({
   declarations: [ListPatientComponent],
   imports: [
