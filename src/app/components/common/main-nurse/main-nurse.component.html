@@ -1,0 +1,172 @@
+
+<div class="list-visit-content h-full w-full worklist-container">
+    <as-split *ngIf="layout" direction="horizontal" style="height: 700px;" >
+      <as-split-area *ngIf="layout.columns[0].visible" [size]="layout.columns[0].size"
+        class="h-full w-full worklist-container">
+        <ng-container *ngTemplateOutlet="containerLeft"></ng-container>
+      </as-split-area>
+      <as-split-area *ngIf="layout.columns[1].visible" [size]="layout.columns[1].size">
+        <ng-container *ngTemplateOutlet="containerRight"></ng-container>
+      </as-split-area>
+    </as-split>
+  </div>
+  
+  <ng-template pTemplate="content" class="h-full w-full worklist-container" #containerLeft>
+    <p-tabView [(activeIndex)]="activeTabIndex" class="h-full w-full worklist-container">
+      <p-tabPanel header="Tab 1">
+        <div class="h-full w-full worklist-container" direction="vertical" [formGroup]="patientForm">
+          <div class="grid mx-0 p-1">
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <input formControlName="patientName" pInputText type="text" placeholder="Tên bệnh nhân*"
+                class="w-full p-inputtext-sm text-base" />
+              <div class="m-error" *ngIf="
+                  patientForm.controls['patientName'].invalid &&
+                  patientForm.controls['patientName'].dirty
+                ">
+                *Tên bệnh nhân không được để trống
+              </div>
+            </div>
+            <div class="field pb-0 col-6 pl-2 pr-0">
+              <input formControlName="patientCode" pInputText type="text" placeholder="Mã bệnh nhân*"
+                class="w-full p-inputtext-sm text-base" />
+              <div class="m-error" *ngIf="
+                  patientForm.controls['patientCode'].invalid &&
+                  patientForm.controls['patientCode'].dirty
+                ">
+                *Mã bệnh nhân không được để trống
+              </div>
+            </div>
+            <div class="field py-0 col-4 pl-0 pr-2">
+              <p-dropdown formControlName="sex" optionLabel="label" optionValue="value" [options]="GENDERS"
+                placeholder="Giới tính*" [showClear]="true" [ngStyle]="{ width: '100%' }">
+              </p-dropdown>
+              <div class="m-error" *ngIf="
+                  patientForm.controls['sex'].invalid &&
+                  patientForm.controls['sex'].dirty
+                ">
+                *Giới tính không được để trống
+              </div>
+            </div>
+            <div class="field py-0 col-4 pl-2">
+              <p-calendar formControlName="dob" placeholder="Ngày tháng năm sinh*" [style]="{ position: 'relative' }"
+                [showIcon]="true" [showOnFocus]="false" inputId="buttondisplay" />
+  
+              <div class="m-error" *ngIf="
+                  patientForm.controls['dob'].invalid &&
+                  patientForm.controls['dob'].dirty
+                ">
+                *Năm sinh không được để trống
+              </div>
+            </div>
+            <div class="field py-0 col-4 pl-0 pr-0">
+              <input formControlName="phone" pInputText type="text" placeholder="Số điện thoại"
+                class="w-full p-inputtext-sm text-base" />
+            </div>
+            <div class="field py-0 col-12 pl-0 pr-0">
+              <input formControlName="address" pInputText type="text" placeholder="Địa chỉ"
+                class="w-full p-inputtext-sm text-base" />
+            </div>
+          </div>
+          <div class="col-4 pr-0 pl-2 pb-0">
+            <button pButton pRipple label="Thêm bệnh nhân" icon="pi pi-plus" class="bg-green-500 p-button-sm"
+              (click)="addPatient()"></button>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Tab 2">
+        <div class="heading-1" *ngIf="newPatient">
+          <a class="visit-title">
+            <span style="font-size: 21px; color: #25b396; font-weight: 700">{{
+              newPatient.patientName
+              }}</span>
+            <span class="fs-18">
+              - {{ convertISODateToNormalDate(newPatient.dob) }}, -
+              {{ newPatient.patientCode }}
+            </span>
+          </a>
+        </div>
+        <div class="patient-info-container overflow-auto" [formGroup]="formAddVisit">
+          <div class="grid mx-0 p-1">
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <input class="w-full p-inputtext-sm text-base" pInputText formControlName="reason" placeholder="Lý do khám"
+                required autofocus #nextTab />
+              <div class="m-error" *ngIf="
+                  formAddVisit.controls['reason'].invalid &&
+                  formAddVisit.controls['reason'].dirty
+                ">
+                <span>Bạn chưa nhập lý do khám</span>
+              </div>
+            </div>
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <p-calendar class="w-full p-inputtext-sm text-base" formControlName="createDate" [showTime]="true"
+                [showIcon]="true" appendTo="body" placeholder="Thời gian tạo*" [dateFormat]="'dd/mm/yy'"></p-calendar>
+              <div class="m-error" *ngIf="
+                  formAddVisit.controls['createDate'].invalid &&
+                  formAddVisit.controls['createDate'].dirty
+                ">
+                <span>Bạn chưa nhập ngày khám</span>
+              </div>
+            </div>
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <p-dropdown [options]="listDoctor" formControlName="doctor" optionLabel="doctorName" optionValue="doctorId"
+                placeholder="Chọn bác sĩ" [showClear]="true" [style]="{ width: '100%' }"></p-dropdown>
+              <!-- <div class="m-error" *ngIf="
+                  formAddVisit.controls['doctor'].invalid &&
+                  formAddVisit.controls['doctor'].dirty
+                ">
+                <span>Vui lòng chọn bác sĩ</span>
+              </div> -->
+            </div>
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <input class="w-full p-inputtext-sm text-base" pInputText formControlName="diagnostic"
+                placeholder="Chẩn đoán ban đầu" required autofocus #nextTab />
+              <div class="m-error" *ngIf="
+                  formAddVisit.controls['diagnostic'].invalid &&
+                  formAddVisit.controls['diagnostic'].dirty
+                ">
+                <span>Bạn chưa nhập chẩn đoán ban đầu</span>
+              </div>
+            </div>
+            <div class="field pb-0 col-6 pl-0 pr-2">
+              <input class="w-full p-inputtext-sm text-base" pInputText formControlName="status" placeholder="Trạng thái"
+                required autofocus #nextTab />
+              <div class="m-error" *ngIf="
+                  formAddVisit.controls['status'].invalid &&
+                  formAddVisit.controls['status'].dirty
+                ">
+                <span>Bạn chưa nhập trạng thái</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 pr-0 pl-2 pb-0">
+            <button pButton pRipple label="Thêm ca khám" icon="pi pi-plus" class="bg-green-500 p-button-sm"
+              (click)="addCaseStudy()"></button>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Lưu" icon="pi pi-save" class="p-button-text" (click)="onSave()"></button>
+  </ng-template>
+  <ng-template pTemplate="content" #containerRight>
+    <p-table [value]="caseStudy" [columns]="cols" [resizableColumns]="true" styleClass="p-datatable-gridlines"
+      [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+  
+  <ng-template #containerRight>34123432</ng-template>

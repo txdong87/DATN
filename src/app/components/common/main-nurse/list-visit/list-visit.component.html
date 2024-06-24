@@ -142,60 +142,6 @@
           <button pButton pRipple label="Thêm ca khám" icon="pi pi-plus" class="bg-green-500 p-button-sm"
             (click)="addCaseStudy()"></button>
         </div>
-
-        <!-- <div class="row-form">
-          <div class="cursor-pointer mg-bt-10" (click)="vitalInfoCollapse()">
-            Thông tin sinh tồn
-            <i class="mgl10" [ngClass]="{
-                'pi pi-caret-down': vitalSignCollapse,
-                'pi pi-caret-right': !vitalSignCollapse
-              }"></i>
-          </div>
-          <div *ngIf="vitalSignCollapse">
-            <div class="vital-sign-info">
-              <div class="vital-sign-row">
-                <div class="col-12 vital-sign-col">
-                  <div class="label">Mạch</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="heartBeat"
-                    type="number" placeholder="lần/phút" />
-                </div>
-              </div>
-              <div class="vital-sign-row row">
-                <div class="col-6 vital-sign-col">
-                  <div class="label">Nhiệt độ</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="temperature"
-                    type="number" placeholder="Nhiệt độ" />
-                </div>
-                <div class="col-6 vital-sign-col">
-                  <div class="label">SpO2</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="spo2"
-                    type="number" placeholder="SpO2" />
-                </div>
-              </div>
-              <div class="vital-sign-row">
-                <div class="col-12 vital-sign-col">
-                  <div class="label">Huyết áp</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab class="w-100px mgr10" pInputText
-                    formControlName="bloodPressureMax" type="number" placeholder="max" />
-                  <input class="w-full p-inputtext-sm text-base" #nextTab class="w-100px mgl10" pInputText
-                    formControlName="bloodPressureMin" type="number" placeholder="min" />
-                </div>
-              </div>
-              <div class="vital-sign-row row">
-                <div class="col-6 vital-sign-col">
-                  <div class="label">Chiều cao</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="height"
-                    type="number" placeholder="cm" />
-                </div>
-                <div class="col-6 vital-sign-col">
-                  <div class="label">Cân nặng</div>
-                  <input class="w-full p-inputtext-sm text-base" #nextTab pInputText formControlName="weight"
-                    type="number" placeholder="kg" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </p-tabPanel>
   </p-tabView>

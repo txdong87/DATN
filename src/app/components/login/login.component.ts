@@ -40,11 +40,13 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('authToken', res.token);
         localStorage.setItem('role', res.role);
         if(res.role==="Admin"){
-          console.log(res)
           this.router.navigate(['/admin']);
-        }else{
-          console.log(res)
-        this.router.navigate(['/common/page']);
+        }else if(res.role==="Doctor"){
+        this.router.navigate(['/common/doctor']);
+        } else if(res.role==="Nurse"){
+          this.router.navigate(['/common/main-nurse']);
+        }else {
+          this.router.navigate(['/common/ktv']);
         }
       },
       (error: any) => {

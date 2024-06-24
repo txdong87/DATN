@@ -119,7 +119,7 @@ export class ListVisitComponent {
     if (changes['newPatient'] && changes['newPatient'].currentValue) {
       const newPatient = changes['newPatient'].currentValue;
       console.log('New patient received:', newPatient);
-      this.caseStudy.push(newPatient); // Giả sử bạn thêm bệnh nhân mới vào danh sách thăm khám
+      this.caseStudy.push(newPatient); 
     }
   }
   getListPatient(){

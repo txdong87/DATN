@@ -4,7 +4,7 @@ import { ListPatientComponent } from './list-patient.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
-import { PatientTableModule } from '../patient-table/patient-table.module';
+import { PatientTableModule } from '../../common-layout/patient-table/patient-table.module';
 
 @NgModule({
   declarations: [ListPatientComponent],

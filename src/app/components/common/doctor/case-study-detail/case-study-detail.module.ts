@@ -4,7 +4,7 @@ import { CaseStudyDetailComponent } from './case-study-detail.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
-import { AddClsModule } from '../../add-cls/add-cls.module';
+import { AddClsModule } from '../add-cls/add-cls.module';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 

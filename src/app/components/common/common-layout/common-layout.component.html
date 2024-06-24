@@ -25,11 +25,14 @@
             <aside class="aside" [ngClass]="{ expanding: isExpanding }" #asideElement>
                 
                     <ul class="layout-menu" style="margin-top: 15px; padding: 10px 10px">
-                        <li *ngIf="hasRole('Nurse') "  class="sideicon menu-item menu-item-flex" style="border-style: dashed; border-width: 0 0 1px 0; border-color: white" (click)="openNewTab('ListVisit', 'Danh sách ca khám', 'main')">
+                        <li *ngIf="hasRole('Nurse') "  class="sideicon menu-item menu-item-flex" style="border-style: dashed; border-width: 0 0 1px 0; border-color: white" (click)="openNewTab('Nurse', 'Danh sách ca khám', 'main')">
                             <span>Danh sách ca khám</span>
                         </li>
-                        <li *ngIf="hasRole('Doctor')" class="sideicon menu-item menu-item-flex" (click)="openNewTab('ListCaseStudy','Ca khám bác sĩ', 'extra')">
+                        <li *ngIf="hasRole('Doctor')" class="sideicon menu-item menu-item-flex" (click)="openNewTab('Doctor','Ca khám bác sĩ', 'extra')">
                             <span>Ca khám bác sĩ</span>
+                        </li>
+                        <li *ngIf="hasRole('KTV')" class="sideicon menu-item menu-item-flex" (click)="openNewTab('KTV','Danh mục chỉ định', 'extra')">
+                            <span>Danh mục chỉ định</span>
                         </li>
                     </ul>
             </aside>
@@ -50,17 +53,14 @@
                             </span>
                         </div>
                     </ng-template>
-                    <div class="h-full w-full worklist-container" *ngIf="tab.id == 'ListVisit'">
-                        <app-list-visit ></app-list-visit>
+                    <div class="h-full w-full worklist-container" *ngIf="tab.id == 'Nurse'">
+                        <app-main-nurse ></app-main-nurse>
                     </div>
-                    <div *ngIf="tab.id == 'AddPatient'">
-                        <app-add-patient (patientAdded)="onPatientAdded($event)"></app-add-patient>
+                    <div *ngIf="tab.id == 'KTV'">
+                        <app-ktv></app-ktv>
                     </div>
-                    <!-- <div *ngIf="tab.id == 'ListPatient'">
-                        <app-list-patient></app-list-patient>
-                    </div> -->
-                    <div *ngIf="tab.id == 'ListCaseStudy'">
-                        <app-list-case-study></app-list-case-study>
+                    <div *ngIf="tab.id == 'Doctor'">
+                        <app-doctor></app-doctor>
                     </div>
                 </p-tabPanel>
             </p-tabView>

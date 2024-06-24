@@ -3,11 +3,11 @@ import { IlayoutConfig } from 'src/app/models/ilayout-config';
 import { SearchVisitSmall } from 'src/app/models/listVisit.class';
 
 @Component({
-  selector: 'app-list-case-study',
-  templateUrl: './list-case-study.component.html',
-  styleUrl: './list-case-study.component.css'
+  selector: 'app-doctor',
+  templateUrl: './doctor.component.html',
+  styleUrl: './doctor.component.css'
 })
-export class ListCaseStudyComponent {
+export class DoctorComponent {
   isLoading = false;
   indexTab = 0;
   // config: IlayoutConfig = null;

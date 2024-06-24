@@ -37,14 +37,6 @@ import { AuthGuard } from './services/auth-guard';
                         ).then((m) => m.CommonLayoutModule),
                     canActivate: [AuthGuard],
                 },
-                {
-                    path: 'ktv',
-                    loadChildren: () =>
-                        import(
-                            './components/ktv/ktv-layout/ktv-layout.module'
-                        ).then((m) => m.KTVLayoutModule),
-                    // canActivate: [AuthGuard],
-                },
                 { path: '**', redirectTo: '404' },
             ],
             {

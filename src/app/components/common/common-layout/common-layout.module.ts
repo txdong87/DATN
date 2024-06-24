@@ -7,15 +7,13 @@ import { RouterModule } from '@angular/router';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainWorkComponent } from '../common-page/main-work/main-work.component';
-import { CommonPageModule } from '../common-page/common-page.module';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
 import { TabView, TabViewModule } from 'primeng/tabview';
-import { ListPatientModule } from '../common-page/list-patient/list-patient.module';
-import { ListCaseStudyModule } from '../common-page/list-case-study/list-case-study.module';
-import {  AddPatientModule } from '../common-page/add-patient/add-patient.module';
-import { ListVisitModule } from '../common-page/list-visit/list-visit.module';
+import { ListPatientModule } from '../ktv/list-patient/list-patient.module';
+import { DoctorModule } from '../doctor/doctor.module';
 import { NotificationModule } from 'src/app/shared/component/notification/notification.module';
+import { MainNurseModule } from '../main-nurse/main-nurse.module';
+import { KTVModule } from '../ktv/ktv.module';
 @NgModule({
   declarations: [
     CommonLayoutComponent,
@@ -31,10 +29,10 @@ import { NotificationModule } from 'src/app/shared/component/notification/notifi
     SidebarModule,
     ButtonModule,
     TabViewModule,
-    ListCaseStudyModule,
-    ListVisitModule,
+    DoctorModule,
+    MainNurseModule,
+    KTVModule,
     ListPatientModule,
-    AddPatientModule,
     NotificationModule
     
   ],
