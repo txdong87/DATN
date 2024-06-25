@@ -26,7 +26,7 @@ import { AuthGuard } from './services/auth-guard';
                         import(
                            './components/admin/admin-layout/app.layout.module'
                         ).then((m) => m.AppLayoutModule),
-                    // canActivate: [AuthGuard],
+                    canActivate: [AuthGuard],
                     // data: { role: Roles.ADMIN },
                 },
                 {
@@ -35,7 +35,7 @@ import { AuthGuard } from './services/auth-guard';
                         import(
                             './components/common/common-layout/common-layout.module'
                         ).then((m) => m.CommonLayoutModule),
-                    canActivate: [AuthGuard],
+                    // canActivate: [AuthGuard],
                 },
                 { path: '**', redirectTo: '404' },
             ],

@@ -9,7 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabDataService } from 'src/app/services/base/tab-data.service';
 import { TabView, TabViewModule } from 'primeng/tabview';
-import { ListPatientModule } from '../ktv/list-patient/list-patient.module';
+
 import { DoctorModule } from '../doctor/doctor.module';
 import { NotificationModule } from 'src/app/shared/component/notification/notification.module';
 import { MainNurseModule } from '../main-nurse/main-nurse.module';
@@ -32,7 +32,6 @@ import { KTVModule } from '../ktv/ktv.module';
     DoctorModule,
     MainNurseModule,
     KTVModule,
-    ListPatientModule,
     NotificationModule
     
   ],

@@ -12,7 +12,7 @@ export class AuthService extends BaseService {
  
   // public isLoggedIn: boolean = false;
   isLoggedIn(): boolean {
-    return true
+    return false
   }
   login(payload: any): Observable<any> {
     return this.post('/api/Auth/Login', payload).pipe(
