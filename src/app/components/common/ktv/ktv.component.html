@@ -20,15 +20,13 @@ sadfsdf
           <button pButton pRipple type="button" icon="pi pi-delete-left"
             class="flex-none ml-2 text-2xl p-button-danger font-bold p-button-rounded" (click)="onResetSearchData()"
             title="Xóa lọc"></button>
-          <!-- <button [loading]="loadingExport" (click)="showCustomExeclCols()"
-                  pButton pRipple type="button" icon="pi pi-download" title="Xuất báo cáo"
-                  class="flex-none text-xl ml-2 font-bold p-button-rounded p-buton-primary"></button> -->
           <button pButton pRipple label="Thêm ca bệnh" icon="pi pi-plus"
             class="flex-none xl:ml-4 sm:ml-2 p-button p-button-rounded" (click)="onCreateCaseStudy()"></button>
         </div>
       </div>
       <div class="col-12 py-0 px-3 w-full ">
-        <app-patient-table>  </app-patient-table>
+        <app-perform-cdha></app-perform-cdha>
+        <!-- <app-patient-table>  </app-patient-table> -->
       </div>
     </div>
   </div>

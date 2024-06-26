@@ -1,8 +1,10 @@
+import { MessageService ,PrimeNGConfig} from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { FormGroup, FormBuilder, Validators ,FormControl} from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-perform-cdha',
@@ -10,7 +12,6 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./perform-cdha.component.css']
 })
 export class PerformCDHAComponent implements OnInit {
-  // reportForm: FormGroup;
   patientInformation:FormGroup
   procedure:FormGroup
   public showWebcam = true;
@@ -21,20 +22,23 @@ export class PerformCDHAComponent implements OnInit {
   public videoHeight = 480;
   public errors: WebcamInitError[] = [];
   options: any = []
-
-  // latest snapshot
+  selectedPatient:any
   public webcamImage: WebcamImage | undefined;
-  // array to store captured images
   public capturedImages: WebcamImage[] = [];
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
-  // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
+
+  files = [];
+  totalSize : number = 0;
+  totalSizePercent : number = 0;
   constructor(
     private fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private messageService:MessageService,
+    private config: PrimeNGConfig
   ) {
     this.patientInformation=this.fb.group({
           name: ['', Validators.required],
@@ -125,4 +129,32 @@ export class PerformCDHAComponent implements OnInit {
   public get nextWebcamObservable(): Observable<boolean | string> {
     return this.nextWebcam.asObservable();
   }
+
+  //imamge 
+
+  onRemoveTemplatingFile(event:any, file:any, removeFileCallback:any, index:any) {
+    removeFileCallback(event, index);
+    this.totalSizePercent = this.totalSize / 10;
+  }
+  onClearTemplatingUpload(clear:any) {
+    clear();
+    this.totalSize = 0;
+    this.totalSizePercent = 0;
+}
+
+onTemplatedUpload() {
+    this.messageService.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+}
+
+onSelectedFiles(event:any) {
+    this.files = event.currentFiles;
+    this.totalSizePercent = this.totalSize / 10;
+}
+
+uploadEvent(callback:any) {
+    callback();
+}
+choose(event:any, callback:any) {
+  callback();
+}
 }

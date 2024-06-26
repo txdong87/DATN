@@ -7,8 +7,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
-
-
+import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [PerformCDHAComponent],
@@ -17,11 +20,15 @@ import { ButtonModule } from 'primeng/button';
     WebcamModule,
     ReactiveFormsModule,
     FormsModule,
- 
+    CalendarModule,
     DropdownModule,
     InputTextModule,
     InputNumberModule,
-    ButtonModule
+    ButtonModule,
+    AutoCompleteModule,
+    InputTextareaModule,
+    FileUploadModule,
+    BadgeModule
     
   ],
   exports:[

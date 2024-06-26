@@ -47,13 +47,15 @@ export class CommonLayoutComponent implements OnInit {
   setMainTab() {
     if (this.role === 'Doctor' || this.role==='Admin') {
       this.tabs = [
-        { id: 'ListCaseStudy', name: 'Ca khám bác sĩ', tabType: 'main' },
+        { id: 'Doctor', name: 'Ca khám bác sĩ', tabType: 'main' },
       ];
     } else if (this.role === 'Nurse'|| this.role==='Admin') {
       this.tabs = [
-        { id: 'ListVisit', name: 'Danh sách ca khám', tabType: 'main' },
-        // { id: 'AddPatient', name: 'Thêm bệnh nhân', tabType: 'extra' },
-        // { id: 'ListPatient', name: 'Danh sách bệnh nhân', tabType: 'extra' },
+        { id: 'Nurse', name: 'Danh sách ca khám', tabType: 'main' },
+      ];
+    } else if (this.role === 'KTV'|| this.role==='Admin') {
+      this.tabs = [
+        { id: 'KTV', name: 'Danh mục chỉ định', tabType: 'main' },
       ];
     }
     this.indexTab = 0;
