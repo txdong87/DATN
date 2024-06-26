@@ -4,19 +4,21 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { PatientTableModule } from '../../common-layout/patient-table/patient-table.module';
-import { ListCDHAComponent } from 'src/app/components/admin/list-cdha/list-cdha.component';
+import { TableModule } from 'primeng/table';
+import { CdhaActiveComponent } from './cdha-active.component';
 
 @NgModule({
-  declarations: [ListCDHAComponent],
+  declarations: [CdhaActiveComponent],
   imports: [
     CommonModule,
     ContextMenuModule,
     CalendarModule,
+    TableModule,
     FormsModule,
     PatientTableModule
   ],
   exports: [
-    ListCDHAComponent,
+    CdhaActiveComponent,
   ]
 })
-export class ListCDHAModule { }
+export class CdhaActiveModule { }

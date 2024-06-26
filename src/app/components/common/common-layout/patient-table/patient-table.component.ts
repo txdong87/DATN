@@ -99,10 +99,8 @@ export class PatientTableComponent implements OnInit {
   }
 
   onColumnClick(event: MouseEvent,data:any) {
-    // Ngăn chặn sự kiện nhấp vào cột kích hoạt sự kiện nhấp vào hàng
     event.stopPropagation();
    console.log(event,data)
    this.onSelectCaseStudy.emit(data);
-    // Xử lý logic khi nhấp vào cột
   }
 }

@@ -83,10 +83,11 @@ export class PerformCDHAComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    WebcamUtil.getAvailableVideoInputs().then((mediaDevices: MediaDeviceInfo[]) => {
-      this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-      this.cdr.detectChanges(); // Manually trigger change detection
-    });
+    this.initializeWebcam();
+    // WebcamUtil.getAvailableVideoInputs().then((mediaDevices: MediaDeviceInfo[]) => {
+    //   this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+    //   this.cdr.detectChanges(); // Manually trigger change detection
+    // });
   }
 
   public triggerSnapshot(): void {
@@ -94,10 +95,30 @@ export class PerformCDHAComponent implements OnInit {
   }
 
   public toggleWebcam(): void {
-   
     this.showWebcam = !this.showWebcam;
-    console.log(this.showWebcam )
+    if (this.showWebcam) {
+        this.initializeWebcam();
+    }else {
+      this.stopWebcamStream();
   }
+}
+
+private initializeWebcam(): void {
+    WebcamUtil.getAvailableVideoInputs().then((mediaDevices: MediaDeviceInfo[]) => {
+        this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+        this.cdr.detectChanges(); // Manually trigger change detection
+    });
+}
+
+private stopWebcamStream(): void {
+    const videoElement = document.querySelector('video');
+    if (videoElement && videoElement.srcObject) {
+        const stream = videoElement.srcObject as MediaStream;
+        const tracks = stream.getTracks();
+        tracks.forEach(track => track.stop());
+        videoElement.srcObject = null;
+    }
+}
 
   public handleInitError(error: WebcamInitError): void {
     this.errors.push(error);

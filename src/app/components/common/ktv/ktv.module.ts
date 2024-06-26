@@ -6,6 +6,7 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { PatientTableModule } from '../common-layout/patient-table/patient-table.module';
+import { CdhaActiveModule } from './cdha-active/cdha-active.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PatientTableModule } from '../common-layout/patient-table/patient-table
         ContextMenuModule,
         CalendarModule,
         FormsModule,
-        PatientTableModule
+        PatientTableModule,
+        CdhaActiveModule
     ],
     exports:[
         KTVComponent

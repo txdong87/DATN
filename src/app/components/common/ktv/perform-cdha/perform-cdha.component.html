@@ -1,7 +1,7 @@
 <div class="container">
   <div class="webcam-capture">
     <h2>Chụp ảnh webcam</h2>
-    <div class="webcam-container">
+    <div class="webcam-container" *ngIf="showWebcam">
       <webcam #webcam [height]="videoHeight" [width]="videoWidth" [trigger]="triggerObservable"
               [switchCamera]="nextWebcamObservable" (imageCapture)="handleImage($event)"
               (initError)="handleInitError($event)">
@@ -20,7 +20,6 @@
       </div>
     </div>
   </div>
-
   <div class="report">
     <div class="report-header">
       <h2>Báo cáo kết quả bệnh án</h2>
