@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('role', res.role);
         if(res.role==="Admin"){
           this.router.navigate(['/admin']);
+          console.log(1)
         }else if(res.role==="Doctor"){
         this.router.navigate(['/common/doctor']);
         } else if(res.role==="Nurse"){

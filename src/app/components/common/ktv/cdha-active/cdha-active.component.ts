@@ -1,26 +1,30 @@
+import { ListCdhaService } from 'src/app/services/list-cdha.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-
+import { CDHACaseStudyService } from 'src/app/services/cdha-case-study.service';
+import { SearchCaseStudy,INIT_SEARCH_CASE_STUDY, } from 'src/app/models/search-case-study';
 
 @Component({
   selector: 'app-cdha-active',
   templateUrl: './cdha-active.component.html',
-  styleUrls: ['./cdha-active.component.css'] // Chú ý đến s ở cuối là styleUrls
+  styleUrls: ['./cdha-active.component.css'] 
 })
 export class CdhaActiveComponent implements OnInit {
-  totalCaseStudies: any;
-  selectedCaseStudy: any = {};
-  caseStudies: any[] = [];
+  searchData: SearchCaseStudy = structuredClone(INIT_SEARCH_CASE_STUDY);
+  totalCaseStudies:any
+  listCDHA=[]
   cols: any[] = [];
   clickTimer: any;
   actions: MenuItem[] = [];
   loading = false;
   patients: any[] = [];
   cdha: any;
+  total = 0;
+  selectedCaseStudy:any
+  selectedRow: any = {};
+  @Output() onSelectCdha = new EventEmitter<any>();
 
-  @Output() onSelectCaseStudy = new EventEmitter<any>();
-
-  constructor() {}
+  constructor(private cdhaService:CDHACaseStudyService) {}
 
   ngOnInit() {
     this.getListCDHA();
@@ -28,59 +32,60 @@ export class CdhaActiveComponent implements OnInit {
   }
 
   getListCDHA() {
-    // Thêm logic lấy danh sách CDHA ở đây
+    this.cdhaService.getAll().subscribe({
+      next: (res) => {
+        this.listCDHA = res;
+        this.totalCaseStudies = res.length;
+        console.log(res)
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      },
+    }).add(() => {
+      this.loading = false;
+    });
   }
 
   setupColumns() {
     this.cols = [
       {
-        field: 'idx',
-        header: 'STT',
-        width: '5rem',
-        sortField: 'idx',
-        sort: 'none'
-      },
-      {
         field: 'patientName',
         header: 'Tên bệnh nhân',
         width: '5rem',
-        sortField: 'PatientsName',
+        sortField: 'patientName',
         sort: 'none'
       },
       {
-        field: 'patientCode',
-        header: 'Mã bệnh nhân',
+        field: 'medicalCdhaName',
+        header: 'Tên chỉ định',
         width: '5rem',
-        sortField: 'PatientCode',
+        sortField: 'medicalCdhaName',
         sort: 'none'
       },
       {
-        field: 'createdAt',
+        field: 'dateCreate',
         header: 'Ngày tạo',
         width: '5rem',
-        sortField: 'CreatedTime',
+        sortField: 'dateCreate',
         sort: 'desc'
       }
     ];
 
-    // Thêm cột STT vào đầu danh sách cột
-    this.cols.unshift({
-      field: 'idx',
-      header: 'STT',
-      width: '12rem',
-      sortField: 'idx',
-      sort: 'none',
-    });
   }
 
   onResetSearchData() {
     // Thêm logic reset dữ liệu tìm kiếm
   }
-
-  onModelChangeSearchData() {
-    // Thêm logic khi mô hình tìm kiếm thay đổi
+  selectRow(row: any) {
+    if (row) {
+      console.log(row)
+      this.selectedRow = row;
+    }
   }
+  onModelChangeSearchData(){
 
+  }
   onColResize(event: any) {
     let colResize = this.cols.find((el) => el.field === event.element.dataset.colname);
     let fontSize = parseInt(getComputedStyle(document.documentElement).fontSize, 10);
@@ -91,15 +96,12 @@ export class CdhaActiveComponent implements OnInit {
     this.loading = true;
   }
 
-  onCreateCaseStudy() {
-    // Thêm logic tạo mới case study
-  }
 
   onRowSelect(event: any, data: any) {
     if (event.detail === 1) {
       this.clickTimer = setTimeout(() => {
         this.selectedCaseStudy = data;
-        this.onSelectCaseStudy.emit(data);
+        this.onSelectCdha.emit(data);
       }, 300);
     }
   }
@@ -107,6 +109,6 @@ export class CdhaActiveComponent implements OnInit {
   onColumnClick(event: MouseEvent, data: any) {
     event.stopPropagation();
     console.log(event, data);
-    this.onSelectCaseStudy.emit(data);
+    this.onSelectCdha.emit(data);
   }
 }

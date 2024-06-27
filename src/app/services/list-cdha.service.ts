@@ -6,7 +6,7 @@ import { BaseService } from 'src/app/services/base/base.service';
   providedIn: 'root'
 })
 export class ListCdhaService extends BaseService {
-  override url = '/api/CDHA';
+  override url = '/api/MedicalCdhas';
   getCDHA(): Observable<any[]> {
     return this.get(`${this.url}`);
   }

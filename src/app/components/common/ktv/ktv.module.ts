@@ -7,6 +7,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { PatientTableModule } from '../common-layout/patient-table/patient-table.module';
 import { CdhaActiveModule } from './cdha-active/cdha-active.module';
+import { KTVRoutingModule } from './ktv.routing.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { CdhaActiveModule } from './cdha-active/cdha-active.module';
         CalendarModule,
         FormsModule,
         PatientTableModule,
-        CdhaActiveModule
+        CdhaActiveModule,
+        KTVRoutingModule
     ],
     exports:[
         KTVComponent

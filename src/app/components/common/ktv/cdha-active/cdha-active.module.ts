@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { PatientTableModule } from '../../common-layout/patient-table/patient-table.module';
 import { TableModule } from 'primeng/table';
 import { CdhaActiveComponent } from './cdha-active.component';
+import { MTableModule } from 'src/app/shared/component/m-table/m-table.module';
 
 @NgModule({
   declarations: [CdhaActiveComponent],
@@ -15,7 +16,8 @@ import { CdhaActiveComponent } from './cdha-active.component';
     CalendarModule,
     TableModule,
     FormsModule,
-    PatientTableModule
+    PatientTableModule,
+    MTableModule
   ],
   exports: [
     CdhaActiveComponent,

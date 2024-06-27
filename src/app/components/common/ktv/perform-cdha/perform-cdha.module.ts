@@ -28,7 +28,7 @@ import { BadgeModule } from 'primeng/badge';
     AutoCompleteModule,
     InputTextareaModule,
     FileUploadModule,
-    BadgeModule
+    BadgeModule,
     
   ],
   exports:[

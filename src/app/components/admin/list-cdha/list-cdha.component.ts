@@ -8,9 +8,10 @@ import { ListCdhaService } from 'src/app/services/list-cdha.service';
 })
 export class ListCDHAComponent {
   cols = [
-    { field: 'name', header: 'Tên', width: '30%' },
-    { field: 'nameEn', header: 'Tên En', width: '30%' },
-    { field: 'image', header: 'Image', width: '30' },
+    { field: 'cdhaName', header: 'Tên', width: '30%' },
+    { field: 'dateCreate', header: 'Ngày tạo', width: '30%' },
+    { field: 'timeEstimate', header: 'Thời gian thực hiện', width: '30%' },
+    { field: 'price', header: 'Giá', width: '30' },
   ];
   selectedRow: any = {};
   createEditItemPopupData = {
@@ -30,6 +31,22 @@ export class ListCDHAComponent {
   deleteId = '';
   constructor(private cdhaService:ListCdhaService){
 
+    this.search()
+  }
+  search() {
+    this.loading = true;
+    this.cdhaService.getAll().subscribe({
+      next: (res) => {
+        this.listCDHA = res;
+        this.total = res.length;
+      },
+      error: (err) => {
+        console.error(err);
+        this.loading = false;
+      },
+    }).add(() => {
+      this.loading = false;
+    });
   }
   onCreateItem() {
     this.createEditItemPopupData = { ...this.createEditItemPopupData, isEdit: false, isVisibleDialog: true };
@@ -44,7 +61,7 @@ export class ListCDHAComponent {
   }
   onDelete(item: any) {
     this.deleteId = item.id
-    this.textDelete=`Xác nhận xóa thị trường xuất khẩu <b> ${item.name}</b>?`;
+    this.textDelete=`Xác nhận xóa chỉ định hình ảnh<b> ${item.name}</b>?`;
     this.isVisible = true;
     this.confirmLabelDelete = "Delete";
     }

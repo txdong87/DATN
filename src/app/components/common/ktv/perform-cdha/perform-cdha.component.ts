@@ -1,5 +1,5 @@
 import { MessageService ,PrimeNGConfig} from 'primeng/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { FormGroup, FormBuilder, Validators ,FormControl} from '@angular/forms';
@@ -12,6 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./perform-cdha.component.css']
 })
 export class PerformCDHAComponent implements OnInit {
+  @Input() selectedCdha: any; 
   patientInformation:FormGroup
   procedure:FormGroup
   public showWebcam = true;

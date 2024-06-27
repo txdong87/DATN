@@ -16,7 +16,7 @@ import { AppTopBarComponent } from './app.topbar.component';
 // import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
-
+import {TieredMenuModule} from 'primeng/tieredmenu';
 @NgModule({
   declarations: [
     AppMenuitemComponent,
@@ -36,7 +36,8 @@ import { AppLayoutComponent } from "./app.layout.component";
     RippleModule,
     RouterModule,
     CommonModule, // Add CommonModule here
-    AdminLayoutRoutingModule
+    AdminLayoutRoutingModule,
+    TieredMenuModule
   ],
   exports: [AppLayoutComponent]
 })

@@ -30,26 +30,6 @@
           <div class=" pt-1 pb-2  border-300"><strong>Thông tin bệnh nhân chỉ định</strong></div>
           
           <div class="grid mx-1 mt-3 mb-0 border-1 border-round-lg py-2 border-300">
-            <!-- <div class="flex col-6 py-1 items-center">
-              <div class="pi pi-user"></div>
-              <div class="p-inputtext-sm text-base ml-2">{{selectedPatient.patientsName}}</div>
-            </div>
-            <div class="flex col-6 py-1 items-center">
-              <div class="pi pi-code"></div>
-              <div class="p-inputtext-sm text-base ml-2">{{selectedPatient.patientCode}}</div>
-            </div>
-            <div class="flex col-6 py-1 items-center">
-              <div class="pi pi-users"></div>
-              <div class="p-inputtext-sm text-base ml-2">{{selectedPatient.patientsSex}}</div>
-            </div>
-            <div class="flex col-6 py-1 items-center">
-              <div class="pi pi-calendar-plus"></div>
-              <div class="p-inputtext-sm text-base ml-2">{{selectedPatient.yob}}</div>
-            </div>
-            <div class="flex col-12 py-1 items-center">
-              <div class="pi pi-home"></div>
-              <div class="p-inputtext-sm text-base ml-2">{{selectedPatient.address}}</div>
-            </div> -->
         </div>
     <div class="report-body">
 
@@ -86,16 +66,24 @@
               </div>
           </ng-template>
       </p-fileUpload>
-        <div class="p-field">
+        <!-- <div class="p-field">
           <label for="description">Mô tả:</label>
-          <p-textarea id="description" rows="5" pInputText  required></p-textarea>
+          <div style="width: 100%;" id="description" rows="5" cols="30"  pInputTextarea   required></div>
         </div>
         <div class="p-field">
           <label for="notes">Ghi chú:</label>
-          <p-textarea id="notes" rows="3" pInputText  required></p-textarea>
+          <p-textarea id="notes" rows="3" cols="30"  pInputTextarea   required></p-textarea>
         </div>
+      </div> -->
+      <div class="p-field">
+        <label for="description">Mô tả:</label>
+        <div style="width: 100%;" id="description" rows="5" cols="30"  pInputTextarea   required></div>
       </div>
-
+      <div class="p-field">
+        <label for="notes">Ghi chú:</label>
+        <div id="notes" rows="3" cols="30"  pInputText   required></div>
+      </div>
+    </div>
       <div class="section">
         <h3>Kết luận</h3>
         <!-- Bạn có thể thêm nội dung kết luận ở đây -->
