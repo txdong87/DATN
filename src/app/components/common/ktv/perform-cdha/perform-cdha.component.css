@@ -41,6 +41,10 @@
   border-radius: 8px;
   background-color: #f9f9f9;
 }
+.captured-image-container img {
+  width: 100px;
+  height: 75px;
+}
 
 .delete-button {
   margin-left: 10px;

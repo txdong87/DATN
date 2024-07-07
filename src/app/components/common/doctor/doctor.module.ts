@@ -20,6 +20,7 @@ import { AddClsModule } from './add-cls/add-cls.module';
 import { CaseStudyDetailModule } from './case-study-detail/case-study-detail.module';
 import { PrescriptionTabComponent } from './prescription-tab/prescription-tab.component';
 import { PrescriptionTabModule } from './prescription-tab/prescription-tab.module';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PrescriptionTabModule } from './prescription-tab/prescription-tab.modul
     TableModule,
     SplitterModule,
     TabViewModule,
+    ContextMenuModule,
     AngularSplitModule,
     PatientTableModule,
     CaseStudyInfoModule,

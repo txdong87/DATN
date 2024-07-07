@@ -10,8 +10,8 @@ const routes: Routes = [
     path: '',
     component: KTVComponent,
     children: [
-      { path: 'cdha-active', component: CdhaActiveComponent },
       { path: 'perform-cdha', component: PerformCDHAComponent },
+      { path: 'cdha-active', component: CdhaActiveComponent },
       { path: '', redirectTo: 'cdha-active', pathMatch: 'full' }
     ]
   }

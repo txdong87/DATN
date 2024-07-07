@@ -72,6 +72,7 @@ export class ListVisitComponent {
     });
   }
   ngOnInit(){
+    this.getListPatient()
     this.getListDoctor()
     this.getCaseStudy()
     console.log(this.newPatient)
@@ -125,6 +126,7 @@ export class ListVisitComponent {
   getListPatient(){
     this.patientService.getPatients().subscribe((res: any) => {
       this.listPatients=res.data
+      console.log(1,res)
   })
   }
   getListDoctor(){

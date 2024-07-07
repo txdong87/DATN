@@ -1,51 +1,31 @@
 
 <div class="list-visit-small">
     <div class="search-visit-small">
-        <div class="row">
-            <div class="col-12">
-                <div>
-                    <p-radioButton class="pr-2 uniform-button" name="isReceived" [(ngModel)]="search.isReceived" (ngModelChange)="searchListVisit()" label="Chờ gọi" [value]="false"></p-radioButton>
-                    <p-radioButton class="uniform-button" name="isReceived" [(ngModel)]="search.isReceived" (ngModelChange)="searchListVisit()" label="Tất cả" [value]="null"></p-radioButton>
-                </div>
-            </div>
-            <div class="col-12">
-                <div>
-                    <p-radioButton class="pr-2 uniform-button" name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Chờ khám" [value]="0"></p-radioButton>
-                    <p-radioButton class="pr-2 uniform-button" name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Chờ kết luận" [value]="1"></p-radioButton>
-                    <p-radioButton class="uniform-button" name="visitStatus" [(ngModel)]="search.visitStatus" (ngModelChange)="searchListVisit()" label="Tất cả" [value]="null"></p-radioButton>
-                </div>
-                <span class="search-visit-small-icon" title="Refresh" (click)="searchListVisit()"></span>
-            </div>
-        </div>
         <p-panel [toggleable]="true">
             <ng-template pTemplate="header">
                 <div class="search-visit-small-title">Tìm kiếm nâng cao</div>
             </ng-template>
-            <div class="advanced-search" *ngIf="isExpandSearch">
-                <div class="row">
-                    <label class="col-4">Mã bệnh nhân:</label>
-                    <div class="col-8">
-                        <input pInputText [(ngModel)]="search.patientCode" name="patientCode" placeholder="Mã bệnh nhân" (keydown.enter)="searchListVisit()">
+            <div  >
+                <div class="row " >
+                    <div class="col-12">
+                        <input pInputText [(ngModel)]="search.patientCode" name="patientCode" class="w-full" placeholder="Mã bệnh nhân" (keydown.enter)="searchListVisit()">
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-4">Tên bệnh nhân:</label>
-                    <div class="col-8">
-                        <input pInputText [(ngModel)]="search.patientName" name="patientName" placeholder="Tên bệnh nhân" (keyup)="onSearchPatientName($event)">
+                    <div class="col-12">
+                        <input pInputText [(ngModel)]="search.patientName" name="patientName" class="w-full" placeholder="Tên bệnh nhân" (keyup)="onSearchPatientName($event)">
                     </div>
                 </div>
                 <div class="row">
-                    <label class="col-4">Ngày khám:</label>
-                    <div class="col-8">
-                        <p-calendar [(ngModel)]="search.visitDate" name="visitDate" placeholder="Ngày khám"></p-calendar>
+                    <div class="col-12">
+                        <p-calendar [(ngModel)]="search.visitDate" name="visitDate" class="w-full" placeholder="Ngày khám"></p-calendar>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="btn-search-container">
-                            <span class="pi pi-plus" (click)="resetSearch()" title="Bỏ lọc"></span>
-                            <span class="pi pi-search" (click)="searchListVisit()" title="Lọc"></span>
+                            <button pButton class="pi pi-plus" style="margin-right: 200px;" (click)="resetSearch()" title="Bỏ lọc"></button>
+                            <button pButton class="pi pi-search" (click)="searchListVisit()" title="Lọc"></button>
                         </div>
                     </div>
                 </div>
@@ -53,5 +33,24 @@
         </p-panel>
        
     </div>
-<app-patient-table>  </app-patient-table>
+    <div class="col-12 py-0 px-3 w-full">
+        <p-table [value]="patient" [columns]="cols" [resizableColumns]="true" selectionMode="single" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '10rem' }">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of columns">
+                {{ col.header }}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr >
+              <td *ngFor="let col of columns" (click)="onColumnClick($event, rowData)">
+                {{ rowData[col.field] }}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      
+      <p-contextMenu #menu styleClass="w-16rem" [model]="actions"></p-contextMenu>
 </div>

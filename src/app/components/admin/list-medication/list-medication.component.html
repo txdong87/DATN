@@ -2,42 +2,71 @@
     <div class="col-12 p-0">
         <div class="card admin-content m-0">
             <div class="flex flex-wrap column-gap-2 row-gap-6 pb-2 relative">
-                <input type="text" class="w-full sm:w-auto p-inputtext-sm" pInputText placeholder="Tên"
-                    [(ngModel)]="searchData.name" />
-                <button pButton pRipple icon="pi pi-search" class="p-button-primary p-button-sm"
-                    (click)="onSearch()"></button>
-                <button pButton pRipple icon="pi pi-times" class="p-button-secondary p-button-sm"
-                    (click)="onClearSearch()"></button>
-                <button pButton pRipple icon="pi pi-plus"
-                    class="p-button-success p-button-sm absolute right-0 bottom-auto" (click)="onCreate()"
-                    label="Thêm mới"></button>
+                <input type="text" class="w-full sm:w-auto p-inputtext-sm" pInputText placeholder="Tên" [(ngModel)]="searchData.name" />
+                <button pButton pRipple icon="pi pi-search" class="p-button-primary p-button-sm" (click)="onSearch()"></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-secondary p-button-sm" (click)="onClearSearch()"></button>
+                <button pButton pRipple icon="pi pi-plus" class="p-button-success p-button-sm absolute right-0 bottom-auto" (click)="onCreate()" label="Thêm mới"></button>
             </div>
 
-            <m-table [isLazyLoad]="true" [cols]="cols" [items]="rows" (selectRow)="selectItem($event)"
-                [dataKey]="'id'" [customHeaderTemplate]="customHeaderTemplate" [customBodyTemplate]="customBodyTemplate"
-                class="table-admin" [calcHeight]="303" (onPageChange)="onPageChange($event)"
-                [totalRecords]="total" [loading]="loading"></m-table>
+            <m-table [isLazyLoad]="true" [cols]="cols" [items]="rows" (selectRow)="selectItem($event)" [dataKey]="'id'" [customHeaderTemplate]="customHeaderTemplate" [customBodyTemplate]="customBodyTemplate" class="table-admin" [calcHeight]="303" (onPageChange)="onPageChange($event)" [totalRecords]="total" [loading]="loading"></m-table>
+
             <ng-template #customHeaderTemplate>
-                <th >Tên</th>
-                <th >Đơn vị</th>
-                <th >Đường dùng</th>
+                <th>Tên</th>
+                <th>Đơn vị</th>
+                <th>Đường dùng</th>
                 <th>Sử dụng</th>
                 <th>Thực phẩm chức năng</th>
                 <th class="flex c-center">Hành động</th>
             </ng-template>
             <ng-template #customBodyTemplate let-rowData>
-                <td >{{ rowData.name }}</td>
-                <td >{{ rowData.unit }}</td>
-                <td >{{ rowData.route }}</td>
-                <td >{{ rowData.usage }}</td>
-                <td >{{ rowData.isFunctionalFoods ? 'Có' : 'Không' }}</td>
-                <td  class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
-                    <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-success p-button-xs mr-2"
-                        (click)="onDelete(rowData)"></button>
+                <td>{{ rowData.name }}</td>
+                <td>{{ rowData.unit }}</td>
+                <td>{{ rowData.route }}</td>
+                <td>{{ rowData.usage }}</td>
+                <td>{{ rowData.isFunctionalFoods ? 'Có' : 'Không' }}</td>
+                <td class="text-center flex justify-content-center" pFrozenColumn alignFrozen="right">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-xs mr-2" (click)="onEdit(rowData)"></button>
+                    <button pButton pRipple icon="pi pi-times" class="p-button-rounded p-button-success p-button-xs mr-2" (click)="confirmDelete(rowData)"></button>
                 </td>
             </ng-template>
-            <p-dialog [(visible)]="visibleImage">
-                <img *ngIf="selectedImg" [src]="selectedImg" alt="Selected Image" />
+
+            <!-- Dialog for Create/Edit Medication -->
+            <p-dialog [(visible)]="visibleDialog" [style]="{ width: '600px', height: '450px', 'z-index': 1100 }" [header]="userDialogHeader" [modal]="true" class="p-fluid">
+                <form [formGroup]="formGroup">
+                    <div class="p-field">
+                        <label for="name">Tên thuốc</label>
+                        <input id="name" type="text" pInputText formControlName="name" />
+                    </div>
+                    <div class="p-field">
+                        <label for="unit">Đơn vị</label>
+                        <input id="unit" type="text" pInputText formControlName="unit" />
+                    </div>
+                    <div class="p-field">
+                        <label for="route">Đường dùng</label>
+                        <input id="route" type="text" pInputText formControlName="route" />
+                    </div>
+                    <div class="p-field">
+                        <label for="usage">Sử dụng</label>
+                        <input id="usage" type="text" pInputText formControlName="usage" />
+                    </div>
+                    <div class="p-field">
+                        <div class="mr-2 pb-2"><label for="isFunctionalFoods">Thực phẩm chức năng</label></div>
+                        <p-inputSwitch id="isFunctionalFoods" formControlName="isFunctionalFoods"></p-inputSwitch>
+                    </div>
+                </form>
+                <p-footer>
+                    <button pButton label="Lưu" icon="pi pi-check" (click)="saveMedication()"></button>
+                    <button pButton label="Hủy" icon="pi pi-times" class="p-button-secondary" (click)="visibleDialog=false"></button>
+                </p-footer>
+            </p-dialog>
+
+            <!-- Dialog for Delete Confirmation -->
+            <p-dialog [(visible)]="isDeleteDialogVisible" [style]="{ width: '350px', 'z-index': 1100 }" [header]="'Xác nhận'" [modal]="true" class="p-fluid">
+                <p> Bạn có chắc chắn muốn xóa thuốc này không? </p>
+                <p-footer>
+                    <button pButton label="Xóa" icon="pi pi-times" class="p-button-danger" (click)="deleteMedication()"></button>
+                    <button pButton label="Hủy" icon="pi pi-times" class="p-button-secondary" (click)="isDeleteDialogVisible=false"></button>
+                </p-footer>
             </p-dialog>
         </div>
     </div>

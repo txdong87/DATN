@@ -1,28 +1,61 @@
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { TabView } from 'primeng/tabview';
+import { CaseStudyService } from 'src/app/services/case-study.service';
 import { DoctorService } from 'src/app/services/doctor.service';
 import { PatientService } from 'src/app/services/patient.service';
-import { CaseStudyService } from 'src/app/services/case-study.service';
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NotificationService } from 'src/app/shared/notification.service';
 import { Constants } from 'src/app/shared/constants/constants';
-import { TabView } from 'primeng/tabview';
-import { MessageService } from 'primeng/api';
+import { NotificationService } from 'src/app/shared/notification.service';
+
 @Component({
   selector: 'app-main-nurse',
   templateUrl: './main-nurse.component.html',
-  styleUrl: './main-nurse.component.css'
+  styleUrls: ['./main-nurse.component.css']
 })
-export class MainNurseComponent {
+export class MainNurseComponent implements OnInit {
   @Input() newPatient: any;
+
   GENDERS = Constants.GENDERS;
-  cols!: any[];
-  caseStudy:any[]=[]
-  listPatients:any[]=[]
-  listDoctor:any[]=[]
+  cols: any[] = [
+    {
+      "field": "caseStudyId",
+      "header": "STT",
+      "width": "12rem",
+      "sortField": "idx",
+      "sort": "none"
+    },
+    {
+      "width": "15.93rem",
+      "sortField": "PatientsName",
+      "field": "patientName",
+      "header": "Tên bệnh nhân",
+      "sort": "none"
+    },
+    {
+      "width": "10rem",
+      "sortField": "doctorName",
+      "field": "doctorName",
+      "header": "Tên bác sĩ",
+      "sort": "none"
+    },
+    {
+      "width": "13.79rem",
+      "sortField": "CreatedTime",
+      "field": "createDate",
+      "header": "Ngày tạo",
+      "sort": "desc"
+    },
+  ];
+
+  caseStudy: any[] = [];
+  listPatients: any[] = [];
+  listDoctor: any[] = [];
   PATIENT_TYPES = Constants.PATIENT_TYPES;
-  patientForm:FormGroup
-  formAddVisit:FormGroup
+  patientForm: FormGroup;
+  formAddVisit: FormGroup;
   vitalSignCollapse = false;
+  selectedPatient: any;
   layout = {
     columns: [
       {
@@ -41,18 +74,17 @@ export class MainNurseComponent {
     disabled: false,
   };
   activeTabIndex: number = 0;
+
   constructor(
     private fb: FormBuilder,
     private notification: NotificationService,
     private patientService: PatientService,
-    private doctorService:DoctorService,
-    private caseStudyService:CaseStudyService,
+    private doctorService: DoctorService,
+    private caseStudyService: CaseStudyService,
     private tabView: TabView,
-    private messageService: MessageService 
+    private messageService: MessageService
   ) {
-    console.log(this.newPatient,this.activeTabIndex)
     this.patientForm = this.fb.group({
-      id: [null],
       patientCode: [null, [Validators.required]],
       patientName: [null, [Validators.required]],
       sex: [null, [Validators.required]],
@@ -64,105 +96,129 @@ export class MainNurseComponent {
       patientId: [null, Validators.required],
       reason: [null, Validators.required],
       createDate: [new Date(), Validators.required],
-      doctor: [null, Validators.required],
+      doctorId: [null, Validators.required],
       diagnostic: [null],
       status: [null]
     });
   }
-  ngOnInit(){
-    this.getListDoctor()
-    this.getCaseStudy()
-    console.log(this.newPatient)
-    this.cols=[
-      {
-          "field": "idx",
-          "header": "STT",
-          "width": "12rem",
-          "sortField": "idx",
-          "sort": "none"
-      },
-      {
-          "width": "15.93rem",
-          "sortField": "PatientsName",
-          "field": "patientName",
-          "header": "Tên bệnh nhân",
-          "sort": "none"
-      },
-      
-      {
-          "width": "10rem",
-          "sortField": "PatientCode",
-          "field": "patientCode",
-          "header": "Mã bệnh nhân",
-          "sort": "none"
-      },
-      {
-          "width": "13.79rem",
-          "sortField": "CreatedTime",
-          "field": "createdAt",
-          "header": "Ngày tạo",
-          "sort": "desc"
-      },
-  ]
+
+  ngOnInit() {
+    this.getListPatient();
+    this.getListDoctor();
+    this.getCaseStudy();
+    console.log(this.newPatient);
   }
+
   onSave() {
+    // Logic for saving data if needed
   }
+
   get visitFormCtrl() {
     return this.formAddVisit.controls;
   }
+
   vitalInfoCollapse() {
     this.vitalSignCollapse = !this.vitalSignCollapse;
   }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['newPatient'] && changes['newPatient'].currentValue) {
       const newPatient = changes['newPatient'].currentValue;
       console.log('New patient received:', newPatient);
-      this.caseStudy.push(newPatient); 
+      this.caseStudy.push(newPatient);
+
+      if (newPatient.id) {
+        this.formAddVisit.patchValue({
+          patientId: newPatient.id
+        });
+      }
     }
   }
-  getListPatient(){
+
+  getListPatient() {
     this.patientService.getPatients().subscribe((res: any) => {
-      this.listPatients=res.data
-  })
+      this.listPatients = res;
+    });
   }
-  getListDoctor(){
+
+  getListDoctor() {
     this.doctorService.getAll().subscribe((res: any) => {
-      this.listDoctor=res.data;
-      console.log(res)
-  })
+      this.listDoctor = res;
+    });
   }
-  addPatient(){
+
+  addPatient() {
     if (this.patientForm.invalid) {
       this.notification.error('Nhập đủ các trường bệnh nhân', '');
       return;
     }
-    this.patientService.create({ ...this.patientForm.value}).subscribe({
-      next: (res) => {
-        this.newPatient=res.data
+    this.patientService.create({ ...this.patientForm.value }).subscribe({
+      next: (res: any) => {
+        this.newPatient = res.data;
         this.notification.success('Thêm mới bệnh nhân thành công', '');
+        console.log(res);
+        const patientId = res.data.patientId;
+        this.patientForm.reset();
+        this.formAddVisit.patchValue({
+          patientId: patientId
+        });
         this.activeTabIndex = 1;
-        console.log(this.activeTabIndex)
-        // this.patientAdded.emit(res);
-    }
-    })
+        console.log("Patient added with ID:", patientId); 
+      },
+      error: (err: any) => {
+        this.notification.error('Thêm mới bệnh nhân thất bại', '');
+      }
+    });
   }
-  addCaseStudy(){
-    console.log(1,this.formAddVisit)
-    this.caseStudyService.create({ ...this.formAddVisit.value}).subscribe({
-      next: (res) => {
-        this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
-        console.log(res)
-    }
-    })
+
+  onRowSelect(event: any) {
+    const selectedPatient = event.data;
+    this.newPatient = selectedPatient;
+    this.activeTabIndex = 1;
+    this.formAddVisit.patchValue({
+      patientId: selectedPatient.id
+    });
   }
-  getCaseStudy(){
+
+  addCaseStudy() {
+
+    if (this.formAddVisit.invalid) {
+      this.notification.error('Vui lòng nhập đầy đủ thông tin ca khám', '');
+      return;
+    }
+
+    this.caseStudyService.create({ ...this.formAddVisit.value }).subscribe({
+      next: (res: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Thêm ca khám thành công', detail: 'Via MessageService' });
+        this.caseStudy.push(res.data);
+         this.activeTabIndex = 0;
+        this.refreshLists();
+      },
+      error: (err: any) => {
+        this.notification.error('Thêm mới ca khám thất bại', '');
+      }
+    });
+  }
+
+  getCaseStudy() {
     this.caseStudyService.getCaseStudy().subscribe((res: any) => {
-      this.caseStudy=res;
-      console.log(this.caseStudy)
-  })
+      this.caseStudy = res.map((cs: any) => ({
+        caseStudyId: cs.caseStudyId,
+        patientName: cs.patient.patientName,
+        doctorName: cs.doctor.doctorName,
+        createDate: this.convertISODateToNormalDate(cs.createDate),
+      }));
+    });
   }
+
   convertISODateToNormalDate(isoDate: string): string {
     const date = new Date(isoDate);
-    return date.toLocaleDateString(); 
+    return date.toLocaleDateString();
+  }
+
+  private refreshLists() {
+    this.getListPatient();
+    this.getListDoctor();
+    this.getCaseStudy();
   }
 }

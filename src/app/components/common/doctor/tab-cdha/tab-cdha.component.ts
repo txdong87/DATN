@@ -16,7 +16,7 @@ export class TabCDHAComponent {
       "subClinicalOrderId": null,
       "keyImages": null,
       "reports": null,
-      "conlusion": null,
+      "conclusion": null,
       "description": "CT",
       "readDoctor": null,
       "technician": null,

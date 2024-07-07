@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<div *ngIf="!selectedCdha">
+    <app-cdha-active (onSelectCdha)="handleSelectedCdha($event)"></app-cdha-active>
+  </div>
+  <div *ngIf="selectedCdha">
+    <app-perform-cdha [selectedCdha]="selectedCdha"></app-perform-cdha>
+  </div>
+  

@@ -150,7 +150,7 @@
   <button pButton pRipple label="Lưu" icon="pi pi-save" class="p-button-text" (click)="onSave()"></button>
 </ng-template>
 <ng-template pTemplate="content" #containerRight>
-  <p-table [value]="caseStudy" [columns]="cols" [resizableColumns]="true" styleClass="p-datatable-gridlines"
+  <p-table [value]="listPatients" [columns]="cols" [resizableColumns]="true" styleClass="p-datatable-gridlines"
     [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -168,5 +168,3 @@
     </ng-template>
   </p-table>
 </ng-template>
-
-<ng-template #containerRight>34123432</ng-template>

@@ -9,8 +9,8 @@ import { Constants } from 'src/app/shared/constants/constants';
 })
 export class MTableComponent implements OnInit, AfterViewInit {
   ACTIONS = Constants.ACTIONS;
-  //   listDataTypeOT: any[];
-  selectedItem:any = [];
+  selectedItem: any = [];
+  
   @Input() items: any[] = [];
   @Input() cols: any[] = [];
   @Input() selectionMode = "single";
@@ -18,7 +18,7 @@ export class MTableComponent implements OnInit, AfterViewInit {
   @Input() totalRecords = 0;
   @Input() dataKey = '';
   @Input() loading = false;
-  @Input() isLazyLoad = false; // server-side pagination
+  @Input() isLazyLoad = false;
   @Input() take = 40;
   @Input() calcHeight = 225;
   @Input() actionColWidth = '6rem';
@@ -33,18 +33,18 @@ export class MTableComponent implements OnInit, AfterViewInit {
   @Output() selectRow = new EventEmitter<any>();
   @Output() onPageChange = new EventEmitter<any>();
   @Output() onRowDblClick = new EventEmitter<any>();
-  @ViewChild("dt", {read: ElementRef}) dataTable!: ElementRef;
+  @ViewChild("dt", { read: ElementRef }) dataTable!: ElementRef;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.selectedItem = this.selectionMode =="single"?{}:[];
+    this.selectedItem = this.selectionMode == "single" ? {} : [];
   }
 
-  ngAfterViewInit():void{
+  ngAfterViewInit(): void {
     const parentElement = this.dataTable.nativeElement;
     const pDatatableWrapper = parentElement.querySelector(".p-datatable-wrapper");
-    pDatatableWrapper.style.height=`calc(100vh - ${this.calcHeight}px)`
+    pDatatableWrapper.style.height = `calc(100vh - ${this.calcHeight}px)`
   }
 
   rowDblClick(data: any) {
@@ -53,5 +53,10 @@ export class MTableComponent implements OnInit, AfterViewInit {
     } else {
       this.onRowDblClick.emit(data);
     }
+  }
+
+  onRowSelect(event: any) {
+    console.log(event)
+    this.selectRow.emit(event.data);
   }
 }

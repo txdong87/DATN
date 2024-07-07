@@ -17,9 +17,9 @@ export class ListMedicationComponent {
   formGroup: FormGroup;
   selectedItem: any;
   selectedImg: string = '';
-  bannersDialogHeader = '';
-  visibleImage: boolean = false;
+  userDialogHeader = '';
   visibleDialog: boolean = false;
+  isDeleteDialogVisible: boolean = false;
   deleteId = '';
   isVisible = false;
   searchData: any = {
@@ -27,18 +27,24 @@ export class ListMedicationComponent {
     take: 40,
     skip: 0
   };
+  createEditItemPopupData = {
+    isVisibleDialog: false,
+    isEdit: false,
+    dialogHeader: '',
+    selectedRow: {} as any,
+  };
+  selectedRow: any = {};
 
   constructor(private fb: FormBuilder, private listMedicationService: ListMedicationService) {
     this.formGroup = this.fb.group({
       id: [null],
-      type: [null],
-      name: [null],
-      nameEn: [null],
-      description: [null],
-      descriptionEn: [null],
-      order: [null],
-      enable: true,
+      name: [null, Validators.required],
+      unit: [null, Validators.required],
+      route: [null, Validators.required],
+      usage: [null, Validators.required],
+      isFunctionalFoods: [false]
     });
+
     this.cols = [
       { field: 'name', header: 'Tên' },
       { field: 'unit', header: 'Đơn vị' },
@@ -46,6 +52,7 @@ export class ListMedicationComponent {
       { field: 'usage', header: 'Sử dụng' },
       { field: 'isFunctionalFoods', header: 'Thực phẩm chức năng' },
     ];
+
     this.search();
   }
 
@@ -69,6 +76,19 @@ export class ListMedicationComponent {
     this.search();
   }
 
+  selectRow(row: any) {
+    if (row) {
+      this.selectedRow = row;
+    }
+  }
+
+  onEdit(row: any) {
+    this.selectRow(row);
+    this.visibleDialog = true;
+    this.userDialogHeader = 'Chỉnh sửa thuốc';
+    this.formGroup.patchValue(row);
+  }
+
   onClearSearch() {
     this.searchData = {
       name: '',
@@ -80,8 +100,8 @@ export class ListMedicationComponent {
 
   onCreate() {
     this.visibleDialog = true;
-    this.bannersDialogHeader = 'Thêm mới';
     this.formGroup.reset();
+    this.userDialogHeader = 'Thêm thuốc mới';
   }
 
   selectItem(item: any) {
@@ -94,26 +114,38 @@ export class ListMedicationComponent {
     this.search();
   }
 
-  onDelete(item: any) {
-    // Implement delete logic
+  confirmDelete(item: any) {
+    this.selectedItem = item;
+    this.isDeleteDialogVisible = true;
   }
 
-  deleteUser() {
-    this.listMedicationService.deleteById(this.deleteId).subscribe({
-      next: (res) => {
-        if (res.isValid) {
-          this.isVisible = false;
-          this.search();
-        } else {
-          if (res.errors && res.errors.length > 0) {
-            res.errors.forEach((el: any) => {
-              // Handle errors
-            });
-          } else {
-            // Handle generic error
-          }
-        }
-      }
-    });
+  saveMedication() {
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    const medicationData = this.formGroup.value;
+    if (medicationData.id) {
+      // Update logic
+      this.listMedicationService.update(medicationData.id,medicationData).subscribe(() => {
+        this.search();
+        this.visibleDialog = false;
+      });
+    } else {
+      // Create logic
+      this.listMedicationService.create(medicationData).subscribe(() => {
+        this.search();
+        this.visibleDialog = false;
+      });
+    }
+  }
+
+  deleteMedication() {
+    if (this.selectedItem && this.selectedItem.id) {
+      this.listMedicationService.deleteById(this.selectedItem.id).subscribe(() => {
+        this.search();
+        this.isDeleteDialogVisible = false;
+      });
+    }
   }
 }

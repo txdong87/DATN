@@ -10,6 +10,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TabViewModule } from 'primeng/tabview';
 import { MessagesModule } from 'primeng/messages';
 import { MainNurseComponent } from './main-nurse.component';
+import { MTableModule } from 'src/app/shared/component/m-table/m-table.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MainNurseComponent } from './main-nurse.component';
     AngularSplitModule,
     InputTextModule,
     TabViewModule,
-    MessagesModule 
+    MessagesModule ,
+    MTableModule
     
   ],
   exports:[

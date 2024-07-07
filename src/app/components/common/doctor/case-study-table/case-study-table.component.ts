@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { SearchVisitSmall } from 'src/app/models/listVisit.class';
+import { MenuItem } from 'primeng/api';
+import { CaseStudyService } from 'src/app/services/case-study.service';
 @Component({
   selector: 'app-case-study-table',
   templateUrl: './case-study-table.component.html',
@@ -7,31 +9,27 @@ import { SearchVisitSmall } from 'src/app/models/listVisit.class';
 })
 export class CaseStudyTableComponent {
   isLoading = false;
+  totalCaseStudies: any;
+  selectedCaseStudy: any = {};
   // config: IlayoutConfig = null;
   search: SearchVisitSmall 
   searchDataIsReceived = false;
   caseStudy:any[]=[]
+  patient:any[]=[]
+  actions!: MenuItem[];
   cols = [ 
     {
       "header": 'STT',
-      "field": "STT",
-    },
+      "field": "caseStudyId",
+      "width": '15rem'    },
     {
       "header": 'Tên bệnh nhân',
       "field": "patientName",
+      "width": '15rem'
     },
-    // {
-    //   "header": 'STT',
-    //   "width": '30',
-    //   "field": "csStatus",
-    // },
-    // {
-    //   title: '',
-    //   width: 50,
-    // },
   ];
   isExpandSearch = false;
-  constructor(){
+  constructor(private caseStudyService:CaseStudyService){
     this.search = {
       patientName: '',
       patientCode: '',
@@ -41,8 +39,19 @@ export class CaseStudyTableComponent {
     };
   }
   ngOnInit(){
-   
+   this.getCaseStudy()
   }
+  getCaseStudy() {
+    this.caseStudyService.getCaseStudy().subscribe((res: any[]) => {
+      this.caseStudy = res;
+      this.patient = this.caseStudy.map(cs => {
+        const patientWithCaseStudyId = { ...cs.patient, caseStudyId: cs.caseStudyId };
+        return patientWithCaseStudyId;
+      });
+      console.log(this.caseStudy, this.patient);
+    });
+  }
+  
   onSearchPatientName(e:any) {
     // clearTimeout(this.timer);
     // this.timer = setTimeout(() => {
@@ -68,6 +77,10 @@ export class CaseStudyTableComponent {
     // this.search.isReceived  = null;
     // this.pageIndex = 1;
     // this.getListVisit();
+  }
+  onColumnClick(event: MouseEvent,data:any) {
+   console.log(event,data)
+   
   }
 
 }

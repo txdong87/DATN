@@ -111,47 +111,6 @@
     </div>
   </div>
   
-  <!-- context menu -->
-
-  <!-- Khám thêm -->
-  <!-- <p-dialog [(visible)]="visibleAddService" header="Chỉ định dịch vụ khám thêm" [modal]="true" [closable]="false" [style]="{width: '500px'}">
-    <div class="p-grid p-fluid">
-      <div class="p-col-12 p-md-4">Dịch vụ khám <span class="red-dot">*</span></div>
-      <div class="p-col-12 p-md-8">
-        <p-dropdown [(ngModel)]="objService.serviceId" [options]="services"  filterBy="name" appendTo="body">
-          <ng-template let-service pTemplate="selectedItem">
-            <span>{{ hienGiaDichVuChiDinh ? service.name + ' - '+ (service.price | currencyFormat) : service.name }}</span>
-          </ng-template>
-          <ng-template let-service pTemplate="item">
-            <span>{{ service.name }}</span>
-          </ng-template>
-        </p-dropdown>
-      </div>
-      <div class="p-col-12 p-md-4">Phòng khám <span class="red-dot">*</span></div>
-      <div class="p-col-12 p-md-8">
-        <p-dropdown [(ngModel)]="objService.roomId" [options]="rooms"  appendTo="body">
-          <ng-template let-room pTemplate="selectedItem">
-            <span>{{ room.name }}</span>
-          </ng-template>
-          <ng-template let-room pTemplate="item">
-            <span>{{ room.name }}</span>
-          </ng-template>
-        </p-dropdown>
-      </div>
-    </div>
-    <div class="p-dialog-footer">
-      <button pButton type="button" label="Hủy" class="btn-cancel-small" (click)="closeAddService()"></button>
-      <button pButton type="button" label="Thêm" class="btn-primary-small" (click)="addService()"></button>
-    </div>
-  </p-dialog> -->
-  
-  <!-- <app-subclinical-group-add [(isVisible)]="visibleSubOrderGroupAdd" [groupId]="visit.groupId" [visitId]="visit.id" [getHISServicePrice]="getHISServicePrice" (refresh)="loadData(); titleTabChange()"></app-subclinical-group-add>
-  
-  <app-subclinical-tree-add [(isVisible)]="showAddSubOrder" [visitId]="visit.id" [rosIdSelected]="rosIdSelected" [subClinicalVisit]="subClinicalVisitModal" [getHISServicePrice]="getHISServicePrice" (refreshData)="loadData(); titleTabChange()" (cancelModal)="cancelModalAddSubOrder()" (cancelSubclinicalVisit)="serviceCanceledEvent($event)"></app-subclinical-tree-add>
-  
-  <app-discount [isVisible]="visibleDiscount" (closeModal)="closeModalDiscount()" [visitId]="visit.id" [currentOrdersDiscount]="currentOrdersDiscount" (discountChange)="discountEvent($event)"></app-discount>
-  <app-visit-other-info [popupData]="visitOtherInfoPopupData"></app-visit-other-info>
-   -->
    <app-add-cls [(isVisible)]="showAddSubOrder" [visitId]="visit.id" [rosIdSelected]="rosIdSelected"
    [subClinicalVisit]="subClinicalVisitModal" 
    (refreshData)="loadData(); titleTabChange()" (cancelModal)="cancelModalAddSubOrder()"

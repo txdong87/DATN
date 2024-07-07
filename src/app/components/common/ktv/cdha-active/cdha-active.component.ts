@@ -3,6 +3,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { CDHACaseStudyService } from 'src/app/services/cdha-case-study.service';
 import { SearchCaseStudy,INIT_SEARCH_CASE_STUDY, } from 'src/app/models/search-case-study';
+import { DataSharingService } from 'src/app/shared/data-sharing.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cdha-active',
@@ -24,7 +26,7 @@ export class CdhaActiveComponent implements OnInit {
   selectedRow: any = {};
   @Output() onSelectCdha = new EventEmitter<any>();
 
-  constructor(private cdhaService:CDHACaseStudyService) {}
+  constructor(private cdhaService:CDHACaseStudyService,private router: Router,private dataShareService:DataSharingService) {}
 
   ngOnInit() {
     this.getListCDHA();
@@ -77,12 +79,6 @@ export class CdhaActiveComponent implements OnInit {
   onResetSearchData() {
     // Thêm logic reset dữ liệu tìm kiếm
   }
-  selectRow(row: any) {
-    if (row) {
-      console.log(row)
-      this.selectedRow = row;
-    }
-  }
   onModelChangeSearchData(){
 
   }
@@ -97,14 +93,16 @@ export class CdhaActiveComponent implements OnInit {
   }
 
 
-  onRowSelect(event: any, data: any) {
-    if (event.detail === 1) {
-      this.clickTimer = setTimeout(() => {
-        this.selectedCaseStudy = data;
-        this.onSelectCdha.emit(data);
-      }, 300);
-    }
+selectRow(row: any) {
+  if (row) {
+    console.log('Selected Row:', row);
+    this.selectedRow = row;
+    this.dataShareService.setSelectedRow(row);
+    this.onSelectCdha.emit(row);
+    // this.router.navigate(['/perform-cdha']);
+    console.log(1)
   }
+}
 
   onColumnClick(event: MouseEvent, data: any) {
     event.stopPropagation();
