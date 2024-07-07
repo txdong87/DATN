@@ -280,9 +280,9 @@ onSave(): void {
 
     if (this.files.length > 0) {
       const file = this.files[0];
-      formData.append('file', file);  // Đảm bảo tên khớp với tham số của backend
-      formData.append('imageName', file.name);
-      formData.append('imageLink', this.createObjectURL(file));
+      formData.append('file', file);  
+      // formData.append('imageName', file.name);
+      // formData.append('imageLink', this.createObjectURL(file));
     } else {
       console.error('Không có tệp nào được chọn!');
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Hãy cập nhật hình ảnh' });
