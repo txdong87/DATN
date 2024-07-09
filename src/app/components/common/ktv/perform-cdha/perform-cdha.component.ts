@@ -98,8 +98,12 @@ export class PerformCDHAComponent implements OnInit,OnChanges {
   }
 
   ngOnInit(): void {
-    this.selectedCdha = this.dataShareService.getSelectedRow();
-    console.log(this.selectedCdha)
+    if (history.state && history.state.selectedRow) {
+      this.selectedCdha = history.state.selectedRow;
+      console.log('Selected Row in Perform CDHA:', this.selectedCdha);
+    }
+    // this.selectedCdha = this.dataShareService.getSelectedRow();
+    // console.log(this.selectedCdha)
     this.cdhaForm.patchValue({
       caseStudyId: this.selectedCdha.data.caseStudyId ,
       medicalCdhaId: this.selectedCdha.data.medicaCdhaId ,

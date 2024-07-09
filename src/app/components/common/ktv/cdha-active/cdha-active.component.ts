@@ -99,7 +99,9 @@ selectRow(row: any) {
     this.selectedRow = row;
     this.dataShareService.setSelectedRow(row);
     this.onSelectCdha.emit(row);
-    // this.router.navigate(['/perform-cdha']);
+    this.router.navigate(['/ktv/perform-cdha'], { state: { selectedRow: row } })
+    .then(success => console.log('Navigation successful:', success))
+    .catch(error => console.error('Navigation failed:', error));
     console.log(1)
   }
 }
