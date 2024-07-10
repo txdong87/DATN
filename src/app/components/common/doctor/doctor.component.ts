@@ -7,7 +7,7 @@ import { SearchVisitSmall } from 'src/app/models/listVisit.class';
   templateUrl: './doctor.component.html',
   styleUrl: './doctor.component.css'
 })
-export class DoctorComponent {
+export class DoctorComponent { 
   isLoading = false;
   indexTab = 0;
   // config: IlayoutConfig = null;

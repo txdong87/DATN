@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,Output,EventEmitter} from '@angular/core';
 import { SearchVisitSmall } from 'src/app/models/listVisit.class';
 import { MenuItem } from 'primeng/api';
 import { CaseStudyService } from 'src/app/services/case-study.service';
@@ -29,6 +29,10 @@ export class CaseStudyTableComponent {
     },
   ];
   isExpandSearch = false;
+
+  @Output() selectCaseStudy = new EventEmitter<any>();
+
+
   constructor(private caseStudyService:CaseStudyService){
     this.search = {
       patientName: '',
@@ -40,6 +44,9 @@ export class CaseStudyTableComponent {
   }
   ngOnInit(){
    this.getCaseStudy()
+  }
+  onRowSelect(caseStudy: any) {
+    this.selectCaseStudy.emit(caseStudy);
   }
   getCaseStudy() {
     this.caseStudyService.getCaseStudy().subscribe((res: any[]) => {
