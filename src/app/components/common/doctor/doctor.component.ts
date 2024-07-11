@@ -60,5 +60,6 @@ export class DoctorComponent {
   }
   onSelectCaseStudy(caseStudy: any) {
     this.selectedCaseStudy = caseStudy;
+    console.log(this.selectedCaseStudy)
   }
 }

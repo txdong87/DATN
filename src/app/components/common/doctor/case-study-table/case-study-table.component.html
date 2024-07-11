@@ -1,56 +1,53 @@
-
 <div class="list-visit-small">
-    <div class="search-visit-small">
-        <p-panel [toggleable]="true">
-            <ng-template pTemplate="header">
-                <div class="search-visit-small-title">Tìm kiếm nâng cao</div>
-            </ng-template>
-            <div  >
-                <div class="row " >
-                    <div class="col-12">
-                        <input pInputText [(ngModel)]="search.patientCode" name="patientCode" class="w-full" placeholder="Mã bệnh nhân" (keydown.enter)="searchListVisit()">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <input pInputText [(ngModel)]="search.patientName" name="patientName" class="w-full" placeholder="Tên bệnh nhân" (keyup)="onSearchPatientName($event)">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <p-calendar [(ngModel)]="search.visitDate" name="visitDate" class="w-full" placeholder="Ngày khám"></p-calendar>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="btn-search-container">
-                            <button pButton class="pi pi-plus" style="margin-right: 200px;" (click)="resetSearch()" title="Bỏ lọc"></button>
-                            <button pButton class="pi pi-search" (click)="searchListVisit()" title="Lọc"></button>
-                        </div>
-                    </div>
-                </div>
+  <div class="search-visit-small">
+    <p-panel [toggleable]="true">
+      <ng-template pTemplate="header">
+        <div class="search-visit-small-title">Tìm kiếm nâng cao</div>
+      </ng-template>
+      <div>
+        <div class="row">
+          <div class="col-12">
+            <input pInputText [(ngModel)]="search.patientCode" name="patientCode" class="w-full" placeholder="Mã bệnh nhân" (keydown.enter)="searchListVisit()">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <input pInputText [(ngModel)]="search.patientName" name="patientName" class="w-full" placeholder="Tên bệnh nhân" (keyup)="onSearchPatientName($event)">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p-calendar [(ngModel)]="search.visitDate" name="visitDate" class="w-full" placeholder="Ngày khám"></p-calendar>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="btn-search-container">
+              <button pButton class="pi pi-plus" style="margin-right: 200px;" (click)="resetSearch()" title="Bỏ lọc"></button>
+              <button pButton class="pi pi-search" (click)="searchListVisit()" title="Lọc"></button>
             </div>
-        </p-panel>
-       
-    </div>
-    <div class="col-12 py-0 px-3 w-full">
-        <p-table [value]="patient" [columns]="cols" [resizableColumns]="true" selectionMode="single" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '10rem' }">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th *ngFor="let col of columns">
-                {{ col.header }}
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-rowData let-columns="columns">
-            <tr >
-              <td *ngFor="let col of columns" (click)="onColumnClick($event, rowData)">
-                {{ rowData[col.field] }}
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+          </div>
+        </div>
       </div>
-      
-      <p-contextMenu #menu styleClass="w-16rem" [model]="actions"></p-contextMenu>
+    </p-panel>
+  </div>
+  <div class="col-12 py-0 px-3 w-full">
+    <p-table [value]="caseStudy" [columns]="cols" [resizableColumns]="true" selectionMode="single" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '10rem' }">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">
+            {{ col.header }}
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns" (click)="onColumnClick($event, rowData)" [ngClass]="{'red-text': rowData[col.field] === 'Chờ khám', 'green-text': rowData[col.field] === 'Đã khám'}">
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <p-contextMenu #menu styleClass="w-16rem" [model]="actions"></p-contextMenu>
 </div>
