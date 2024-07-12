@@ -9,6 +9,8 @@ export class CaseStudyDetailComponent {
   @Input() editingFlag = false;
   @Output() editingFlagChange = new EventEmitter();
   disabledEditInfo: boolean = false;
+  @Input() caseStudy: any;
+ 
   visit: any = {
     clinicalInfomation: '',
     diagnoseInit: '',
@@ -59,12 +61,6 @@ export class CaseStudyDetailComponent {
     }
   }
   showModalAddSubOrder(title:any) {
-    // this.rosIdSelected = this.rosIdConfig;
-    // if (title == this.rosConstant.Imaging) {
-    //   this.rosIdSelected = this.rosIdConfig.Imaging;
-    // } else if (title == this.rosConstant.Laboratory) {
-    //   this.rosIdSelected = this.rosIdConfig.Laboratory;
-    // }
     this.showAddSubOrder = true;
     this.subClinicalVisitModal = this.subClinicalVisit.filter((en) => en.isDisabled == false);
   }

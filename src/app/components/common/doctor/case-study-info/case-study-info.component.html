@@ -1,13 +1,13 @@
 <div class="heading-1" *ngIf="visit">
   <a class="visit-title">
-    <span style="font-size: 21px; color: #25b396; font-weight: 700">{{ visit.patientName }}</span>
+    <span style="font-size: 21px; color: #25b396; font-weight: 700">{{ visit.patient.patientName }}</span>
     <span class="fs-18">
-      - {{ visit.dob }}, {{ visit.patientSexText }} - {{ visit.patientCode }}
+      - {{ visit.patient.dob }}, {{ visit.patientSexText }} - {{ visit.patient.patientCode }}
     </span>
-    <span> - {{ visit.visitReason }} </span>
+    <span> - {{ visit.reason }} </span>
     <span>
-      - {{ visit.doctorName }}
+      - {{ visit.status }}
     </span>
-    <span> - {{ getVisitStatus() }} </span>
+  
   </a>
 </div>

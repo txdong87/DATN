@@ -1,4 +1,4 @@
-import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { Component,Input,Output,EventEmitter ,SimpleChanges} from '@angular/core';
 import { Visits } from 'src/app/models/listVisit.class';
 @Component({
   selector: 'app-case-study-info',
@@ -20,8 +20,18 @@ export class CaseStudyInfoComponent {
   constructor(){
     console.log(this.caseStudy)
   }
+  
   ngOnInit() {
     console.log(this.visit); // Ensure visit is initialized properly
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['caseStudy'] && changes['caseStudy'].currentValue) {
+      this.getVisit(changes['caseStudy'].currentValue);
+      console.log(this.caseStudy)
+    }
+  }
+  getVisit(caseStudy: any){
+    this.visit=caseStudy
   }
   getVisitStatus() {
 

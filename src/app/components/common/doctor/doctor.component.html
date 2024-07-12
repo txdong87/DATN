@@ -1,7 +1,7 @@
 <div  class="tab-list-detail-visit">
   <as-split direction="horizontal">
     <as-split-area  [size]="30">
-      <app-case-study-table (onSelectCaseStudy)="onSelectCaseStudy($event)"></app-case-study-table>
+      <app-case-study-table (selectedCaseStudy)="onSelectCaseStudy($event)"></app-case-study-table>
     </as-split-area>
     <as-split-area [size]="70">
       <div style="height: 100%">
@@ -13,7 +13,7 @@
                 <app-case-study-info></app-case-study-info>
               </p-tabPanel>  -->
               <p-tabPanel header="Thông tin ca khám">
-                <app-case-study-detail></app-case-study-detail>  
+                <app-case-study-detail [caseStudy]="selectedCaseStudy"></app-case-study-detail>  
               </p-tabPanel>
               <p-tabPanel header="Chỉ định HA">
                 <app-tab-cdha [caseStudy]="selectedCaseStudy"></app-tab-cdha>

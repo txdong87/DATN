@@ -1,15 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-tab-cdha',
   templateUrl: './tab-cdha.component.html',
   styleUrl: './tab-cdha.component.css'
 })
-export class TabCDHAComponent {
+export class TabCDHAComponent implements OnChanges{
   @Input() caseStudy: any;
-
+ 
   subclinicalResultOfVisit :any;
   constructor(){
+    console.log(this.caseStudy)
     this.subclinicalResultOfVisit=[{
       "id": null,
       "subClinicalVisitId": "65e160a68643cdf1899d0382",
@@ -35,6 +36,7 @@ export class TabCDHAComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['caseStudy'] && changes['caseStudy'].currentValue) {
       this.loadCaseStudyData(changes['caseStudy'].currentValue);
+      console.log(this.caseStudy)
     }
   }
   loadCaseStudyData(caseStudy: any){

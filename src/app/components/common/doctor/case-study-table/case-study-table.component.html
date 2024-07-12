@@ -42,7 +42,7 @@
       </ng-template>
       <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
-          <td *ngFor="let col of columns" (click)="onColumnClick($event, rowData)" [ngClass]="{'red-text': rowData[col.field] === 'Chờ khám', 'green-text': rowData[col.field] === 'Đã khám'}">
+          <td *ngFor="let col of columns" (click)="onColumnClick($event, rowData)" [ngClass]="{'red-text': rowData[col.field] === 'Chờ khám', 'green-text': rowData[col.field] === 'Đã khám', 'blue-text': rowData[col.field] === 'Chờ kết quả'}">
             {{ rowData[col.field] }}
           </td>
         </tr>
